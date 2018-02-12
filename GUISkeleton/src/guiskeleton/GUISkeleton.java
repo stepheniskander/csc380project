@@ -12,17 +12,21 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import java.util.ArrayList;
+import javafx.scene.control.TextField;
 
 /**
  *
  * @author Nick
  */
 public class GUISkeleton extends Application {
-    
+    ArrayList<String> inOutlist = new ArrayList();
     @Override
     public void start(Stage primaryStage) {
+        TextField inOutField = new TextField();
+        
         Button btn = new Button();
-        btn.setText("Say 'Hello World'");
+        btn.setText("Enter");
         btn.setOnAction(new EventHandler<ActionEvent>() {
             
             @Override
@@ -32,11 +36,12 @@ public class GUISkeleton extends Application {
         });
         
         StackPane root = new StackPane();
-        root.getChildren().add(btn);
         
-        Scene scene = new Scene(root, 300, 250);
+        root.getChildren().addAll(btn, inOutField);
         
-        primaryStage.setTitle("Hello World!");
+        Scene scene = new Scene(root, 800, 500);
+        
+        primaryStage.setTitle("GUI");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
