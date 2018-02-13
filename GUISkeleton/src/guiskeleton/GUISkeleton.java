@@ -28,6 +28,7 @@ public class GUISkeleton extends Application {
         ArrayList<String> inOutList = new ArrayList(); //Contains inputs and outputs as strings to be shown to the user 
         TextField inField = new TextField(); //The 
         TextArea outField = new TextArea();
+        outField.setEditable(false);
         outField.setMaxSize(300, 400);
         //outField.setDisable(true); This dissallows the user to input text in the output box, but unfortunately greys it out. If you know  another way to stop the user from doing this, please implement it
         inField.setMaxWidth(300);
