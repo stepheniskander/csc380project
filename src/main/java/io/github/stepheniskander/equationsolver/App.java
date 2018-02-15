@@ -24,10 +24,8 @@ public class App extends Application {
         TextField inField = new TextField(); //The 
         TextArea outField = new TextArea();
         outField.setEditable(false);
-        outField.setMaxSize(300, 400);
-        //outField.setDisable(true); This dissallows the user to input text in the output box, but unfortunately greys it out. If you know  another way to stop the user from doing this, please implement it
+        outField.setMaxSize(300, 400); //This dissallows the user to input text in the output box
         inField.setMaxWidth(300);
-
         Button btn = new Button();
         btn.setText("Enter");
         btn.setOnAction(new EventHandler<ActionEvent>() {
