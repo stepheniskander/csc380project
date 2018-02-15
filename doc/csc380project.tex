@@ -1,0 +1,53 @@
+\documentclass[letterpaper]{article}
+
+\usepackage[margin=1.0in]{geometry}
+
+\begin{document}
+
+\title{\textbf{Math Parser and Evaluator}}
+\author{Nicholas Esposito \and Stephen Iskander}
+
+\maketitle
+
+\section{Project Description}
+Our project parses mathematical expressions and evaluates them symbolically in a few mathematical fields including algebra, calculus, and matrix algebra.
+If the expression does not contain any variables, it will be evaluated to a numerical answer.
+The user interacts with a simple JavaFX GUI by typing expressions with variables into an input field.
+The answer will be printed in a command-line-like text area above the input field also showing the history of inputs and outputs.
+
+\subsection{Stretch Goals}
+The user can also use the program to graph functions.
+Graphs are located on a separate tab.
+The graph will be displayed next to the list of functions.
+
+\newpage
+
+\section{System Requirements}
+
+\begin{tabular}{|l|r|l|}
+\hline
+\multicolumn{1}{|c|}{\textbf{Identifier}} & \multicolumn{1}{c|}{\textbf{Priority}} & \multicolumn{1}{c|}{\textbf{Description}} \\ \hline
+REQ1  & 10 & Parsing user input into parse tree. \\ \hline
+REQ2  & 10 & Provide an interface for user to input expressions and see result.\\ \hline
+REQ3  & 10 & Evaluate expression parse tree into numerical answer. \\ \hline
+REQ4  & 9  & Solve an equation with a single variable. \\ \hline
+REQ5  & 8  & Parse a matrix entered in text format ([[x y z] [a b c]]) \\ \hline
+REQ6  & 8  & Perform matrix multiplication symbolically (i.e. each element is an expression). \\ \hline
+REQ7  & 7  & Perform LU factorization on a matrix in order to solve a system of equations. \\ \hline
+REQ8  & 6  & Provide a UI to simplify input of a system of equations. \\ \hline
+REQ9  & 5  & Provide a graphical interface for building matrices. \\ \hline
+REQ10 & 3  & Display equations graphically. \\ \hline
+\end{tabular}
+
+\newpage
+
+\section{User Stories}
+
+\begin{tabular}{|l|r|l|}
+\hline
+\multicolumn{1}{|c|}{\textbf{Identifier}} & \multicolumn{1}{c|}{\textbf{Size}} & \multicolumn{1}{c|}{\textbf{Description}} \\ \hline
+ST-1 & 10 & As a user, I can evaluate an expression by typing in the input field. \\ \hline
+ST-2 & 9  & As a user, I can get a solution for an equation with a single variable. \\ \hline
+ST-3 & 3  & As a user, I can graph a function. \\ \hline
+\end{tabular}
+\end{document}
