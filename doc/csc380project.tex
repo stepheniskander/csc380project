@@ -1,24 +1,46 @@
 \documentclass[letterpaper]{article}
 
 \usepackage[margin=1.0in]{geometry}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,      
+    urlcolor=cyan,
+}
+
+\urlstyle{same}
+
+\newcommand{\code}[1]{\texttt{#1}}
 
 \begin{document}
 
-\title{\textbf{Math Parser and Evaluator}}
-\author{Nicholas Esposito \and Stephen Iskander}
+\title{\textbf{Expression Calculator and Equation Solver} \\
+    \url{https://github.com/stepheniskander/csc380project}}
+\author{Nicholas Esposito \\ nesposi3@oswego.edu \and Stephen Iskander \\ siskande@oswego.edu}
 
 \maketitle
 
 \section{Project Description}
-Our project parses mathematical expressions and evaluates them symbolically in a few mathematical fields including algebra, calculus, and matrix algebra.
-If the expression does not contain any variables, it will be evaluated to a numerical answer.
-The user interacts with a simple JavaFX GUI by typing expressions with variables into an input field.
-The answer will be printed in a command-line-like text area above the input field also showing the history of inputs and outputs.
+Our project is an expression calculator and equation solver.
+The user can input mathematical expressions (e.g. \code{4*2+1}) to be evaluated to a numerical answer.
+Expressions can also contain matrices or calculus operations such as integrals and derivatives.
+If an expression contains one or more variables it will be simplified in terms of the variables (e.g. \code{(1*2)*x+(4-7) -> 2x-3}).
+If the user inputs an equation containing a single variable, the program will solve for that variable.
+The user can also input a system of equations that the program will solve if possible.
+
+\par The program uses JavaFX for its user interface.
+The main window is a simple command-prompt-like interface that the user types expressions or equations into.
+Expressions are typed into a text field at the bottom of the window, and the expression as well as its evaluated answer are displayed in a text area above the input field.
+The user can see their history in the output area so they can easily copy and paste previous expressions.
+An additional window allows the user to graphically build matrices that will be inserted into the input field.
+Systems of equations are handled on a separate tab to simplify inputting multiple equations.
 
 \subsection{Stretch Goals}
 The user can also use the program to graph functions.
 Graphs are located on a separate tab.
-The graph will be displayed next to the list of functions.
+The user inputs functions into an expandable list of functions and can choose what functions are visible on the graph.
+A graph of all the visible functions is displayed next to the list of functions.
+The window size and scale of the graph can be set manually or the program can attempt to set appropriate values.
 
 \newpage
 
@@ -27,16 +49,19 @@ The graph will be displayed next to the list of functions.
 \begin{tabular}{|l|r|l|}
 \hline
 \multicolumn{1}{|c|}{\textbf{Identifier}} & \multicolumn{1}{c|}{\textbf{Priority}} & \multicolumn{1}{c|}{\textbf{Description}} \\ \hline
-REQ1  & 10 & Parsing user input into parse tree. \\ \hline
+REQ1  & 10 & Parsing user input into an expression. \\ \hline
 REQ2  & 10 & Provide an interface for user to input expressions and see result.\\ \hline
 REQ3  & 10 & Evaluate expression parse tree into numerical answer. \\ \hline
-REQ4  & 9  & Solve an equation with a single variable. \\ \hline
-REQ5  & 8  & Parse a matrix entered in text format ([[x y z] [a b c]]) \\ \hline
-REQ6  & 8  & Perform matrix multiplication symbolically (i.e. each element is an expression). \\ \hline
-REQ7  & 7  & Perform LU factorization on a matrix in order to solve a system of equations. \\ \hline
-REQ8  & 6  & Provide a UI to simplify input of a system of equations. \\ \hline
-REQ9  & 5  & Provide a graphical interface for building matrices. \\ \hline
-REQ10 & 3  & Display equations graphically. \\ \hline
+REQ4  & 9  & Evaluate an expression containing variables in terms of variables. \\ \hline
+REQ5  & 8  & Solve an equation with a single variable. \\ \hline
+REQ6  & 8  & Evaluate calculus operations numerically. \\ \hline
+REQ7  & 7  & Evaluate calculus operations symbolically. \\ \hline 
+REQ8  & 7  & Parse a matrix entered in text format ([[x y z] [a b c]]) \\ \hline
+REQ9  & 7  & Perform matrix multiplication symbolically (i.e. each element is an expression). \\ \hline
+REQ10 & 6  & Perform LU factorization on a matrix in order to solve a system of equations. \\ \hline
+REQ11 & 5  & Provide a UI to simplify input of a system of equations. \\ \hline
+REQ12 & 4  & Provide a graphical interface for building matrices. \\ \hline
+REQ13 & 3  & Graph functions. \\ \hline
 \end{tabular}
 
 \newpage
@@ -46,8 +71,16 @@ REQ10 & 3  & Display equations graphically. \\ \hline
 \begin{tabular}{|l|r|l|}
 \hline
 \multicolumn{1}{|c|}{\textbf{Identifier}} & \multicolumn{1}{c|}{\textbf{Size}} & \multicolumn{1}{c|}{\textbf{Description}} \\ \hline
-ST-1 & 10 & As a user, I can evaluate an expression by typing in the input field. \\ \hline
-ST-2 & 9  & As a user, I can get a solution for an equation with a single variable. \\ \hline
-ST-3 & 3  & As a user, I can graph a function. \\ \hline
+ST-1 & 3 pts & As a user, I can evaluate an expression by typing in the input field. \\ \hline
+ST-2 & 6 pts & As a user, I can get a solution for an equation with a single variable. \\ \hline
+ST-3 & 4 pts & As a user, I can evaluate an expression containing calculus operations numerically. \\ \hline
+ST-4 & 6 pts & As a user, I can evaluate an expression containing calculus operations numerically. \\ \hline
+ST-3 & 4 pts & As a user, I can input a matrix in a text format. \\ \hline
+ST-4 & 5 pts & As a user, I can perform matrix multiplication. \\ \hline
+ST-5 & 6 pts & As a user, I can perform matrix multiplication in terms of variable matrix elements. \\ \hline
+ST-6 & 4 pts & As a user, I can use a graphical interface to simplify creating a matrix. \\ \hline
+ST-7 & 7 pts & As a user, I can solve a system of equations. \\ \hline
+ST-8 & 4 pts & As a user, I can use a graphical UI to simplify entering a system of equations. \\ \hline
+ST-9 & 9 pts & As a user, I can graph a function. \\ \hline
 \end{tabular}
 \end{document}
