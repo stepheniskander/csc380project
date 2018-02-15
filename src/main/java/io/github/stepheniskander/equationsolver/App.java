@@ -20,7 +20,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        ArrayList<String> inOutList = new ArrayList(); //Contains inputs and outputs as strings to be shown to the user 
+        ArrayList<String> inOutList = new ArrayList<>(); //Contains inputs and outputs as strings to be shown to the user
         TextField inField = new TextField(); //The 
         TextArea outField = new TextArea();
         outField.setEditable(false);
