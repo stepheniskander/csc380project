@@ -5,6 +5,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import java.util.ArrayList;
@@ -38,8 +40,24 @@ public class App extends Application {
                 for(String item:inOutList){
                     outField.appendText(item + "\n");
                 }
+
+                inField.setText("");
             }
         });
+
+        inField.setOnKeyPressed((KeyEvent ke) -> {
+            if(ke.getCode() == KeyCode.ENTER) {
+                outField.clear();
+                String s = inField.getText();
+                inOutList.add(s); //All inputs and outputs will be added to the list in the order they were entered and shown to the user in the output field
+                for (String item : inOutList) {
+                    outField.appendText(item + "\n");
+                }
+
+                inField.setText("");
+            }
+        });
+
         //These are the allignments to this pane that I have been experimenting with
         StackPane root = new StackPane();
         root.getChildren().addAll(btn, inField,outField);
