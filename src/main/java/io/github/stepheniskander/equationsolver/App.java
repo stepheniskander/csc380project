@@ -36,7 +36,10 @@ public class App extends Application {
             public void handle(ActionEvent event) {
                 outField.clear();
                 String s = inField.getText();
-                inOutList.add(s); //All inputs and outputs will be added to the list in the order they were entered and shown to the user in the output field
+                if(s.length()!=0) {
+
+                    inOutList.add(s); //All inputs and outputs will be added to the list in the order they were entered and shown to the user in the output field
+                }
                 for(String item:inOutList){
                     outField.appendText(item + "\n");
                 }
@@ -49,8 +52,10 @@ public class App extends Application {
             if(ke.getCode() == KeyCode.ENTER) {
                 outField.clear();
                 String s = inField.getText();
-                inOutList.add(s); //All inputs and outputs will be added to the list in the order they were entered and shown to the user in the output field
-                for (String item : inOutList) {
+                if(s.length()!=0) {
+                    inOutList.add(s); //All inputs and outputs will be added to the list in the order they were entered and shown to the user in the output field
+                }
+                    for (String item : inOutList) {
                     outField.appendText(item + "\n");
                 }
 
