@@ -27,8 +27,11 @@ public class App extends Application {
         TextArea outField = new TextArea();
         outField.setEditable(false);
         outField.setMaxSize(300, 400); //This dissallows the user to input text in the output box
-        inField.setMaxWidth(300);
+        inField.setMaxWidth(250);
+        inField.setPromptText("Please enter your expression");
         Button btn = new Button();
+        btn.setTranslateX(151);
+
         btn.setText("Enter");
         btn.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -36,7 +39,7 @@ public class App extends Application {
             public void handle(ActionEvent event) {
                 outField.clear();
                 String s = inField.getText();
-                if(s.length()!=0) {
+                if(s.trim().length()!=0) {
 
                     inOutList.add(s); //All inputs and outputs will be added to the list in the order they were entered and shown to the user in the output field
                 }
@@ -52,7 +55,7 @@ public class App extends Application {
             if(ke.getCode() == KeyCode.ENTER) {
                 outField.clear();
                 String s = inField.getText();
-                if(s.length()!=0) {
+                if(s.trim().length()!=0) {
                     inOutList.add(s); //All inputs and outputs will be added to the list in the order they were entered and shown to the user in the output field
                 }
                     for (String item : inOutList) {
@@ -66,13 +69,14 @@ public class App extends Application {
         //These are the allignments to this pane that I have been experimenting with
         StackPane root = new StackPane();
         root.getChildren().addAll(btn, inField,outField);
-        root.setAlignment(btn, Pos.BOTTOM_RIGHT);
+        root.setAlignment(btn, Pos.BOTTOM_CENTER);
         root.setAlignment(inField, Pos.BOTTOM_CENTER);
-        root.setAlignment(outField, Pos.TOP_CENTER);
 
+        root.setAlignment(outField, Pos.TOP_CENTER);
+        btn.toFront();
         Scene scene = new Scene(root, 800, 500);
 
-        primaryStage.setTitle("GUI");
+        primaryStage.setTitle("MathBoy3000");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
