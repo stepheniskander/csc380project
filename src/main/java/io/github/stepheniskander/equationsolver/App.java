@@ -85,9 +85,6 @@ public class App extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        ExpressionParser ep = new ExpressionParser();
-        System.out.println(ep.parse("4+18/(9-3)"));
-
         launch(args);
     }
 
