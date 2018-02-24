@@ -57,7 +57,7 @@ public class ExpressionParser {
                 if(second != '(' && second != ')')
                     return true;
                 else
-                    return true;
+                    return false;
             case '^':
                 if(second != '^' && second != '(' && second != ')')
                     return true;
