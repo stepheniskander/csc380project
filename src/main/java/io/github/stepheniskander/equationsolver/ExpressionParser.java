@@ -6,7 +6,7 @@ import java.util.StringTokenizer;
 
 public class ExpressionParser {
     public Expression parse(String ex){
-        StringTokenizer tokenizer = new StringTokenizer(ex, "+-*/^", true);
+        StringTokenizer tokenizer = new StringTokenizer(ex, "+-*/^()", true);
         ArrayDeque<String> outputQueue = new ArrayDeque<>();
         ArrayDeque<String> operatorStack = new ArrayDeque<>();
         String token;
@@ -17,7 +17,7 @@ public class ExpressionParser {
             if(isNumeric(token)) {
                 outputQueue.add(token);
             } else if(token.length() == 1 && "+-*/^".contains(token.substring(0, 1))) { // token is an operator
-                while(operatorStack.peek() != null && greaterPrecendence(operatorStack.peek().charAt(0), token.charAt(0))) {
+                while(operatorStack.peek() != null && greaterPrecedence(operatorStack.peek().charAt(0), token.charAt(0))) {
                     outputQueue.add(operatorStack.pop());
                 }
                 operatorStack.push(token);
@@ -36,8 +36,11 @@ public class ExpressionParser {
         }
 
         StringBuilder rpn = new StringBuilder();
-        for(String s : outputQueue)
+        for(String s : outputQueue) {
             rpn.append(s);
+            rpn.append(" ");
+        }
+        rpn.deleteCharAt(rpn.length() - 1);
 
         return new Expression(rpn.toString());
     }
@@ -51,23 +54,12 @@ public class ExpressionParser {
         }
     }
 
-    private boolean greaterPrecendence(char first, char second) {
+    private boolean greaterPrecedence(char first, char second) {
         switch(first) {
-            case '(': case ')':
-                if(second != '(' && second != ')')
-                    return true;
-                else
-                    return false;
             case '^':
-                if(second != '^' && second != '(' && second != ')')
-                    return true;
-                else
-                    return false;
+                return second != '^' && second != '(' && second != ')';
             case '*': case '/':
-                if(second == '+' || second == '-')
-                    return true;
-                else
-                    return false;
+                return second == '+' || second == '-';
             case '+': case '-':
                 return false;
         }

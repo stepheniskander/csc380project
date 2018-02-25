@@ -85,6 +85,9 @@ public class App extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        ExpressionParser ep = new ExpressionParser();
+        Expression e = ep.parse("4 + 4 * 2 / (1 - 5)");
+        System.out.println(e.getRpn());
         launch(args);
     }
 

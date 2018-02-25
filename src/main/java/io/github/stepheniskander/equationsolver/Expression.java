@@ -6,4 +6,8 @@ public class Expression {
     public Expression(String rpn) {
         this.rpn = rpn;
     }
+
+    public String getRpn() {
+        return rpn;
+    }
 }
