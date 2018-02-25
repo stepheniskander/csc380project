@@ -1,6 +1,7 @@
 \documentclass[11pt]{article}
 
 \usepackage[margin=1.0in]{geometry}
+\usepackage{tabularx}
 \usepackage{hyperref}
 \hypersetup{
     colorlinks=true,
@@ -11,6 +12,9 @@
 \urlstyle{same}
 
 \newcommand{\code}[1]{\texttt{#1}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
 
 \begin{document}
 
@@ -47,7 +51,7 @@ The window size and scale of the graph can be set manually or the program can at
 \section{System Requirements}
 
 \begin{center}
-\begin{tabular}{|l|r|l|}
+\begin{tabular}{|L{.5in}|R{.5in}|L{5in}|}
 \hline
 \multicolumn{1}{|c|}{\textbf{Identifier}} & \multicolumn{1}{c|}{\textbf{Priority}} & \multicolumn{1}{c|}{\textbf{Description}} \\ \hline
 REQ1  & 10 & Parsing user input into an expression. \\ \hline
@@ -71,7 +75,7 @@ REQ13 & 3  & Graph functions. \\ \hline
 \section{User Stories}
 
 \begin{center}
-\begin{tabular}{|l|r|l|}
+\begin{tabular}{|L{.5in}|R{.5in}|L{5in}|}
 \hline
 \multicolumn{1}{|c|}{\textbf{Identifier}} & \multicolumn{1}{c|}{\textbf{Size}} & \multicolumn{1}{c|}{\textbf{Description}} \\ \hline
 ST-1 & 3 pts & As a user, I can evaluate an expression by typing in the input field. \\ \hline
