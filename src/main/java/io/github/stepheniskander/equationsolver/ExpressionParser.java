@@ -38,7 +38,7 @@ public class ExpressionParser {
         return new Expression(outputQueue);
     }
 
-    private boolean isNumeric(String s) {
+    public static boolean isNumeric(String s) {
         try {
             Double.parseDouble(s);
             return true;
@@ -47,7 +47,7 @@ public class ExpressionParser {
         }
     }
 
-    private boolean greaterPrecedence(char first, char second) {
+    public static boolean greaterPrecedence(char first, char second) {
         switch(first) {
             case '^':
                 return second != '^' && second != '(' && second != ')';
