@@ -85,7 +85,10 @@ public class App extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        launch(args);
+        //launch(args);
+        ExpressionParser expP = new ExpressionParser();
+        Expression e = expP.parse("(2+2)/3");
+        e.evaluateRpn();
     }
 
 }
