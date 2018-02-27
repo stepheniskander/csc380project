@@ -35,14 +35,7 @@ public class ExpressionParser {
             outputQueue.add(operatorStack.pop());
         }
 
-        StringBuilder rpn = new StringBuilder();
-        for(String s : outputQueue) {
-            rpn.append(s);
-            rpn.append(" ");
-        }
-        rpn.deleteCharAt(rpn.length() - 1);
-
-        return new Expression(rpn.toString());
+        return new Expression(outputQueue);
     }
 
     private boolean isNumeric(String s) {

@@ -1,13 +1,28 @@
 package io.github.stepheniskander.equationsolver;
 
-public class Expression {
-    private String rpn;
+import java.util.ArrayDeque;
 
-    public Expression(String rpn) {
-        this.rpn = rpn;
+public class Expression {
+    private ArrayDeque<String> rpnStack;
+
+    public Expression(ArrayDeque<String> rpnStack) {
+        this.rpnStack = rpnStack;
     }
 
-    public String getRpn() {
-        return rpn;
+    public ArrayDeque<String> getRpnStack() {
+        return rpnStack;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+
+        for(String s : rpnStack) {
+            sb.append(s);
+            sb.append(" ");
+        }
+
+        sb.deleteCharAt(sb.length() - 1);
+        return sb.toString();
     }
 }
