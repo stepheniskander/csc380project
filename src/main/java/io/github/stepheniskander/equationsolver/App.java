@@ -87,8 +87,9 @@ public class App extends Application {
     public static void main(String[] args) {
         //launch(args);
         ExpressionParser expP = new ExpressionParser();
-        Expression e = expP.parse("(2+2)/3");
-        e.evaluateRpn();
+        Expression e = expP.parse(" ((15/3)/(2*4))/(1/8)");
+        System.out.println(e.toString());
+        System.out.println(e.evaluateRpn());
     }
 
 }
