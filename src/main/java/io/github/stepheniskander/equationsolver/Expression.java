@@ -47,7 +47,7 @@ public class Expression {
         switch (operand){
             case "+": return op_1 + op_2;
             case "-": return op_1 - op_2;
-            case "^": return Math.pow(op_1,op_2);
+            case "^": return Math.pow(op_2,op_1);
             case "*": return op_1 * op_2;
             case "/": return op_2 / op_1; //I'm not sure why these are reversed, I must have done something wrong in the evaluation
             default: return 0;
