@@ -79,7 +79,7 @@ public class App extends Application {
             }
         });
 
-        //These are the allignments to this pane that I have been experimenting with
+        //These are the alignments to this pane that I have been experimenting with
         StackPane root = new StackPane();
         root.getChildren().addAll(btn, inField, outField);
         root.setAlignment(btn, Pos.BOTTOM_CENTER);
