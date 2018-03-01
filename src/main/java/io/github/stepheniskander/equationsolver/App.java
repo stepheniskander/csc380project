@@ -85,11 +85,8 @@ public class App extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //launch(args);
-        ExpressionParser expP = new ExpressionParser();
-        Expression e = expP.parse(" ((15/3)/(2*4))/(1/8)");
-        System.out.println(e.toString());
-        System.out.println(e.evaluateRpn());
+        launch(args);
+
     }
 
 }
