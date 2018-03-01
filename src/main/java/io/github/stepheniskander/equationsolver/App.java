@@ -9,13 +9,14 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
 import java.util.ArrayList;
+
 import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
 
 /**
- *
  * @author Nick
  */
 public class App extends Application {
@@ -42,7 +43,7 @@ public class App extends Application {
                 outField.clear();
                 String s = inField.getText();
                 double result;
-                if(s.trim().length()!=0) {
+                if (s.trim().length() != 0) {
                     Expression ex = parser.parse(s);
                     result = ex.evaluateRpn();
                     inField.setText(String.valueOf(result));
@@ -51,7 +52,7 @@ public class App extends Application {
                 } else {
                     inField.setText("");
                 }
-                for(String item:inOutList){
+                for (String item : inOutList) {
                     outField.appendText(item + "\n");
                 }
 
@@ -59,11 +60,11 @@ public class App extends Application {
         });
 
         inField.setOnKeyPressed((KeyEvent ke) -> {
-            if(ke.getCode() == KeyCode.ENTER) {
+            if (ke.getCode() == KeyCode.ENTER) {
                 outField.clear();
                 String s = inField.getText();
                 double result;
-                if(s.trim().length()!=0) {
+                if (s.trim().length() != 0) {
                     Expression ex = parser.parse(s);
                     result = ex.evaluateRpn();
                     inField.setText(String.valueOf(result));
@@ -72,7 +73,7 @@ public class App extends Application {
                 } else {
                     inField.setText("");
                 }
-                    for (String item : inOutList) {
+                for (String item : inOutList) {
                     outField.appendText(item + "\n");
                 }
             }
@@ -80,7 +81,7 @@ public class App extends Application {
 
         //These are the allignments to this pane that I have been experimenting with
         StackPane root = new StackPane();
-        root.getChildren().addAll(btn, inField,outField);
+        root.getChildren().addAll(btn, inField, outField);
         root.setAlignment(btn, Pos.BOTTOM_CENTER);
         root.setAlignment(inField, Pos.BOTTOM_CENTER);
 
