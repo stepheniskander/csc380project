@@ -33,21 +33,28 @@ public class App extends Application {
         btn.setTranslateX(151);
 
         btn.setText("Enter");
+
+        ExpressionParser parser = new ExpressionParser();
         btn.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent event) {
                 outField.clear();
                 String s = inField.getText();
+                double result;
                 if(s.trim().length()!=0) {
-
+                    Expression ex = parser.parse(s);
+                    result = ex.evaluateRpn();
+                    inField.setText(String.valueOf(result));
+                    inField.end();
                     inOutList.add(s); //All inputs and outputs will be added to the list in the order they were entered and shown to the user in the output field
+                } else {
+                    inField.setText("");
                 }
                 for(String item:inOutList){
                     outField.appendText(item + "\n");
                 }
 
-                inField.setText("");
             }
         });
 
@@ -55,14 +62,19 @@ public class App extends Application {
             if(ke.getCode() == KeyCode.ENTER) {
                 outField.clear();
                 String s = inField.getText();
+                double result;
                 if(s.trim().length()!=0) {
+                    Expression ex = parser.parse(s);
+                    result = ex.evaluateRpn();
+                    inField.setText(String.valueOf(result));
+                    inField.end();
                     inOutList.add(s); //All inputs and outputs will be added to the list in the order they were entered and shown to the user in the output field
+                } else {
+                    inField.setText("");
                 }
                     for (String item : inOutList) {
                     outField.appendText(item + "\n");
                 }
-
-                inField.setText("");
             }
         });
 
