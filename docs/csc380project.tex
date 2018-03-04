@@ -116,7 +116,7 @@ Postconditions:        & \begin{itemize}[nosep]
 
 \begin{tabular}{p{.25in}p{.25in}p{5.8in}}
 \multicolumn{3}{l}{Flow of Events for Main Success Scenario:} \\
-$\rightarrow$ & 1. & The User types an expression into the input field and presses enter.//
+$\rightarrow$ & 1. & The User types an expression into the input field and presses enter. \\
 &             & 2. & \code{include::ParseExpression} \\ 
 $\leftarrow$  & 3. & Expression object evaluates to a number \\
 $\leftarrow$  & 4. & GUI displays answer to User \\
@@ -124,7 +124,7 @@ $\leftarrow$  & 4. & GUI displays answer to User \\
 
 \begin{tabular}{p{.25in}p{.25in}p{5.8in}}
 \multicolumn{3}{l}{Flow of Events for Extensions:} \\
-\multicolumn{2}{l}{\textbf{3a.}} & User entered an expression that cannot be evaluated \\
+\multicolumn{2}{c}{\textbf{3a.}} & User entered an expression that cannot be evaluated \\
 $\leftarrow$  & 1.           & Expression throws ArithmeticException
 \end{tabular}
 \end{center}
