@@ -1,6 +1,7 @@
 \documentclass[11pt]{article}
 
 \usepackage[margin=1.0in]{geometry}
+\usepackage{enumitem}
 \usepackage{tabularx}
 \usepackage{hyperref}
 \hypersetup{
@@ -99,22 +100,32 @@ ST-9 & 9 pts & As a user, I can graph a function. \\ \hline
 \begin{center}
 \begin{tabular}{p{1.5in}p{5in}}
 \hline
-\textbf{Use Case UC-\#}     & \textbf{Name} \\ \hline
-Related Requirements: & List of the requirements that are addressed by this use case \\
-Initiating Actor:     & Actor who initiates interaction with the system to accomplish a goal \\
-Actor's Goal:          & Informal description of the initiating actor’s goal \\
-Preconditions:         & What is assumed about the state of the system before the interaction starts \\
-Postconditions:        & What are the results after the goal is achieved or abandoned; i.e., what must be true about the system at the time the execution of this use case is completed
+\textbf{Use Case UC-1}     & \textbf{EvaluateExpression} \\ \hline
+Related Requirements: & REQ1, REQ2, REQ3 \\
+Initiating Actor:     & User \\
+Participating Actors: & GUI, ExpressionParser, Expression \\
+Actor's Goal:          & To evaluate a mathematical expression typed into the calculator. \\
+Preconditions:         & \begin{itemize}[nosep]
+                         \item GUI is visible
+                         \item ExpressionParser is initialized
+                         \end{itemize} \\
+Postconditions:        & \begin{itemize}[nosep]
+                         \item Program is ready to evaluate another expression.
+                         \end{itemize} \\ \hline
 \end{tabular}
 
 \begin{tabular}{p{.25in}p{.25in}p{5.8in}}
 \multicolumn{3}{l}{Flow of Events for Main Success Scenario:} \\
-$\rightarrow$ & 1. & The initiating actor delivers an action or stimulus to the system (the arrow indicates the direction of interaction, to- or from the system)
+$\rightarrow$ & 1. & The User types an expression into the input field and presses enter.//
+&             & 2. & \code{include::ParseExpression} \\ 
+$\leftarrow$  & 3. & Expression object evaluates to a number \\
+$\leftarrow$  & 4. & GUI displays answer to User \\
 \end{tabular}
 
 \begin{tabular}{p{.25in}p{.25in}p{5.8in}}
 \multicolumn{3}{l}{Flow of Events for Extensions:} \\
-$\rightarrow$ & 1a. & For example, the actor enters invalid data.
+$\rightarrow$ & \textbf{3a.} & User entered an expression that cannot be evaluated \\
+$\leftarrow$  & 1.           & Expression throws ArithmeticException
 \end{tabular}
 \end{center}
 
@@ -126,8 +137,9 @@ $\rightarrow$ & 1a. & For example, the actor enters invalid data.
 \begin{tabular}{|l|l|l|l|l|l|l|}
 \hline
 & UC-1 & UC-2 & UC-3 & UC-4 & UC-5 & UC-6 \\ \hline
-REQ2 &  &  &  &  &  &  \\ \hline
-REQ3 &  &  &  &  &  &  \\ \hline
+REQ1 & X &  &  &  &  &  \\ \hline
+REQ2 & X &  &  &  &  &  \\ \hline
+REQ3 & X &  &  &  &  &  \\ \hline
 REQ4 &  &  &  &  &  &  \\ \hline
 REQ5 &  &  &  &  &  &  \\ \hline
 REQ1 &  &  &  &  &  &  \\  \hline
