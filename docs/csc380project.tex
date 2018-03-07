@@ -82,14 +82,13 @@ REQ13 & 3  & Graph functions. \\ \hline
 ST-1 & 3 pts & As a user, I can evaluate an expression by typing in the input field. \\ \hline
 ST-2 & 6 pts & As a user, I can get a solution for an equation with a single variable. \\ \hline
 ST-3 & 4 pts & As a user, I can evaluate an expression containing calculus operations numerically. \\ \hline
-ST-4 & 6 pts & As a user, I can evaluate an expression containing calculus operations numerically. \\ \hline
-ST-3 & 4 pts & As a user, I can input a matrix in a text format. \\ \hline
-ST-4 & 5 pts & As a user, I can perform matrix multiplication. \\ \hline
-ST-5 & 6 pts & As a user, I can perform matrix multiplication in terms of variable matrix elements. \\ \hline
-ST-6 & 4 pts & As a user, I can use a graphical interface to simplify creating a matrix. \\ \hline
-ST-7 & 7 pts & As a user, I can solve a system of equations. \\ \hline
-ST-8 & 4 pts & As a user, I can use a graphical UI to simplify entering a system of equations. \\ \hline
-ST-9 & 9 pts & As a user, I can graph a function. \\ \hline
+ST-4 & 4 pts & As a user, I can input a matrix in a text format. \\ \hline
+ST-5 & 5 pts & As a user, I can perform matrix multiplication. \\ \hline
+ST-6 & 6 pts & As a user, I can perform matrix multiplication in terms of variable matrix elements. \\ \hline
+ST-7 & 4 pts & As a user, I can use a graphical interface to simplify creating a matrix. \\ \hline
+ST-8 & 7 pts & As a user, I can solve a system of equations. \\ \hline
+ST-9 & 4 pts & As a user, I can use a graphical UI to simplify entering a system of equations. \\ \hline
+ST-10 & 9 pts & As a user, I can graph a function. \\ \hline
 \end{tabular}    
 \end{center}
 
@@ -129,6 +128,48 @@ $\leftarrow$  & 1.           & Expression throws ArithmeticException
 \end{tabular}
 \end{center}
 
+
+\newpage
+\begin{center}
+\begin{tabular}{p{1.5in}p{5in}}
+\hline
+\textbf{Use Case UC-2}     & \textbf{SolveEquation} \\ \hline
+Related Requirements: & REQ4, REQ5, REQ3 \\
+Initiating Actor:     & User \\
+Participating Actors: & GUI, ExpressionParser, Expression, Equation \\
+Actor's Goal:          & To solve an equation of a single variable. \\
+Preconditions:         & \begin{itemize}[nosep]
+                         \item GUI is visible
+                         \item ExpressionParser is initialized
+                         \end{itemize} \\
+Postconditions:        & \begin{itemize}[nosep]
+                         \item Program is ready to solve another equation.
+                         \end{itemize} \\ \hline
+\end{tabular}
+
+\begin{tabular}{p{.25in}p{.25in}p{5.8in}}
+\multicolumn{3}{l}{Flow of Events for Main Success Scenario:} \\
+$\rightarrow$ & 1. & The User types an equation into the input field and presses enter. \\
+            & 2. & \code{include::ParseExpression} \\ 
+$\leftarrow$  & 3. & Parse method determines the input is an equation, and creates an equation object. \\
+$\leftarrow$  & 4. &Equation solve method is applied, and is evaluated to a number.  \\
+$\leftarrow$  & 5. & GUI displays answer to User \\
+\end{tabular}
+
+\begin{tabular}{p{.25in}p{.25in}p{5.8in}}
+\multicolumn{3}{l}{Flow of Events for Extensions:} \\
+\multicolumn{2}{c}{\textbf{4a.}} & User entered an equation that cannot be solved \\
+$\leftarrow$  & 1.           & Equation throws ArithmeticException \\
+
+\multicolumn{2}{c}{\textbf{4b.}} & User entered an equation with more than one variable \\
+$\leftarrow$  & 1.           & Equation solve method prints a warning string, aborts \\
+
+
+
+
+\end{tabular}
+\end{center}
+
 \newpage
 
 \section{Traceability Matrix}
@@ -141,7 +182,7 @@ REQ1 & X &  &  &  &  &  \\ \hline
 REQ2 & X &  &  &  &  &  \\ \hline
 REQ3 & X &  &  &  &  &  \\ \hline
 REQ4 &  &  &  &  &  &  \\ \hline
-REQ5 &  &  &  &  &  &  \\ \hline
+REQ5 &  & X &  &  &  &  \\ \hline
 REQ1 &  &  &  &  &  &  \\  \hline
 REQ6 &  &  &  &  &  &  \\ \hline
 REQ7 &  &  &  &  &  &  \\ \hline
