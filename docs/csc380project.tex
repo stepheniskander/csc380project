@@ -209,10 +209,80 @@ $\leftarrow$  & 1.           & ExpressionParser throws NoSuchElementException\\
 \begin{center}
 \begin{tabular}{p{1.5in}p{5in}}
 \hline
-\textbf{Use Case UC-3}     & \textbf{ParseEquation} \\ \hline
+\textbf{Use Case UC-4}     & \textbf{ParseEquation} \\ \hline
 Related Requirements: & REQ5 \\
 Initiating Actor:     & GUI \\
 Participating Actors: & ExpressionParser, Expression,Equation \\
+Actor's Goal:          & To parse the incoming string into an equation. \\
+Preconditions:         & \begin{itemize}[nosep]
+		      \item  ExpressionParser is initialized
+                         \end{itemize} \\
+Postconditions:        & \begin{itemize}[nosep]
+                         \item An Equation object is created and ready to be evaluated.
+                         \end{itemize} \\ \hline
+\end{tabular}
+
+\begin{tabular}{p{.25in}p{.25in}p{5.8in}}
+\multicolumn{3}{l}{Flow of Events for Main Success Scenario:} \\
+$\leftarrow$  & 1. & Both sides of the equation are evaluated into Expression objects\\
+$\leftarrow$  & 2. & An Equation object is created using the two Expressions\\
+\end{tabular}
+
+\begin{tabular}{p{.25in}p{.25in}p{5.8in}}
+\multicolumn{3}{l}{Flow of Events for Extensions:} \\
+\multicolumn{2}{c}{\textbf{2a.}} & User entered an equation with invalid characters \\
+$\leftarrow$  & 1.           & ExpressionParser throws NoSuchElementException\\
+
+
+\end{tabular}
+\end{center}
+
+
+
+
+\newpage
+\begin{center}
+\begin{tabular}{p{1.5in}p{5in}}
+\hline
+\textbf{Use Case UC-5}     & \textbf{Integrate} \\ \hline
+Related Requirements: & REQ6, REQ7 \\
+Initiating Actor:     & User \\
+Participating Actors: & GUI,ExpressionParser, Expression, \\
+Actor's Goal:          & To parse the incoming string into an equation. \\
+Preconditions:         & \begin{itemize}[nosep]
+		      \item  ExpressionParser is initialized
+                         \end{itemize} \\
+Postconditions:        & \begin{itemize}[nosep]
+                         \item An Equation object is created and ready to be evaluated.
+                         \end{itemize} \\ \hline
+\end{tabular}
+
+\begin{tabular}{p{.25in}p{.25in}p{5.8in}}
+\multicolumn{3}{l}{Flow of Events for Main Success Scenario:} \\
+$\leftarrow$  & 1. & Both sides of the equation are evaluated into Expression objects\\
+$\leftarrow$  & 2. & An Equation object is created using the two Expressions\\
+\end{tabular}
+
+\begin{tabular}{p{.25in}p{.25in}p{5.8in}}
+\multicolumn{3}{l}{Flow of Events for Extensions:} \\
+\multicolumn{2}{c}{\textbf{2a.}} & User entered an equation with invalid characters \\
+$\leftarrow$  & 1.           & ExpressionParser throws NoSuchElementException\\
+
+
+\end{tabular}
+\end{center}
+
+
+
+\newpage
+
+\begin{center}
+\begin{tabular}{p{1.5in}p{5in}}
+\hline
+\textbf{Use Case UC-6}     & \textbf{Derive} \\ \hline
+Related Requirements: & REQ6, REQ7 \\
+Initiating Actor:     & User \\
+Participating Actors: & GUI,ExpressionParser, Expression, \\
 Actor's Goal:          & To parse the incoming string into an equation. \\
 Preconditions:         & \begin{itemize}[nosep]
 		      \item  ExpressionParser is initialized
@@ -252,9 +322,8 @@ REQ2 & X &  &  &  &  &  \\ \hline
 REQ3 & X &  &  &  &  &  \\ \hline
 REQ4 &  &  &  &  &  &  \\ \hline
 REQ5 &  & X &  &  X&  &  \\ \hline
-REQ1 &  &  &  &  &  &  \\  \hline
-REQ6 &  &  &  &  &  &  \\ \hline
-REQ7 &  &  &  &  &  &  \\ \hline
+REQ6 &  &  &  &  &  X& X \\ \hline
+REQ7 &  &  &  &  &  X& X \\ \hline
 REQ8 &  &  &  &  &  &  \\ \hline
 REQ9 &  &  &  &  &  &  \\ \hline
 REQ10 &  &  &  &  &  &  \\ \hline
