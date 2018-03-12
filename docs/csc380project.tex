@@ -247,28 +247,28 @@ $\leftarrow$  & 1.           & ExpressionParser throws NoSuchElementException\\
 \textbf{Use Case UC-5}     & \textbf{Integrate} \\ \hline
 Related Requirements: & REQ6, REQ7 \\
 Initiating Actor:     & User \\
-Participating Actors: & GUI,ExpressionParser, Expression, \\
+Participating Actors: & GUI, FunctionParser, Function \\
 Actor's Goal:          & To integrate an expression symbolically or definitively. \\
 Preconditions:         & \begin{itemize}[nosep]
-		      \item  ExpressionParser is initialized
+		      \item  FunctionParser is initialized
                          \end{itemize} \\
 Postconditions:        & \begin{itemize}[nosep]
-                         \item An Equation object is created and ready to be evaluated.
+                         \item An indefinite integral is calculated, or a definite integral if given range parameters.
                          \end{itemize} \\ \hline
 \end{tabular}
 
 \begin{tabular}{p{.25in}p{.25in}p{5.8in}}
 \multicolumn{3}{l}{Flow of Events for Main Success Scenario:} \\
-$\leftarrow$  & 1. & Both sides of the equation are evaluated into Expression objects\\
-$\leftarrow$  & 2. & An Equation object is created using the two Expressions\\
+$\rightarrow$ & 1. & User inputs a fucntion to integrate.\\
+$\leftarrow$  & 2. & A Function object is parsed from User input.\\
+$\leftarrow$  & 3. & An indefinite integral is calculated from the function.\\
+$\leftarrow$  & 4. & If given range parameters, the application displays a numerical answer. Otherwise, it returns an indefinite integral function. 
 \end{tabular}
 
 \begin{tabular}{p{.25in}p{.25in}p{5.8in}}
 \multicolumn{3}{l}{Flow of Events for Extensions:} \\
-\multicolumn{2}{c}{\textbf{2a.}} & User entered an equation with invalid characters \\
-$\leftarrow$  & 1.           & ExpressionParser throws NoSuchElementException\\
-
-
+\multicolumn{2}{c}{\textbf{2a.}} & User entered an invalid function \\
+$\leftarrow$  & 1.           & FunctionParser throws FunctionParseException\.\
 \end{tabular}
 \end{center}
 
