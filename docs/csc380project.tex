@@ -150,9 +150,10 @@ Postconditions:        & \begin{itemize}[nosep]
 \begin{tabular}{p{.25in}p{.25in}p{5.8in}}
 \multicolumn{3}{l}{Flow of Events for Main Success Scenario:} \\
 $\rightarrow$ & 1. & The User types an equation into the input field and presses enter. \\
-            & 2. & \code{include::ParseExpression} \\ 
-$\leftarrow$  & 3. &Equation solve method is applied, and is evaluated to a number.  \\
-$\leftarrow$  & 4. & GUI displays answer to User \\
+              & 2. & \code{include::ParseExpression} \\ 
+$\leftarrow$  & 3. & Each expression is simplified \\
+$\leftarrow$  & 4. &Equation solve method is applied, and is evaluated to a number.  \\
+$\leftarrow$  & 5. & GUI displays answer to User \\
 \end{tabular}
 
 \begin{tabular}{p{.25in}p{.25in}p{5.8in}}
@@ -377,7 +378,7 @@ $\leftarrow$ & 3. & Display the resulting matrix\\
 REQ1  & X    &      & X    &      &      &      &      &     \\ \hline
 REQ2  & X    &      &      &      &      &      &      &     \\ \hline
 REQ3  & X    &      &      &      &      &      &      &     \\ \hline
-REQ4  &      &      &      &      &      &      &      &     \\ \hline
+REQ4  &      & X    &      &      &      &      &      &     \\ \hline
 REQ5  &      & X    &      &  X   &      &      &      &     \\ \hline
 REQ6  &      &      &      &      &  X   & X    &      &     \\ \hline
 REQ7  &      &      &      &      &  X   & X    &      &     \\ \hline
