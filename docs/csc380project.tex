@@ -366,28 +366,61 @@ $\leftarrow$ & 3. & Display the resulting matrix\\
 \end{tabular}
 \end{center}
 
+\begin{center}
+\begin{tabular}{p{1.5in}p{5in}}
+\hline
+\textbf{Use Case UC-9}     & \textbf{SolveSystem} \\ \hline
+Related Requirements: & REQ10, REQ11 \\
+Initiating Actor:     & User \\
+Participating Actors: &MatrixParser, Matrix, EquationParser, Equation, ExpressionParser, Expression \\
+Actor's Goal:          & To solve a system of equations \\
+Preconditions:         & \begin{itemize}[nosep]
+                \item  MatrixParser is initialized
+                            \end{itemize} \\
+Postconditions:        & \begin{itemize}[nosep]
+                            \item A solution is found for a system of equations.
+                            \end{itemize} \\ \hline
+\end{tabular}
+
+\begin{tabular}{p{.25in}p{.25in}p{5.8in}}
+\multicolumn{3}{l}{Flow of Events for Main Success Scenario:} \\
+              & 1. & \code{include::ParseEquation}\\
+$\leftarrow$  & 2. & A matrix is generated from the parsed equations\\
+$\leftarrow$  & 3. & LU factorization is performed on the matrix\\
+$\leftarrow$  & 4. & The solution to the system is displayed by the GUI
+\end{tabular}
+
+\begin{tabular}{p{.25in}p{.25in}p{5.8in}}
+\multicolumn{3}{l}{Flow of Events for Extensions:} \\
+\multicolumn{2}{c}{\textbf{1a.}} & System of equations is not solvable \\
+$\leftarrow$  & 1.           & Matrix throws LUFactorException\\
+
+
+\end{tabular}
+\end{center}
+
 \newpage
 
 
 \section{Traceability Matrix}
 
 \begin{center}
-\begin{tabular}{|l|l|l|l|l|l|l|l|l|}
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
 \hline
-      & UC-1 & UC-2 & UC-3 & UC-4 & UC-5 & UC-6 & UC-7 & UC-8\\ \hline
-REQ1  & X    &      & X    &      &      &      &      &     \\ \hline
-REQ2  & X    &      &      &      &      &      &      &     \\ \hline
-REQ3  & X    &      &      &      &      &      &      &     \\ \hline
-REQ4  &      & X    &      &      &      &      &      &     \\ \hline
-REQ5  &      & X    &      &  X   &      &      &      &     \\ \hline
-REQ6  &      &      &      &      &  X   & X    &      &     \\ \hline
-REQ7  &      &      &      &      &  X   & X    &      &     \\ \hline
-REQ8  &      &      &      &      &      &      & X    &     \\ \hline
-REQ9  &      &      &      &      &      &      &      & X   \\ \hline
-REQ10 &      &      &      &      &      &      &      &     \\ \hline
-REQ11 &      &      &      &      &      &      &      &     \\ \hline
-REQ12 &      &      &      &      &      &      & X    &     \\ \hline
-REQ13 &      &      &      &      &      &      &      &     \\ \hline
+      & UC-1 & UC-2 & UC-3 & UC-4 & UC-5 & UC-6 & UC-7 & UC-8 & UC-9\\ \hline
+REQ1  & X    &      & X    &      &      &      &      &      &     \\ \hline
+REQ2  & X    &      &      &      &      &      &      &      &     \\ \hline
+REQ3  & X    &      &      &      &      &      &      &      &     \\ \hline
+REQ4  &      & X    &      &      &      &      &      &      &     \\ \hline
+REQ5  &      & X    &      &  X   &      &      &      &      &     \\ \hline
+REQ6  &      &      &      &      &  X   & X    &      &      &     \\ \hline
+REQ7  &      &      &      &      &  X   & X    &      &      &     \\ \hline
+REQ8  &      &      &      &      &      &      & X    &      &     \\ \hline
+REQ9  &      &      &      &      &      &      &      & X    &     \\ \hline
+REQ10 &      &      &      &      &      &      &      &      & X   \\ \hline
+REQ11 &      &      &      &      &      &      &      &      & X   \\ \hline
+REQ12 &      &      &      &      &      &      & X    &      &     \\ \hline
+REQ13 &      &      &      &      &      &      &      &      &     \\ \hline
 \end{tabular}
 \end{center}
 
