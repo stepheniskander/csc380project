@@ -248,7 +248,7 @@ $\leftarrow$  & 1.           & ExpressionParser throws NoSuchElementException\\
 Related Requirements: & REQ6, REQ7 \\
 Initiating Actor:     & User \\
 Participating Actors: & GUI,ExpressionParser, Expression, \\
-Actor's Goal:          & To parse the incoming string into an equation. \\
+Actor's Goal:          & To integrate an expression symbolically or definitively. \\
 Preconditions:         & \begin{itemize}[nosep]
 		      \item  ExpressionParser is initialized
                          \end{itemize} \\
@@ -283,7 +283,7 @@ $\leftarrow$  & 1.           & ExpressionParser throws NoSuchElementException\\
 Related Requirements: & REQ6, REQ7 \\
 Initiating Actor:     & User \\
 Participating Actors: & GUI,ExpressionParser, Expression, \\
-Actor's Goal:          & To parse the incoming string into an equation. \\
+Actor's Goal:          & To derive the expression symbollically or at a point. \\
 Preconditions:         & \begin{itemize}[nosep]
 		      \item  ExpressionParser is initialized
                          \end{itemize} \\
@@ -307,29 +307,65 @@ $\leftarrow$  & 1.           & ExpressionParser throws NoSuchElementException\\
 \end{tabular}
 \end{center}
 
+\newpage
+\begin{center}
+\begin{tabular}{p{1.5in}p{5in}}
+\hline
+\textbf{Use Case UC-5}     & \textbf{ParseMatrix} \\ \hline
+Related Requirements: & REQ8 \\
+Initiating Actor:     & GUI \\
+Participating Actors: &MatrixParser, Matrix \\
+Actor's Goal:          & To parse the incoming string into a Matrix. \\
+Preconditions:         & \begin{itemize}[nosep]
+		      \item  MatrixParser is initialized
+                         \end{itemize} \\
+Postconditions:        & \begin{itemize}[nosep]
+                         \item A Matrix object is created.
+                         \end{itemize} \\ \hline
+\end{tabular}
+
+\begin{tabular}{p{.25in}p{.25in}p{5.8in}}
+\multicolumn{3}{l}{Flow of Events for Main Success Scenario:} \\
+$\leftarrow$  & 1. & The Parse method of the MatrixParser class extracts the matrix info from the incoming string\\
+$\leftarrow$  & 2. & This information is converted into a 2-dimensional array\\
+$\leftarrow$ & 3.& A Matrix object is created using this array\\
+\end{tabular}
+
+\begin{tabular}{p{.25in}p{.25in}p{5.8in}}
+\multicolumn{3}{l}{Flow of Events for Extensions:} \\
+\multicolumn{2}{c}{\textbf{1a.}} & User entered a Matrix with invalid syntax \\
+$\leftarrow$  & 1.           & MatrixParser throws Exception\\
+
+
+\end{tabular}
+\end{center}
+
 
 
 \newpage
 
+\newpage
+
+
 \section{Traceability Matrix}
 
 \begin{center}
-\begin{tabular}{|l|l|l|l|l|l|l|}
+\begin{tabular}{|l|l|l|l|l|l|l|l|}
 \hline
-& UC-1 & UC-2 & UC-3 & UC-4 & UC-5 & UC-6 \\ \hline
-REQ1 & X &  & X  &  &  &  \\ \hline
-REQ2 & X &  &  &  &  &  \\ \hline
-REQ3 & X &  &  &  &  &  \\ \hline
-REQ4 &  &  &  &  &  &  \\ \hline
-REQ5 &  & X &  &  X&  &  \\ \hline
-REQ6 &  &  &  &  &  X& X \\ \hline
-REQ7 &  &  &  &  &  X& X \\ \hline
-REQ8 &  &  &  &  &  &  \\ \hline
-REQ9 &  &  &  &  &  &  \\ \hline
-REQ10 &  &  &  &  &  &  \\ \hline
-REQ11 &  &  &  &  &  &  \\ \hline
-REQ12 &  &  &  &  &  &  \\ \hline
-REQ13 &  &  &  &  &  & \\ \hline
+& UC-1 & UC-2 & UC-3 & UC-4 & UC-5 & UC-6& UC-8 \\ \hline
+REQ1 & X &  & X  &  &  &  &\\ \hline
+REQ2 & X &  &  &  &  &  &\\ \hline
+REQ3 & X &  &  &  &  &  &\\ \hline
+REQ4 &  &  &  &  &  &  &\\ \hline
+REQ5 &  & X &  &  X&  & & \\ \hline
+REQ6 &  &  &  &  &  X& X  &\\ \hline
+REQ7 &  &  &  &  &  X& X  &\\ \hline
+REQ8 &  &  &  &  &  &  & X\\ \hline
+REQ9 &  &  &  &  &  &  &\\ \hline
+REQ10 &  &  &  &  &  &  &\\ \hline
+REQ11 &  &  &  &  &  &  &\\ \hline
+REQ12 &  &  &  &  &  &  &\\ \hline
+REQ13 &  &  &  &  &  &  &\\ \hline
 \end{tabular}
 \end{center}
 
