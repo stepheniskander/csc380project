@@ -294,7 +294,7 @@ Postconditions:        & \begin{itemize}[nosep]
 
 \begin{tabular}{p{.25in}p{.25in}p{5.8in}}
 \multicolumn{3}{l}{Flow of Events for Main Success Scenario:} \\
-$\righttarrow$ & 1. & The user inputs a function.\\
+$\rightarrow$ & 1. & The user inputs a function.\\
 $\leftarrow$   & 2. & A Function object is parsed from the input.\\
 $\leftarrow$   & 3. & A derivative function in generated from the parsed function.\\
 $\leftarrow$   & 4. & Either the generated derivative function or the derivative at a certain point is displayed to the user.\\ 
@@ -340,9 +340,30 @@ $\leftarrow$  & 1.           & MatrixParser throws Exception\\
 \end{tabular}
 \end{center}
 
-
-
 \newpage
+\begin{center}
+\begin{tabular}{p{1.5in}p{5in}}
+\hline
+\textbf{Use Case UC-8}     & \textbf{MultiplyMatrix} \\ \hline
+Related Requirements: & REQ8 \\
+Initiating Actor:     & GUI \\
+Participating Actors: &MatrixParser, Matrix \\
+Actor's Goal:          & To multiply two matrices. \\
+Preconditions:         & \begin{itemize}[nosep]
+		      \item  MatrixParser is initialized
+                         \end{itemize} \\
+Postconditions:        & \begin{itemize}[nosep]
+                         \item A Matrix object is created.
+                         \end{itemize} \\ \hline
+\end{tabular}
+
+\begin{tabular}{p{.25in}p{.25in}p{5.8in}}
+\multicolumn{3}{l}{Flow of Events for Main Success Scenario:} \\
+              & 1. & \code{include::ParseMatrix}\\
+$\leftarrow$  & 2. & Multiply the first matrix by the second\\
+$\leftarrow$ & 3. & Display the resulting matrix\\
+\end{tabular}
+\end{center}
 
 \newpage
 
