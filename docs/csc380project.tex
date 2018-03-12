@@ -400,27 +400,56 @@ $\leftarrow$  & 1.           & Matrix throws LUFactorException\\
 \end{center}
 
 \newpage
+\begin{center}
+\begin{tabular}{p{1.5in}p{5in}}
+\hline
+\textbf{Use Case UC-10}     & \textbf{GraphFunction} \\ \hline
+Related Requirements: & REQ13 \\
+Initiating Actor:     & User \\
+Participating Actors: & GUI, FunctionParser, Function \\
+Actor's Goal:          & To graph a functions \\
+Preconditions:         & \begin{itemize}[nosep]
+                \item  FunctionParser is initialized
+                            \end{itemize} \\
+Postconditions:        & \begin{itemize}[nosep]
+                            \item A graph of the function is displayed
+                            \end{itemize} \\ \hline
+\end{tabular}
 
+\begin{tabular}{p{.25in}p{.25in}p{5.8in}}
+\multicolumn{3}{l}{Flow of Events for Main Success Scenario:} \\
+$\rightarrow$ & 1. & The user inputs a function.\\
+$\leftarrow$   & 2. & A Function object is parsed from the input.\\
+$\leftarrow$   & 3. & A graph of the function is drawn on a Canvas object\\ 
+\end{tabular}
 
+\begin{tabular}{p{.25in}p{.25in}p{5.8in}}
+\multicolumn{3}{l}{Flow of Events for Extensions:} \\
+\multicolumn{2}{c}{\textbf{2a.}} & User entered an invalid function \\
+$\leftarrow$  & 1.           & FunctionParser throws FunctionParseException.\\
+\end{tabular}
+\end{center}
+
+\newpage
 \section{Traceability Matrix}
 
 \begin{center}
-\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|}
 \hline
-      & UC-1 & UC-2 & UC-3 & UC-4 & UC-5 & UC-6 & UC-7 & UC-8 & UC-9\\ \hline
-REQ1  & X    &      & X    &      &      &      &      &      &     \\ \hline
-REQ2  & X    &      &      &      &      &      &      &      &     \\ \hline
-REQ3  & X    &      &      &      &      &      &      &      &     \\ \hline
-REQ4  &      & X    &      &      &      &      &      &      &     \\ \hline
-REQ5  &      & X    &      &  X   &      &      &      &      &     \\ \hline
-REQ6  &      &      &      &      &  X   & X    &      &      &     \\ \hline
-REQ7  &      &      &      &      &  X   & X    &      &      &     \\ \hline
-REQ8  &      &      &      &      &      &      & X    &      &     \\ \hline
-REQ9  &      &      &      &      &      &      &      & X    &     \\ \hline
-REQ10 &      &      &      &      &      &      &      &      & X   \\ \hline
-REQ11 &      &      &      &      &      &      &      &      & X   \\ \hline
-REQ12 &      &      &      &      &      &      & X    &      &     \\ \hline
-REQ13 &      &      &      &      &      &      &      &      &     \\ \hline
+      & UC-1 & UC-2 & UC-3 & UC-4 & UC-5 & UC-6 & UC-7 & UC-8 & UC-9 & UC-10 \\ \hline
+REQ1  & X    &      & X    &      &      &      &      &      &      &       \\ \hline
+REQ2  & X    &      &      &      &      &      &      &      &      &       \\ \hline
+REQ3  & X    &      &      &      &      &      &      &      &      &       \\ \hline
+REQ4  &      & X    &      &      &      &      &      &      &      &       \\ \hline
+REQ5  &      & X    &      &  X   &      &      &      &      &      &       \\ \hline
+REQ6  &      &      &      &      &  X   & X    &      &      &      &       \\ \hline
+REQ7  &      &      &      &      &  X   & X    &      &      &      &       \\ \hline
+REQ8  &      &      &      &      &      &      & X    &      &      &       \\ \hline
+REQ9  &      &      &      &      &      &      &      & X    &      &       \\ \hline
+REQ10 &      &      &      &      &      &      &      &      & X    &       \\ \hline
+REQ11 &      &      &      &      &      &      &      &      & X    &       \\ \hline
+REQ12 &      &      &      &      &      &      & X    &      &      &       \\ \hline
+REQ13 &      &      &      &      &      &      &      &      &      & X     \\ \hline
 \end{tabular}
 \end{center}
 
