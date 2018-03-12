@@ -268,7 +268,7 @@ $\leftarrow$  & 4. & If given range parameters, the application displays a numer
 \begin{tabular}{p{.25in}p{.25in}p{5.8in}}
 \multicolumn{3}{l}{Flow of Events for Extensions:} \\
 \multicolumn{2}{c}{\textbf{2a.}} & User entered an invalid function \\
-$\leftarrow$  & 1.           & FunctionParser throws FunctionParseException\.\
+$\leftarrow$  & 1.           & FunctionParser throws FunctionParseException.\\
 \end{tabular}
 \end{center}
 
@@ -282,28 +282,28 @@ $\leftarrow$  & 1.           & FunctionParser throws FunctionParseException\.\
 \textbf{Use Case UC-6}     & \textbf{Derive} \\ \hline
 Related Requirements: & REQ6, REQ7 \\
 Initiating Actor:     & User \\
-Participating Actors: & GUI,ExpressionParser, Expression, \\
+Participating Actors: & GUI, FunctionParser, Function \\
 Actor's Goal:          & To derive the expression symbollically or at a point. \\
 Preconditions:         & \begin{itemize}[nosep]
-		      \item  ExpressionParser is initialized
+		      \item  FunctionParser is initialized
                          \end{itemize} \\
 Postconditions:        & \begin{itemize}[nosep]
-                         \item An Equation object is created and ready to be evaluated.
+                         \item A derivative function is calculated, and optionally evaluated at a single point.
                          \end{itemize} \\ \hline
 \end{tabular}
 
 \begin{tabular}{p{.25in}p{.25in}p{5.8in}}
 \multicolumn{3}{l}{Flow of Events for Main Success Scenario:} \\
-$\leftarrow$  & 1. & Both sides of the equation are evaluated into Expression objects\\
-$\leftarrow$  & 2. & An Equation object is created using the two Expressions\\
+$\righttarrow$ & 1. & The user inputs a function.\\
+$\leftarrow$   & 2. & A Function object is parsed from the input.\\
+$\leftarrow$   & 3. & A derivative function in generated from the parsed function.\\
+$\leftarrow$   & 4. & Either the generated derivative function or the derivative at a certain point is displayed to the user.\\ 
 \end{tabular}
 
 \begin{tabular}{p{.25in}p{.25in}p{5.8in}}
 \multicolumn{3}{l}{Flow of Events for Extensions:} \\
-\multicolumn{2}{c}{\textbf{2a.}} & User entered an equation with invalid characters \\
-$\leftarrow$  & 1.           & ExpressionParser throws NoSuchElementException\\
-
-
+\multicolumn{2}{c}{\textbf{2a.}} & User entered an invalid function \\
+$\leftarrow$  & 1.           & FunctionParser throws FunctionParseException.\\
 \end{tabular}
 \end{center}
 
