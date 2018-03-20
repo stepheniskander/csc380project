@@ -6,7 +6,9 @@ import java.util.StringTokenizer;
 
 public class ExpressionParser {
     public Expression parse(String ex){
-        StringTokenizer tokenizer = new StringTokenizer(ex, "+-*/^()", true);
+        String negString = ex.replaceAll("[+/\\-^\\(]\\-(.).","(0-$1)");
+        StringTokenizer tokenizer = new StringTokenizer(negString, "+-*/^()", true);
+        System.out.println(negString);
         ArrayDeque<String> outputQueue = new ArrayDeque<>();
         ArrayDeque<String> operatorStack = new ArrayDeque<>();
         String token;
