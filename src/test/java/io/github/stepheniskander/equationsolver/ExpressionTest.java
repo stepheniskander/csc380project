@@ -16,9 +16,10 @@ public class ExpressionTest extends TestCase {
     }
     public void testNegative(){
         ExpressionParser parse = new ExpressionParser();
-        Expression neg = parse.parse("2*(-1)");
+        Expression neg = parse.parse("2*-1");
 
         double result = neg.evaluateRpn();
         assertEquals(result,  -2.0);
     }
+
 }
