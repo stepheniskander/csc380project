@@ -14,4 +14,11 @@ public class ExpressionTest extends TestCase {
 
         assertEquals(result, 181.8125, EPSILON);
     }
+    public void testNegative(){
+        ExpressionParser parse = new ExpressionParser();
+        Expression neg = parse.parse("(-1)*2");
+
+        double result = neg.evaluateRpn();
+        assertEquals(result,  -2);
+    }
 }
