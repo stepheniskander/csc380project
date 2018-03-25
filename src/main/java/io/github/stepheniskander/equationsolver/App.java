@@ -47,24 +47,24 @@ public class App extends Application {
                 if (s.trim().length() != 0) {
                     if(argus[0].equalsIgnoreCase("matrix")){
                         MatrixParser matrixParser = new MatrixParser();
-                        if(argus[1].charAt(0) == '['){
+                        if(argus[1].charAt(0) == '['){ //Checks to see if you just input a matrix without a variable
                             String inputString = s.substring(7, s.length()).trim();
-                            Matrix inputMatrix = matrixParser.parse(inputString);                   //I made a HashMap that stores matrices based on their Variable Name
-                            inField.setText("");                                                    //Matrices can be stored as an Upper case letter
-                            inField.end();                                                          //One assigns matrices with "matrix X = [[]]"
-                            inOutList.add("-------------\n" + inputMatrix.toString() + "\n-------------\n"); //Then you can recall that matrix from the hashmap by
-                        }else if(argus[1].matches("[A-Z]")) {                                   //typing "matrix X"
-                            if (argus.length > 2) {
+                            Matrix inputMatrix = matrixParser.parse(inputString);                                       //I made a HashMap that stores matrices based on their Variable Name
+                            inField.setText("");                                                                         //Matrices can be stored as an Upper case letter
+                            inField.end();                                                                               //One assigns matrices with "matrix X = [[]]"
+                            inOutList.add("-------------\n" + inputMatrix.toString() + "\n-------------\n");            //Then you can recall that matrix from the hashmap by
+                        }else if(argus[1].matches("[A-Z]")) {                                                       //typing "matrix X"
+                            if (argus.length > 2) { //if there are more than two arguments, then it will either be assigning or doing matrix multiplication
                                 if (argus[2].equals("=")) {
-                                    String inputString = s.substring(10, s.length()).trim();
-                                    Matrix inputMatrix = matrixParser.parse(inputString);
+                                    String inputString = s.substring(10, s.length()).trim(); //The number 10 comes from the fact that assignment is always in the form:
+                                    Matrix inputMatrix = matrixParser.parse(inputString);   //matrix x = .... the 10th position in that string is right after the equals
                                     matrixMap.put(argus[1], inputMatrix);
                                     inField.setText("");
                                     inField.end();
                                     inOutList.add("Matrix " + argus[1] + ":\n" + "-------------\n" + inputMatrix.toString() + "\n-------------\n");
                                 }
 
-                        }else {
+                        }else { //If there are 2 arguments, then it will be just recalling the matrix from the hash map
                                 Matrix curr = matrixMap.get(argus[1]);
                                 inOutList.add("Matrix: " + argus[1] + ":\n" + "-------------\n" + curr.toString() + "\n-------------\n");
                                 inField.setText("");
