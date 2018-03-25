@@ -7,7 +7,7 @@ public class MatrixParserTest extends TestCase {
         MatrixParser test = new MatrixParser();
         Matrix ex = test.parse("[[1,2,3] [3,4,5]]");
         System.out.println(ex.toString());
-        assertTrue(ex.toString().equals("1.0 2.0 3.0\n" +
-                                        "3.0 4.0 5.0"));
+        assertEquals(ex.toString(),"1.0 2.0 3.0 \n" +
+                "3.0 4.0 5.0");
     }
 }
