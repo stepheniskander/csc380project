@@ -8,7 +8,15 @@ public class Matrix {
     public void display(){
 
     }
-
+    public int getRows(){
+        return numMatrix.length;
+    }
+    public int getColumns(){
+        return numMatrix[0].length;
+    }
+    public double[][] getMatrix(){
+        return numMatrix;
+    }
     @Override
     public String toString() {
         String s = "";
@@ -21,4 +29,7 @@ public class Matrix {
         }
         return s.trim();
     }
+//    public static double[][] matrixMultiply(Matrix m1, Matrix m2){
+//        double[][] result;
+//    }
 }

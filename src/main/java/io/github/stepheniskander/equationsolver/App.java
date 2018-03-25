@@ -42,14 +42,26 @@ public class App extends Application {
             public void handle(ActionEvent event) {
                 outField.clear();
                 String s = inField.getText();
+                String[] argus = s.split(" ");
                 double result;
                 if (s.trim().length() != 0) {
-                    Expression ex = parser.parse(s);
-                    result = ex.evaluateRpn();
-                    inField.setText(String.valueOf(result));
-                    inField.end();
-                    inOutList.add(s + ":"); //All inputs and outputs will be added to the list in the order they were entered and shown to the user in the output field
-                    inOutList.add("             " + String.valueOf(result));
+                    if(argus[0].equalsIgnoreCase("matrix")){
+                        if(argus[1].charAt(0) == '['){
+                            MatrixParser matrixParser = new MatrixParser();
+                            String inputString = s.substring(7, s.length()).trim();
+                            Matrix inputMatrix = matrixParser.parse(inputString);
+                            inField.setText("");
+                            inField.end();
+                            inOutList.add("-------------\n" + inputMatrix.toString() + "\n-------------\n");
+                        }
+                    }else {
+                        Expression ex = parser.parse(s);
+                        result = ex.evaluateRpn();
+                        inField.setText(String.valueOf(result));
+                        inField.end();
+                        inOutList.add(s + ":"); //All inputs and outputs will be added to the list in the order they were entered and shown to the user in the output field
+                        inOutList.add("             " + String.valueOf(result));
+                    }
                 } else {
                     inField.setText("");
                 }
@@ -64,14 +76,28 @@ public class App extends Application {
             if (ke.getCode() == KeyCode.ENTER) {
                 outField.clear();
                 String s = inField.getText();
+                String[] argus = s.split(" ");
+
                 double result;
                 if (s.trim().length() != 0) {
-                    Expression ex = parser.parse(s);
-                    result = ex.evaluateRpn();
-                    inField.setText(String.valueOf(result));
-                    inField.end();
-                    inOutList.add(s + ":"); //All inputs and outputs will be added to the list in the order they were entered and shown to the user in the output field
-                    inOutList.add("             " + String.valueOf(result));
+                    if(argus[0].equalsIgnoreCase("matrix")){
+                        if(argus[1].charAt(0) == '['){
+                            MatrixParser matrixParser = new MatrixParser();
+                            String inputString = s.substring(7, s.length()).trim();
+                            Matrix inputMatrix = matrixParser.parse(inputString);
+                            inField.setText("");
+                            inField.end();
+                            inOutList.add("-------------\n" + inputMatrix.toString() + "\n-------------\n");
+                        }
+                    }else{
+                        Expression ex = parser.parse(s);
+                        result = ex.evaluateRpn();
+                        inField.setText(String.valueOf(result));
+                        inField.end();
+                        inOutList.add(s + ":"); //All inputs and outputs will be added to the list in the order they were entered and shown to the user in the output field
+                        inOutList.add("             " + String.valueOf(result));
+                    }
+
                 } else {
                     inField.setText("");
                 }
