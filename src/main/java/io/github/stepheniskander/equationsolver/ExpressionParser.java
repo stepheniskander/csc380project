@@ -1,12 +1,15 @@
 package io.github.stepheniskander.equationsolver;
 
 import java.util.ArrayDeque;
-import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class ExpressionParser {
+
     public Expression parse(String ex){
-        String negString = ex.replaceAll("([*+/\\-^\\(])*\\-(.*).*","$1(0-$2)");
+        if(ex.startsWith("-")){ //This handles when the string starts with a negative number
+            ex = ex.replaceFirst("-([0-9]+\\.?[0-9]*)","(0-$1)");
+        }
+        String negString = ex.replaceAll("([*+/\\-^\\(])+\\-(.*).*","$1(0-$2)");
         StringTokenizer tokenizer = new StringTokenizer(negString, "+-*/^()", true);
         System.out.println(negString);
         ArrayDeque<String> outputQueue = new ArrayDeque<>();
