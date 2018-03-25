@@ -9,9 +9,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-
 import java.util.ArrayList;
-
+import java.util.HashMap;
 import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
@@ -36,6 +35,7 @@ public class App extends Application {
         btn.setText("Enter");
 
         ExpressionParser parser = new ExpressionParser();
+        HashMap<String,Matrix> matrixMap = new HashMap<>();
         btn.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
@@ -46,13 +46,30 @@ public class App extends Application {
                 double result;
                 if (s.trim().length() != 0) {
                     if(argus[0].equalsIgnoreCase("matrix")){
+                        MatrixParser matrixParser = new MatrixParser();
                         if(argus[1].charAt(0) == '['){
-                            MatrixParser matrixParser = new MatrixParser();
                             String inputString = s.substring(7, s.length()).trim();
-                            Matrix inputMatrix = matrixParser.parse(inputString);
-                            inField.setText("");
-                            inField.end();
-                            inOutList.add("-------------\n" + inputMatrix.toString() + "\n-------------\n");
+                            Matrix inputMatrix = matrixParser.parse(inputString);                   //I made a HashMap that stores matrices based on their Variable Name
+                            inField.setText("");                                                    //Matrices can be stored as an Upper case letter
+                            inField.end();                                                          //One assigns matrices with "matrix X = [[]]"
+                            inOutList.add("-------------\n" + inputMatrix.toString() + "\n-------------\n"); //Then you can recall that matrix from the hashmap by
+                        }else if(argus[1].matches("[A-Z]")) {                                   //typing "matrix X"
+                            if (argus.length > 2) {
+                                if (argus[2].equals("=")) {
+                                    String inputString = s.substring(10, s.length()).trim();
+                                    Matrix inputMatrix = matrixParser.parse(inputString);
+                                    matrixMap.put(argus[1], inputMatrix);
+                                    inField.setText("");
+                                    inField.end();
+                                    inOutList.add("Matrix " + argus[1] + ":\n" + "-------------\n" + inputMatrix.toString() + "\n-------------\n");
+                                }
+
+                        }else {
+                                Matrix curr = matrixMap.get(argus[1]);
+                                inOutList.add("Matrix: " + argus[1] + ":\n" + "-------------\n" + curr.toString() + "\n-------------\n");
+                                inField.setText("");
+                                inField.end();
+                            }
                         }
                     }else {
                         Expression ex = parser.parse(s);
@@ -77,17 +94,33 @@ public class App extends Application {
                 outField.clear();
                 String s = inField.getText();
                 String[] argus = s.split(" ");
-
+                MatrixParser matrixParser = new MatrixParser();
                 double result;
                 if (s.trim().length() != 0) {
                     if(argus[0].equalsIgnoreCase("matrix")){
                         if(argus[1].charAt(0) == '['){
-                            MatrixParser matrixParser = new MatrixParser();
                             String inputString = s.substring(7, s.length()).trim();
                             Matrix inputMatrix = matrixParser.parse(inputString);
                             inField.setText("");
                             inField.end();
                             inOutList.add("-------------\n" + inputMatrix.toString() + "\n-------------\n");
+                        }else if(argus[1].matches("[A-Z]")) {
+                            if (argus.length > 2) {
+                                if (argus[2].equals("=")) {
+                                    String inputString = s.substring(10, s.length()).trim();
+                                    Matrix inputMatrix = matrixParser.parse(inputString);
+                                    matrixMap.put(argus[1], inputMatrix);
+                                    inField.setText("");
+                                    inField.end();
+                                    inOutList.add("Matrix " + argus[1] + ":\n" + "-------------\n" + inputMatrix.toString() + "\n-------------\n");
+                                }
+
+                            } else {
+                                Matrix curr = matrixMap.get(argus[1]);
+                                inOutList.add("Matrix: " + argus[1] + ":\n" + "-------------\n" + curr.toString() + "\n-------------\n");
+                                inField.setText("");
+                                inField.end();
+                            }
                         }
                     }else{
                         Expression ex = parser.parse(s);

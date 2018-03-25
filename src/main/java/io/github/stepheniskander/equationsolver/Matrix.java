@@ -8,10 +8,10 @@ public class Matrix {
     public void display(){
 
     }
-    public int getRows(){
+    public int getColumns(){
         return numMatrix.length;
     }
-    public int getColumns(){
+    public int getRows(){
         return numMatrix[0].length;
     }
     public double[][] getMatrix(){
@@ -30,6 +30,8 @@ public class Matrix {
         return s.trim();
     }
 //    public static double[][] matrixMultiply(Matrix m1, Matrix m2){
-//        double[][] result;
+//        double [][] result = new double[m1.getRows()][m2.getColumns()];
+//
+//
 //    }
 }
