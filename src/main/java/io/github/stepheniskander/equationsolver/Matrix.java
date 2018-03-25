@@ -6,11 +6,19 @@ public class Matrix {
         numMatrix = constructorMatrix;
     }
     public void display(){
+
+    }
+
+    @Override
+    public String toString() {
+        String s = "";
         for(int i = 0; i < numMatrix.length; i++){
             for (int j = 0; j < numMatrix[0].length; j++){
-                System.out.print(numMatrix[i][j] + " ");
+                s = s + numMatrix[i][j] + " ";
+
             }
-            System.out.println();
+            s = s + "\n";
         }
+        return s.trim();
     }
 }

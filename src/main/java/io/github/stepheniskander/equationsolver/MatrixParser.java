@@ -5,9 +5,9 @@ public class MatrixParser {
             int x;
             int y;
             String[] splits = input.split(" ");
-            String[] xlength = splits[0].split(",");
-            y = splits.length;
-            x = xlength.length;
+            String[] ylength = splits[0].split(",");
+            x = splits.length;
+            y = ylength.length;
             double[][] ex = new double[x][y];
 
             for(int i = 0; i<x; i++ ){
