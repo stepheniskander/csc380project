@@ -32,6 +32,16 @@ public class RationalNumber {
         return new RationalNumber(resultNumerator, lcd);
     }
 
+    public RationalNumber subtract (RationalNumber n) {
+        BigInteger gcd = this.denominator.gcd(n.denominator);
+        BigInteger lcd = this.denominator.divide(gcd).multiply(n.denominator);
+
+        BigInteger resultNumerator = this.numerator.multiply(lcd.divide(this.denominator))
+                .subtract(n.numerator.multiply(lcd.divide(n.denominator)));
+
+        return new RationalNumber(resultNumerator, lcd);
+    }
+
     private void simplify() {
         BigInteger gcd = numerator.gcd(denominator);
 

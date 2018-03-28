@@ -21,4 +21,12 @@ public class RationalNumberTest {
 
         assertEquals(new RationalNumber("3", "4"), a.add(b));
     }
+
+    @Test
+    public void testSubtract() {
+        RationalNumber a = new RationalNumber("3", "4");
+        RationalNumber b = new RationalNumber("1", "2");
+
+        assertEquals(new RationalNumber("1", "4"), a.subtract(b));
+    }
 }
