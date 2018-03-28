@@ -11,8 +11,8 @@ public class RationalNumber {
         this(new BigInteger(numerator), new BigInteger(denominator));
     }
 
-    public RationalNumber(BigInteger numerator, BigInteger denominator) throws IllegalArgumentException{
-        if(denominator.equals(BigInteger.ZERO))
+    public RationalNumber(BigInteger numerator, BigInteger denominator) throws IllegalArgumentException {
+        if (denominator.equals(BigInteger.ZERO))
             throw new IllegalArgumentException("Denominator cannot be 0");
 
         this.numerator = numerator;
@@ -40,7 +40,7 @@ public class RationalNumber {
         return new RationalNumber(resultNumerator, lcd);
     }
 
-    public RationalNumber subtract (RationalNumber n) {
+    public RationalNumber subtract(RationalNumber n) {
         BigInteger gcd = this.denominator.gcd(n.denominator);
         BigInteger lcd = this.denominator.divide(gcd).multiply(n.denominator);
 
@@ -52,7 +52,7 @@ public class RationalNumber {
 
     public RationalNumber multiply(RationalNumber n) {
         return new RationalNumber(this.numerator.multiply(n.numerator),
-                                  this.denominator.multiply(n.denominator));
+                this.denominator.multiply(n.denominator));
     }
 
     public Optional<RationalNumber> divide(RationalNumber n) {
@@ -60,14 +60,14 @@ public class RationalNumber {
     }
 
     public Optional<RationalNumber> inverse() {
-        if(numerator.equals(BigInteger.ZERO))
+        if (numerator.equals(BigInteger.ZERO))
             return Optional.empty();
 
         return Optional.of(new RationalNumber(denominator, numerator));
     }
 
     private void simplify() {
-        if(denominator.compareTo(BigInteger.ZERO) < 0) {
+        if (denominator.compareTo(BigInteger.ZERO) < 0) {
             numerator = numerator.negate();
             denominator = denominator.negate();
         }
@@ -87,8 +87,8 @@ public class RationalNumber {
 
     @Override
     public boolean equals(Object obj) {
-        if(obj == this) return true;
-        if(!(obj instanceof RationalNumber)) return false;
+        if (obj == this) return true;
+        if (!(obj instanceof RationalNumber)) return false;
 
         RationalNumber n = (RationalNumber) obj;
         return this.numerator.equals(n.numerator) && this.denominator.equals(n.denominator);
