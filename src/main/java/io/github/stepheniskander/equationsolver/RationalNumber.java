@@ -20,6 +20,10 @@ public class RationalNumber {
         this.simplify();
     }
 
+    public RationalNumber(String n) {
+        this(new BigInteger(n));
+    }
+
     public RationalNumber(BigInteger n) {
         this.numerator = n;
         this.denominator = BigInteger.ONE;
@@ -46,6 +50,11 @@ public class RationalNumber {
     }
 
     private void simplify() {
+        if(denominator.compareTo(BigInteger.ZERO) < 0) {
+            numerator = numerator.negate();
+            denominator = denominator.negate();
+        }
+
         BigInteger gcd = numerator.gcd(denominator);
 
         if (!(gcd.equals(BigInteger.ONE))) {

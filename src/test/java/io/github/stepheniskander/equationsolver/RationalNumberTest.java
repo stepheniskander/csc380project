@@ -12,6 +12,8 @@ public class RationalNumberTest {
     public void testRationalNumber() {
         assertEquals("(17/81)", new RationalNumber(new BigInteger("680"), new BigInteger("3240")).toString());
         assertEquals("(3/4)", new RationalNumber("3", "4").toString());
+        assertEquals(new RationalNumber("1"), new RationalNumber("-1", "-1"));
+        assertEquals(new RationalNumber("-1", "2"), new RationalNumber("1", "-2"));
     }
 
     @Test(expected = IllegalArgumentException.class)
