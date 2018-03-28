@@ -10,7 +10,10 @@ public class RationalNumber {
         this(new BigInteger(numerator), new BigInteger(denominator));
     }
 
-    public RationalNumber(BigInteger numerator, BigInteger denominator) {
+    public RationalNumber(BigInteger numerator, BigInteger denominator) throws IllegalArgumentException{
+        if(denominator.equals(BigInteger.ZERO))
+            throw new IllegalArgumentException("Denominator cannot be 0");
+
         this.numerator = numerator;
         this.denominator = denominator;
 

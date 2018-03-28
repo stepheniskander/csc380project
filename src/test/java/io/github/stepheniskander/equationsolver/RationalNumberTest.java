@@ -14,6 +14,11 @@ public class RationalNumberTest {
         assertEquals("(3/4)", new RationalNumber("3", "4").toString());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testZeroDenominator() {
+        new RationalNumber("1", "0");
+    }
+
     @Test
     public void testAdd() {
         RationalNumber a = new RationalNumber("1", "2");
