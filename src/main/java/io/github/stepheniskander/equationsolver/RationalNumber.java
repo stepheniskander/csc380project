@@ -1,6 +1,7 @@
 package io.github.stepheniskander.equationsolver;
 
 import java.math.BigInteger;
+import java.util.Optional;
 
 public class RationalNumber {
     private BigInteger numerator;
@@ -47,6 +48,22 @@ public class RationalNumber {
                 .subtract(n.numerator.multiply(lcd.divide(n.denominator)));
 
         return new RationalNumber(resultNumerator, lcd);
+    }
+
+    public RationalNumber multiply(RationalNumber n) {
+        return new RationalNumber(this.numerator.multiply(n.numerator),
+                                  this.denominator.multiply(n.denominator));
+    }
+
+    public Optional<RationalNumber> divide(RationalNumber n) {
+        return n.inverse().map(this::multiply); // we functional now bois
+    }
+
+    public Optional<RationalNumber> inverse() {
+        if(numerator.equals(BigInteger.ZERO))
+            return Optional.empty();
+
+        return Optional.of(new RationalNumber(denominator, numerator));
     }
 
     private void simplify() {

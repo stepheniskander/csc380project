@@ -3,6 +3,7 @@ package io.github.stepheniskander.equationsolver;
 import org.junit.Test;
 
 import java.math.BigInteger;
+import java.util.Optional;
 
 import static org.junit.Assert.*;
 
@@ -35,5 +36,28 @@ public class RationalNumberTest {
         RationalNumber b = new RationalNumber("1", "2");
 
         assertEquals(new RationalNumber("1", "4"), a.subtract(b));
+    }
+
+    @Test
+    public void testMultiply() {
+        RationalNumber a = new RationalNumber("3", "4");
+        RationalNumber b = new RationalNumber("1", "2");
+
+        assertEquals(new RationalNumber("3", "8"), a.multiply(b));
+    }
+
+    @Test
+    public void testInverse() {
+        assertEquals(new RationalNumber("4", "3"), new RationalNumber("3", "4").inverse().get());
+        assertEquals(Optional.empty(), new RationalNumber("0").inverse());
+    }
+
+    @Test
+    public void testDivide() {
+        RationalNumber a = new RationalNumber("3", "4");
+        RationalNumber b = new RationalNumber("1", "2");
+
+        assertEquals(new RationalNumber("3", "2"), a.divide(b).get());
+        assertEquals(Optional.empty(), a.divide(new RationalNumber("0")));
     }
 }
