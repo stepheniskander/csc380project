@@ -54,4 +54,14 @@ public class RationalNumber {
         RationalNumber n = (RationalNumber) obj;
         return this.numerator.equals(n.numerator) && this.denominator.equals(n.denominator);
     }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+
+        result = 31 * result + numerator.hashCode();
+        result = 31 * result + denominator.hashCode();
+
+        return result;
+    }
 }
