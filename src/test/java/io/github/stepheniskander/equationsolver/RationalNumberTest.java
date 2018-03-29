@@ -77,4 +77,15 @@ public class RationalNumberTest {
         assertTrue(new RationalNumber("13", "12").compareTo(new RationalNumber("5", "6")) > 0);
         assertTrue(new RationalNumber("4", "5").compareTo(new RationalNumber("8", "10")) == 0);
     }
+
+    @Test
+    public void testEqualsSymmetric() {
+        RationalNumber a = new RationalNumber("3", "4");
+        RationalNumber b = new RationalNumber("6", "8");
+
+        assertEquals(a, b);
+        assertEquals(b, a);
+
+        assertEquals(a.hashCode(), b.hashCode());
+    }
 }
