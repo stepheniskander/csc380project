@@ -2,6 +2,7 @@ package io.github.stepheniskander.equationsolver;
 
 import org.junit.Test;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 
@@ -59,5 +60,10 @@ public class RationalNumberTest {
 
         assertEquals(new RationalNumber("3", "2"), a.divide(b).get());
         assertEquals(Optional.empty(), a.divide(new RationalNumber("0")));
+    }
+
+    @Test
+    public void testAsBigDecimal() {
+        assertEquals(new BigDecimal(".75"), new RationalNumber("3", "4").asBigDecimal());
     }
 }

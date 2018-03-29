@@ -1,5 +1,6 @@
 package io.github.stepheniskander.equationsolver;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 
@@ -64,6 +65,10 @@ public class RationalNumber extends Number {
             return Optional.empty();
 
         return Optional.of(new RationalNumber(denominator, numerator));
+    }
+
+    public BigDecimal asBigDecimal() {
+        return new BigDecimal(numerator).divide(new BigDecimal(denominator));
     }
 
     private void simplify() {
