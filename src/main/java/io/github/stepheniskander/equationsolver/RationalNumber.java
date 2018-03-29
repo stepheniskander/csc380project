@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 
-public class RationalNumber extends Number {
+public class RationalNumber implements Comparable<RationalNumber> {
     private BigInteger numerator;
     private BigInteger denominator;
 
@@ -110,22 +110,13 @@ public class RationalNumber extends Number {
     }
 
     @Override
-    public int intValue() {
-        return numerator.divide(denominator).intValue();
-    }
+    public int compareTo(RationalNumber o) {
+        BigInteger gcd = this.denominator.gcd(o.denominator);
+        BigInteger lcd = this.denominator.divide(gcd).multiply(o.denominator);
 
-    @Override
-    public long longValue() {
-        return numerator.divide(denominator).longValue();
-    }
+        BigInteger thisNumerator = this.numerator.multiply(lcd.divide(this.denominator));
+        BigInteger oNumerator = o.numerator.multiply(lcd.divide(o.denominator));
 
-    @Override
-    public float floatValue() {
-        return numerator.floatValue() / denominator.floatValue();
-    }
-
-    @Override
-    public double doubleValue() {
-        return numerator.doubleValue() / denominator.doubleValue();
+        return thisNumerator.compareTo(oNumerator);
     }
 }

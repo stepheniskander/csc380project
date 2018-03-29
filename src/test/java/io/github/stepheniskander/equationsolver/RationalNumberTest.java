@@ -66,4 +66,11 @@ public class RationalNumberTest {
     public void testAsBigDecimal() {
         assertEquals(new BigDecimal(".75"), new RationalNumber("3", "4").asBigDecimal());
     }
+
+    @Test
+    public void testCompareTo() {
+        assertTrue(new RationalNumber("4", "5").compareTo(new RationalNumber("7", "6")) < 0);
+        assertTrue(new RationalNumber("13", "12").compareTo(new RationalNumber("5", "6")) > 0);
+        assertTrue(new RationalNumber("4", "5").compareTo(new RationalNumber("8", "10")) == 0);
+    }
 }
