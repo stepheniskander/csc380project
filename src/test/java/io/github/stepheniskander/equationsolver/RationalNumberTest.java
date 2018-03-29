@@ -27,8 +27,10 @@ public class RationalNumberTest {
     public void testAdd() {
         RationalNumber a = new RationalNumber("1", "2");
         RationalNumber b = new RationalNumber("1", "4");
+        RationalNumber c = new RationalNumber("1", "3");
 
         assertEquals(new RationalNumber("3", "4"), a.add(b));
+        assertEquals(new RationalNumber("13", "12"), RationalNumber.sum(a, b, c));
     }
 
     @Test
@@ -43,8 +45,10 @@ public class RationalNumberTest {
     public void testMultiply() {
         RationalNumber a = new RationalNumber("3", "4");
         RationalNumber b = new RationalNumber("1", "2");
+        RationalNumber c = new RationalNumber("1", "3");
 
         assertEquals(new RationalNumber("3", "8"), a.multiply(b));
+        assertEquals(new RationalNumber("3", "24"), RationalNumber.product(a, b, c));
     }
 
     @Test

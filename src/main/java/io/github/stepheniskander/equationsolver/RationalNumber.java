@@ -2,9 +2,13 @@ package io.github.stepheniskander.equationsolver;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Arrays;
 import java.util.Optional;
 
 public class RationalNumber implements Comparable<RationalNumber> {
+    public static final RationalNumber ZERO = new RationalNumber("0");
+    public static final RationalNumber ONE = new RationalNumber("1");
+
     private BigInteger numerator;
     private BigInteger denominator;
 
@@ -39,6 +43,14 @@ public class RationalNumber implements Comparable<RationalNumber> {
                 .add(n.numerator.multiply(lcd.divide(n.denominator)));
 
         return new RationalNumber(resultNumerator, lcd);
+    }
+
+    static public RationalNumber sum(RationalNumber... args) {
+        return Arrays.stream(args).reduce(RationalNumber.ZERO, RationalNumber::add);
+    }
+
+    static public RationalNumber product(RationalNumber... args) {
+        return Arrays.stream(args).reduce(RationalNumber.ONE, RationalNumber::multiply);
     }
 
     public RationalNumber subtract(RationalNumber n) {
