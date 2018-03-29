@@ -3,7 +3,7 @@ package io.github.stepheniskander.equationsolver;
 import java.math.BigInteger;
 import java.util.Optional;
 
-public class RationalNumber {
+public class RationalNumber extends Number {
     private BigInteger numerator;
     private BigInteger denominator;
 
@@ -102,5 +102,25 @@ public class RationalNumber {
         result = 31 * result + denominator.hashCode();
 
         return result;
+    }
+
+    @Override
+    public int intValue() {
+        return numerator.divide(denominator).intValue();
+    }
+
+    @Override
+    public long longValue() {
+        return numerator.divide(denominator).longValue();
+    }
+
+    @Override
+    public float floatValue() {
+        return numerator.floatValue() / denominator.floatValue();
+    }
+
+    @Override
+    public double doubleValue() {
+        return numerator.doubleValue() / denominator.doubleValue();
     }
 }
