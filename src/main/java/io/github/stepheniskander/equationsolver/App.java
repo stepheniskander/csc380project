@@ -19,7 +19,6 @@ import javafx.scene.control.TextArea;
  * @author Nick
  */
 public class App extends Application {
-
     @Override
     public void start(Stage primaryStage) {
         ArrayList<String> inOutList = new ArrayList<>(); //Contains inputs and outputs as strings to be shown to the user
@@ -37,6 +36,7 @@ public class App extends Application {
         ExpressionParser parser = new ExpressionParser();
         HashMap<String,Matrix> matrixMap = new HashMap<>();
         btn.setOnAction(new EventHandler<ActionEvent>() {
+
 
             @Override
             public void handle(ActionEvent event) {

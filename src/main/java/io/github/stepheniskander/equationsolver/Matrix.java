@@ -5,9 +5,7 @@ public class Matrix {
     public Matrix(double[][] constructorMatrix){
         numMatrix = constructorMatrix;
     }
-    public void display(){
 
-    }
     public int getColumns(){
         return numMatrix.length;
     }
@@ -29,9 +27,18 @@ public class Matrix {
         }
         return s.trim();
     }
-//    public static double[][] matrixMultiply(Matrix m1, Matrix m2){
-//        double [][] result = new double[m1.getRows()][m2.getColumns()];
-//
-//
-//    }
+    public static Matrix matrixMultiply(Matrix m1, Matrix m2){
+        double [][] result = new double[m1.getRows()][m2.getColumns()];
+        for (int i = 0; i<m1.getRows(); i++){
+            for (int j = 0; j < m2.getColumns(); j++){
+                double sum = 0;
+                for(int k = 0; k < m1.getRows(); k++){
+                    sum = sum + m1.getMatrix()[i][k] * m2.getMatrix()[k][j];
+                }
+                result[i][j] = sum;
+            }
+        }
+        return new Matrix(result);
+
+    }
 }
