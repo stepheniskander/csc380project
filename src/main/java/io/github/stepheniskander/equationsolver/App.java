@@ -159,6 +159,11 @@ public class App extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        MatrixParser x = new MatrixParser();
+        Matrix A = x.parse("[[1,2,3]]");
+        Matrix B = x.parse("[[3] [4] [5]]");
+        Matrix C = Matrix.matrixMultiply(A, B);
+        System.out.println(C.toString());
         launch(args);
 
     }

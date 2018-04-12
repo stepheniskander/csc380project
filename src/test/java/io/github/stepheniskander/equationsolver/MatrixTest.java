@@ -14,9 +14,9 @@ public class MatrixTest extends TestCase {
     public void testNonSquare() {
         MatrixParser x = new MatrixParser();
         Matrix A = x.parse("[[1,2,3]]");
-        Matrix B = x.parse("[[2] [4] [5]]");
+        Matrix B = x.parse("[[3] [4] [5]]");
         Matrix C = Matrix.matrixMultiply(A, B);
-        assertEquals(C.toString(),"26.0 \n");
+        assertEquals(C.toString(),"26.0");
     }
 
 
