@@ -99,7 +99,10 @@ public class RationalNumber implements Comparable<RationalNumber> {
 
     @Override
     public String toString() {
-        return String.format("(%s/%s)", numerator, denominator);
+        if(!denominator.equals(BigInteger.ONE)) {
+            return String.format("(%s/%s)", numerator, denominator);
+        } else
+            return numerator.toString();
     }
 
     @Override

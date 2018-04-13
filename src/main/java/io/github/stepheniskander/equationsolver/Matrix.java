@@ -1,8 +1,8 @@
 package io.github.stepheniskander.equationsolver;
 
 public class Matrix {
-    private double[][] numMatrix;
-    public Matrix(double[][] constructorMatrix){
+    private RationalNumber[][] numMatrix;
+    public Matrix(RationalNumber[][] constructorMatrix){
         numMatrix = constructorMatrix;
     }
 
@@ -12,7 +12,7 @@ public class Matrix {
     public int getRows(){
         return numMatrix[0].length;
     }
-    public double[][] getMatrix(){
+    public RationalNumber[][] getMatrix(){
         return numMatrix;
     }
     @Override
@@ -28,16 +28,35 @@ public class Matrix {
         return s.trim();
     }
     public static Matrix matrixMultiply(Matrix m1, Matrix m2){
-        double [][] result = new double[m1.getColumns()][m2.getRows()];
+        RationalNumber [][] result = new RationalNumber[m1.getColumns()][m2.getRows()];
         for (int i = 0; i< m1.getColumns(); i++){
             for (int j = 0; j < m2.getRows(); j++){
-                double sum = 0;
+                result[i][j] = RationalNumber.ZERO;
                 for(int k = 0; k < m1.getRows(); k++){
-                    result[i][j] += m1.getMatrix()[i][k] * m2.getMatrix()[k][j];
+                    result[i][j] = result[i][j].add(m1.getMatrix()[i][k].multiply(m2.getMatrix()[k][j]));
                 }
             }
         }
         return new Matrix(result);
 
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof Matrix))
+            return false;
+
+        Matrix m = (Matrix) obj;
+        if(this.getRows() != m.getRows() || this.getColumns() != m.getColumns())
+            return false;
+
+        for(int i = 0; i < this.getColumns(); i++) {
+            for(int j = 0; j < this.getColumns(); j++) {
+                if(!this.getMatrix()[i][j].equals(m.getMatrix()[i][j]))
+                    return false;
+            }
+        }
+
+        return true;
     }
 }
