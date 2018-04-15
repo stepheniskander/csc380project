@@ -62,6 +62,17 @@ public class App extends Application {
                                     inField.setText("");
                                     inField.end();
                                     inOutList.add("Matrix " + argus[1] + ":\n" + "-------------\n" + inputMatrix.toString() + "\n-------------\n");
+                                }else if(argus[2].equals("times")){
+                                    try{
+                                        Matrix a = matrixMap.get(argus[1]);
+                                        Matrix b = matrixMap.get(argus[3]);
+                                        Matrix c = Matrix.matrixMultiply(a,b);
+                                        inField.setText("");
+                                        inField.end();
+                                        inOutList.add("-------------\n" + c.toString() + "\n-------------\n");
+                                    }catch (Exception e){
+                                        inField.setText("Error loading matrices");
+                                    }
                                 }
 
                         }else { //If there are 2 arguments, then it will be just recalling the matrix from the hash map
@@ -113,6 +124,17 @@ public class App extends Application {
                                     inField.setText("");
                                     inField.end();
                                     inOutList.add("Matrix " + argus[1] + ":\n" + "-------------\n" + inputMatrix.toString() + "\n-------------\n");
+                                }else if(argus[2].equals("times")){
+                                    try{
+                                        Matrix a = matrixMap.get(argus[1]);
+                                        Matrix b = matrixMap.get(argus[3]);
+                                        Matrix c = Matrix.matrixMultiply(a,b);
+                                        inField.setText("");
+                                        inField.end();
+                                        inOutList.add("-------------\n" + c.toString() + "\n-------------\n");
+                                    }catch (Exception e){
+                                        inField.setText("Error loading matrices");
+                                    }
                                 }
 
                             } else {
@@ -159,11 +181,6 @@ public class App extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        MatrixParser x = new MatrixParser();
-        Matrix A = x.parse("[[1,2,3]]");
-        Matrix B = x.parse("[[3] [4] [5]]");
-        Matrix C = Matrix.matrixMultiply(A, B);
-        System.out.println(C.toString());
         launch(args);
 
     }
