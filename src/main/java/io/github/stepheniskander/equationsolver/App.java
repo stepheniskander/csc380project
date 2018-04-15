@@ -62,7 +62,7 @@ public class App extends Application {
                                     inField.setText("");
                                     inField.end();
                                     inOutList.add("Matrix " + argus[1] + ":\n" + "-------------\n" + inputMatrix.toString() + "\n-------------\n");
-                                }else if(argus[2].equals("times")){
+                                }else if(argus[2].equalsIgnoreCase("times")){
                                     try{
                                         Matrix a = matrixMap.get(argus[1]);
                                         Matrix b = matrixMap.get(argus[3]);
@@ -124,7 +124,7 @@ public class App extends Application {
                                     inField.setText("");
                                     inField.end();
                                     inOutList.add("Matrix " + argus[1] + ":\n" + "-------------\n" + inputMatrix.toString() + "\n-------------\n");
-                                }else if(argus[2].equals("times")){
+                                }else if(argus[2].equalsIgnoreCase("times")){
                                     try{
                                         Matrix a = matrixMap.get(argus[1]);
                                         Matrix b = matrixMap.get(argus[3]);
