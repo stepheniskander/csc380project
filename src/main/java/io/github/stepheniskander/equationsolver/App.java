@@ -11,6 +11,9 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
@@ -82,7 +85,20 @@ public class App extends Application {
                                 inField.end();
                             }
                         }
-                    }else {
+                    } else if(argus[0].startsWith("integrate")){
+                        Pattern integratePattern = Pattern.compile("integrate\\((.+), *(.+), *(.+) *\\)");
+                        Matcher integrateMatcher = integratePattern.matcher(s);
+                        integrateMatcher.matches();
+                        String expression = integrateMatcher.group(1);
+                        double start = Double.parseDouble(integrateMatcher.group(2));
+                        double end = Double.parseDouble(integrateMatcher.group(3));
+                    } else if(argus[0].startsWith("derive")){
+                        Pattern derivePattern = Pattern.compile("derive\\((.+), *(.+) *\\)");
+                        Matcher deriveMatcher = derivePattern.matcher(s);
+                        deriveMatcher.matches();
+                        String expression = deriveMatcher.group(1);
+                        double point = Double.parseDouble(deriveMatcher.group(2));
+                    } else {
                         Expression ex = parser.parse(s);
                         result = ex.evaluateRpn();
                         inField.setText(String.valueOf(result));
@@ -144,7 +160,20 @@ public class App extends Application {
                                 inField.end();
                             }
                         }
-                    }else{
+                    }else if(argus[0].startsWith("integrate")) {
+                        Pattern integratePattern = Pattern.compile("integrate\\((.+), *(.+), *(.+) *\\)");
+                        Matcher integrateMatcher = integratePattern.matcher(s);
+                        integrateMatcher.matches();
+                        String expression = integrateMatcher.group(1);
+                        double start = Double.parseDouble(integrateMatcher.group(2));
+                        double end = Double.parseDouble(integrateMatcher.group(3));
+                    }else if(argus[0].startsWith("derive")){
+                        Pattern derivePattern = Pattern.compile("derive\\((.+), *(.+) *\\)");
+                        Matcher deriveMatcher = derivePattern.matcher(s);
+                        deriveMatcher.matches();
+                        String expression = deriveMatcher.group(1);
+                        double point = Double.parseDouble(deriveMatcher.group(2));
+                    }else {
                         Expression ex = parser.parse(s);
                         result = ex.evaluateRpn();
                         inField.setText(String.valueOf(result));
