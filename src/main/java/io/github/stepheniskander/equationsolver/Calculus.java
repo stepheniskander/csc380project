@@ -1,0 +1,11 @@
+package io.github.stepheniskander.equationsolver;
+
+public class Calculus {
+    public static double integrate(String input, double start, double end){
+
+    }
+    public static double derive(String input, double point){
+        
+    }
+
+}
