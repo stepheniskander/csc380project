@@ -9,8 +9,9 @@ import java.util.regex.*;
 public class Polynomial {
     private RationalNumber[] coefficients;
     private RationalNumber[] powers;
-    public Polynomial(RationalNumber[] coefficients) throws IllegalArgumentException {
+    public Polynomial(RationalNumber[] coefficients, RationalNumber[] powers) throws IllegalArgumentException {
         this.coefficients = coefficients;
+        this.powers = powers;
     }
     public Polynomial(String input){
         List<String> fixedSplit = Arrays.asList(input.split("\\+"));
@@ -36,7 +37,7 @@ public class Polynomial {
                 if (termMatcher.group(1)==null &&  termMatcher.group(3)==null){
                     coefficients[i] = RationalNumber.ONE;
                     powers[i] = RationalNumber.ONE;
-                }
+                }else
                 if(termMatcher.group(2)==null && termMatcher.group(3)==null){
                     coefficients[i] = new RationalNumber(termMatcher.group(1));
                     powers[i] = RationalNumber.ZERO;
