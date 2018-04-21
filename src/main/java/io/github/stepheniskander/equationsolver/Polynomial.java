@@ -33,21 +33,24 @@ public class Polynomial {
         for(int i = 0; i < split.size(); i++ ){
             String s = split.get(i);
             Matcher termMatcher = termSplitter.matcher(s);
+            termMatcher.matches();
             if(termMatcher.matches()){
                 if (termMatcher.group(1)==null &&  termMatcher.group(3)==null){
                     coefficients[i] = RationalNumber.ONE;
                     powers[i] = RationalNumber.ONE;
-                }else
-                if(termMatcher.group(2)==null && termMatcher.group(3)==null){
+                }else if(termMatcher.group(2)==null && termMatcher.group(3)==null){
                     coefficients[i] = new RationalNumber(termMatcher.group(1));
                     powers[i] = RationalNumber.ZERO;
                 }else if(termMatcher.group(3)==null){
                     coefficients[i] = new RationalNumber(termMatcher.group(1));
                     powers[i] = RationalNumber.ONE;
+                }else if(termMatcher.group(1)==null ||termMatcher.group(1).length()==0 ){
+                    coefficients[i] =  RationalNumber.ONE;
+                    powers[i] = new RationalNumber(termMatcher.group(3));
+
                 }else{
                     coefficients[i] = new RationalNumber(termMatcher.group(1));
                     powers[i] = new RationalNumber(termMatcher.group(3));
-
                 }
             }
 

@@ -2,7 +2,7 @@ package io.github.stepheniskander.equationsolver;
 import java.util.ArrayList;
 import java.util.regex.*;
 public class Calculus {
-    public static double integrate(String input, double start, double end){
+    public static double integrate(String input, int start, int end){
         Polynomial expression = new Polynomial(input);
         return 0.;
     }
@@ -21,7 +21,7 @@ public class Calculus {
         Polynomial poly = new Polynomial(coefficients,powers);
         String unMapped = poly.toString();
         String mapped = unMapped.replaceAll("[xX]\\^([0-9]+)","*("+ point + "^$1)" );
-        System.out.println(mapped);
+        mapped = mapped.replaceAll("[xX]", "*" + point);
         ExpressionParser exp = new ExpressionParser();
         Expression derived = exp.parse(mapped);
         return derived.evaluateRpn();

@@ -3,7 +3,7 @@ import junit.framework.TestCase;
 
 public class CalculusTest extends TestCase{
     public void testIntegral(){
-        double x = Calculus.integrate("3x^2+2x",0.0,4.0);
+        double x = Calculus.integrate("3x^2+2x",0,4);
         assertEquals(80.0,x);
 
     }
