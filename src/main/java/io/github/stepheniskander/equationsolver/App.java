@@ -210,6 +210,8 @@ public class App extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        Polynomial x = new Polynomial("-3x^3+4x^2-5x");
+        System.out.println(x.toString());
         launch(args);
 
     }
