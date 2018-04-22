@@ -17,7 +17,6 @@ public class Calculus {
         }
         Polynomial poly = new Polynomial(coefficients,powers);
         String unMapped = poly.toString();
-        System.out.println(unMapped);
         String a = unMapped.replaceAll("[xX]\\^([0-9]+)","*("+ start + "^$1)");
         a = a.replaceAll("[xX]", "*" + start);
         a = "(" + a +")";
@@ -25,7 +24,6 @@ public class Calculus {
         b = b.replaceAll("[xX]", "*" + end);
         b = "(" + b +")";
         String c = b + "-" + a;
-        System.out.println(c);
         ExpressionParser exp = new ExpressionParser();
         Expression ex =exp.parse(c);
         x = ex.evaluateRpn();
