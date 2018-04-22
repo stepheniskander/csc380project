@@ -226,7 +226,7 @@ public class App extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println(Calculus.integrate("3x^2+2x",2,3));
+        System.out.println(Calculus.integrate("4x^2+2x",2,3));
         launch(args);
 
     }
