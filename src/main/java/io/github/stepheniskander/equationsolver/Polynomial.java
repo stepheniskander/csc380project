@@ -35,17 +35,32 @@ public class Polynomial {
             Matcher termMatcher = termSplitter.matcher(s);
             termMatcher.matches();
             if(termMatcher.matches()){
-                if (termMatcher.group(1)==null &&  termMatcher.group(3)==null){
+                if(!s.contains("x")){
+                    powers[i] = RationalNumber.ZERO;
+                    coefficients[i] = RationalNumber.ZERO;
+
+                }else if (s.equals("x")){
                     coefficients[i] = RationalNumber.ONE;
                     powers[i] = RationalNumber.ONE;
-                }else if(termMatcher.group(2)==null && termMatcher.group(3)==null){
+
+                }else if(s.equals("-x")){
+                    coefficients[i]= new RationalNumber("-1");
+                    powers[i] = RationalNumber.ONE;
+                }
+                else if(termMatcher.group(2)==null && termMatcher.group(3)==null){
                     coefficients[i] = new RationalNumber(termMatcher.group(1));
                     powers[i] = RationalNumber.ZERO;
+
                 }else if(termMatcher.group(3)==null){
                     coefficients[i] = new RationalNumber(termMatcher.group(1));
                     powers[i] = RationalNumber.ONE;
+
                 }else if(termMatcher.group(1)==null ||termMatcher.group(1).length()==0 ){
                     coefficients[i] =  RationalNumber.ONE;
+                    powers[i] = new RationalNumber(termMatcher.group(3));
+
+                }else if(termMatcher.group(1).equals("-")){
+                    coefficients[i] = new RationalNumber("-1");
                     powers[i] = new RationalNumber(termMatcher.group(3));
 
                 }else{

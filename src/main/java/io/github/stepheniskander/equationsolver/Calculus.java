@@ -1,11 +1,36 @@
 package io.github.stepheniskander.equationsolver;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.regex.*;
 public class Calculus {
     public static double integrate(String input, int start, int end){
         Polynomial expression = new Polynomial(input);
-        return 0.;
+        RationalNumber[] coefficients = expression.getCoefficients();
+        RationalNumber[] powers = expression.getPowers();
+        double x;
+        for(int i = 0; i < coefficients.length;i++){
+            if(powers[i].equals(new RationalNumber("-1"))){
+                powers[i] = new RationalNumber("-2");
+            }
+            powers[i] = powers[i].add(RationalNumber.ONE);
+            coefficients[i] = new RationalNumber(coefficients[i].toString(),powers[i].toString());
+        }
+        Polynomial poly = new Polynomial(coefficients,powers);
+        String unMapped = poly.toString();
+        String a = unMapped.replaceAll("[xX]\\^([0-9]+)","*("+ start + "^$1)");
+        a = a.replaceAll("[xX]", "*" + start);
+        a = "(" + a +")";
+        String b = unMapped.replaceAll("[xX]\\^([0-9]+)","*("+ end + "^$1)");
+        b = b.replaceAll("[xX]", "*" + end);
+        b = "(" + a +")";
+        String c = b + "-" + a;
+        ExpressionParser exp = new ExpressionParser();
+        Expression ex =exp.parse(c);
+        x = ex.evaluateRpn();
+        return x;
     }
+
+
     public static double derive(String input, int point){
         Polynomial expression = new Polynomial(input);
         RationalNumber[] coefficients = expression.getCoefficients();
