@@ -226,6 +226,8 @@ public class App extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        Polynomial p = new Polynomial("x+1");
+        System.out.println(p.toString());
         launch(args);
 
     }

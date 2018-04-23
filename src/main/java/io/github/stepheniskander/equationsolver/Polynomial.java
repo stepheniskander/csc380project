@@ -37,7 +37,7 @@ public class Polynomial {
             if(termMatcher.matches()){
                 if(!s.contains("x")){
                     powers[i] = RationalNumber.ZERO;
-                    coefficients[i] = RationalNumber.ZERO;
+                    coefficients[i] = new RationalNumber(termMatcher.group(1));
 
                 }else if (s.equals("x")){
                     coefficients[i] = RationalNumber.ONE;
@@ -91,23 +91,27 @@ public class Polynomial {
                 if(!coefficients[i].equals(RationalNumber.ONE)) {
                     result.append(coefficients[i]);
                 }
+                if(!powers[i].equals(RationalNumber.ZERO)) {
 
-                result.append("x");
-                if(!powers[i].equals(RationalNumber.ONE)){
-                    result.append("^").append(powers[i]);
-                }
+                    result.append("x");
+                    if (!powers[i].equals(RationalNumber.ONE)) {
+                        result.append("^").append(powers[i]);
+                    }
 
-                if(coefficients[i + 1].compareTo(RationalNumber.ZERO) > 0) {
-                    result.append("+");
+                    if (coefficients[i + 1].compareTo(RationalNumber.ZERO) > 0) {
+                        result.append("+");
+                    }
                 }
             }
         }
 
         if(!coefficients[coefficients.length-1].equals(RationalNumber.ZERO)) {
             result.append(coefficients[coefficients.length-1]);
-            result.append("x");
-            if(!powers[coefficients.length-1].equals(RationalNumber.ONE)){
-                result.append("^").append(powers[coefficients.length-1]);
+            if(!powers[coefficients.length-1].equals(RationalNumber.ZERO)) {
+                result.append("x");
+                if (!powers[coefficients.length - 1].equals(RationalNumber.ONE)) {
+                    result.append("^").append(powers[coefficients.length - 1]);
+                }
             }
         }
 
