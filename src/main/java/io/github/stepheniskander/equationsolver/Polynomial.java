@@ -13,6 +13,15 @@ public class Polynomial {
         this.coefficients = coefficients;
         this.powers = powers;
     }
+    private RationalNumber fractionConstructor(String s){
+        Pattern check = Pattern.compile("(\\-?[0-9]+)/([0-9]+)");
+        Matcher match = check.matcher(s);
+        if(match.matches()){
+            return new RationalNumber(match.group(1),match.group(2));
+        }else{
+            return new RationalNumber(s);
+        }
+    }
     public Polynomial(String input){
         List<String> fixedSplit = Arrays.asList(input.split("\\+"));
         ArrayList<String> split = new ArrayList<>();
@@ -37,7 +46,7 @@ public class Polynomial {
             if(termMatcher.matches()){
                 if(!s.contains("x")){
                     powers[i] = RationalNumber.ZERO;
-                    coefficients[i] = new RationalNumber(termMatcher.group(1));
+                    coefficients[i] = fractionConstructor(termMatcher.group(1));
 
                 }else if (s.equals("x")){
                     coefficients[i] = RationalNumber.ONE;
@@ -48,24 +57,24 @@ public class Polynomial {
                     powers[i] = RationalNumber.ONE;
                 }
                 else if(termMatcher.group(2)==null && termMatcher.group(3)==null){
-                    coefficients[i] = new RationalNumber(termMatcher.group(1));
+                    coefficients[i] = fractionConstructor(termMatcher.group(1));
                     powers[i] = RationalNumber.ZERO;
 
                 }else if(termMatcher.group(3)==null){
-                    coefficients[i] = new RationalNumber(termMatcher.group(1));
+                    coefficients[i] = fractionConstructor(termMatcher.group(1));
                     powers[i] = RationalNumber.ONE;
 
                 }else if(termMatcher.group(1)==null ||termMatcher.group(1).length()==0 ){
                     coefficients[i] =  RationalNumber.ONE;
-                    powers[i] = new RationalNumber(termMatcher.group(3));
+                    powers[i] = fractionConstructor(termMatcher.group(3));
 
                 }else if(termMatcher.group(1).equals("-")){
                     coefficients[i] = new RationalNumber("-1");
-                    powers[i] = new RationalNumber(termMatcher.group(3));
+                    powers[i] = fractionConstructor(termMatcher.group(3));
 
                 }else{
-                    coefficients[i] = new RationalNumber(termMatcher.group(1));
-                    powers[i] = new RationalNumber(termMatcher.group(3));
+                    coefficients[i] = fractionConstructor(termMatcher.group(1));
+                    powers[i] = fractionConstructor(termMatcher.group(3));
                 }
             }
 
