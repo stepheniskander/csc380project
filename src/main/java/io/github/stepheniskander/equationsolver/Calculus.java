@@ -9,11 +9,8 @@ public class Calculus {
         RationalNumber[] powers = expression.getPowers();
         double x;
         for(int i = 0; i < coefficients.length;i++){
-            if(powers[i].equals(new RationalNumber("-1"))){
-                powers[i] = new RationalNumber("-2");
-            }
             powers[i] = powers[i].add(RationalNumber.ONE);
-            coefficients[i] = new RationalNumber(coefficients[i].toString(),powers[i].toString());
+            coefficients[i] = coefficients[i].multiply(new RationalNumber(powers[i].getDenominator(),powers[i].getNumerator()));
         }
         Polynomial poly = new Polynomial(coefficients,powers);
         String unMapped = poly.toString();

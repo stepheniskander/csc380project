@@ -134,4 +134,11 @@ public class RationalNumber implements Comparable<RationalNumber> {
 
         return thisNumerator.compareTo(oNumerator);
     }
+    public BigInteger getNumerator(){
+        return this.numerator;
+    }
+
+    public BigInteger getDenominator() {
+        return denominator;
+    }
 }
