@@ -1,13 +1,14 @@
 package io.github.stepheniskander.equationsolver;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.regex.*;
 public class Calculus {
-    public static double integrate(String input, int start, int end){
+    public static BigDecimal integrate(String input, int start, int end){
         Polynomial expression = new Polynomial(input);
         RationalNumber[] coefficients = expression.getCoefficients();
         RationalNumber[] powers = expression.getPowers();
-        double x;
+        BigDecimal x;
         for(int i = 0; i < coefficients.length;i++){
             powers[i] = powers[i].add(RationalNumber.ONE);
             coefficients[i] = coefficients[i].multiply(new RationalNumber(powers[i].getDenominator(),powers[i].getNumerator()));
@@ -24,16 +25,15 @@ public class Calculus {
         c = c.replaceAll("\\(\\*","(");
         ExpressionParser exp = new ExpressionParser();
         Expression ex =exp.parse(c);
-        x = ex.evaluateRpn().doubleValue(); //FIX THIS
+        x = ex.evaluateRpn(); //FIX THIS
         return x;
     }
 
 
-    public static double derive(String input, int point){
+    public static BigDecimal derive(String input, int point){
         Polynomial expression = new Polynomial(input);
         RationalNumber[] coefficients = expression.getCoefficients();
         RationalNumber[] powers = expression.getPowers();
-        double x;
         for(int i = 0; i < coefficients.length; i++){
             if(powers[i].equals(RationalNumber.ZERO)){
                 coefficients[i] = RationalNumber.ZERO;
@@ -47,7 +47,7 @@ public class Calculus {
         mapped = mapped.replaceAll("[xX]", "*" + point);
         ExpressionParser exp = new ExpressionParser();
         Expression derived = exp.parse(mapped);
-        return derived.evaluateRpn().doubleValue();
+        return derived.evaluateRpn();
     }
 
 }

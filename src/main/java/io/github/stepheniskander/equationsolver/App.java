@@ -9,6 +9,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
@@ -46,7 +48,7 @@ public class App extends Application {
                 outField.clear();
                 String s = inField.getText();
                 String[] argus = s.split(" ");
-                double result;
+                BigDecimal result;
                 if (s.trim().length() != 0) {
                     if(argus[0].equalsIgnoreCase("matrix")){
                         MatrixParser matrixParser = new MatrixParser();
@@ -92,7 +94,7 @@ public class App extends Application {
                         String expression = integrateMatcher.group(1);
                         int start = Integer.parseInt(integrateMatcher.group(2));
                         int end = Integer.parseInt(integrateMatcher.group(3));
-                        double answer = Calculus.integrate(expression,start,end);
+                        BigDecimal answer = Calculus.integrate(expression,start,end);
                         inField.setText("");
                         inField.end();
                         inOutList.add("Integral of " + expression + " from " + start +" to " + end + ":\n      " + answer);
@@ -102,13 +104,13 @@ public class App extends Application {
                         deriveMatcher.matches();
                         String expression = deriveMatcher.group(1);
                         int point = Integer.parseInt(deriveMatcher.group(2));
-                        double answer = Calculus.derive(expression,point);
+                        BigDecimal answer = Calculus.derive(expression,point);
                         inField.setText("");
                         inField.end();
                         inOutList.add("Derivative of " + expression + " at " + point + ":\n      " + answer);
                     } else {
                         Expression ex = parser.parse(s);
-                        result = ex.evaluateRpn().doubleValue();
+                        result = ex.evaluateRpn();
                         inField.setText(String.valueOf(result));
                         inField.end();
                         inOutList.add(s + ":"); //All inputs and outputs will be added to the list in the order they were entered and shown to the user in the output field
@@ -130,7 +132,7 @@ public class App extends Application {
                 String s = inField.getText();
                 String[] argus = s.split(" ");
                 MatrixParser matrixParser = new MatrixParser();
-                double result;
+                BigDecimal result;
                 if (s.trim().length() != 0) {
                     if(argus[0].equalsIgnoreCase("matrix")){
                         if(argus[1].charAt(0) == '['){
@@ -175,7 +177,7 @@ public class App extends Application {
                         String expression = integrateMatcher.group(1);
                         int start = Integer.parseInt(integrateMatcher.group(2));
                         int end = Integer.parseInt(integrateMatcher.group(3));
-                        double answer = Calculus.integrate(expression,start,end);
+                        BigDecimal answer = Calculus.integrate(expression,start,end);
                         inField.setText("");
                         inField.end();
                         inOutList.add("Integral of " + expression + " from " + start +" to " + end + ":\n      " + answer);
@@ -185,13 +187,13 @@ public class App extends Application {
                         deriveMatcher.matches();
                         String expression = deriveMatcher.group(1);
                         int point = Integer.parseInt(deriveMatcher.group(2));
-                        double answer = Calculus.derive(expression,point);
+                        BigDecimal answer = Calculus.derive(expression,point);
                         inField.setText("");
                         inField.end();
                         inOutList.add("Derivative of " + expression + " at " + point + ":\n      " + answer);
                     }else {
                         Expression ex = parser.parse(s);
-                        result = ex.evaluateRpn().doubleValue();
+                        result = ex.evaluateRpn();
                         inField.setText(String.valueOf(result));
                         inField.end();
                         inOutList.add(s + ":"); //All inputs and outputs will be added to the list in the order they were entered and shown to the user in the output field

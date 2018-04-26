@@ -1,14 +1,16 @@
 package io.github.stepheniskander.equationsolver;
 import junit.framework.TestCase;
 
+import java.math.BigDecimal;
+
 public class CalculusTest extends TestCase{
     public void testIntegral(){
-        double x = Calculus.integrate("4x^2+2x",2,3);
-        assertEquals(30.33333333333333,x);
+        BigDecimal x = Calculus.integrate("4x^2+2x",2,3);
+        assertTrue(new BigDecimal("30.3333333333333270").compareTo(x) == 0);
 
     }
     public void testDerive(){
-        double x = Calculus.derive("3x^2+2x",2);
-        assertEquals(14.0,x);
+        BigDecimal x = Calculus.derive("3x^2+2x",2);
+        assertTrue(new BigDecimal("14.0").compareTo(x) == 0);
     }
 }
