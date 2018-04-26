@@ -1,7 +1,5 @@
 package io.github.stepheniskander.equationsolver;
 
-import java.math.BigInteger;
-
 public class MatrixParser {
         public Matrix parse(String input){
             int x;
