@@ -45,12 +45,25 @@ public class RationalNumber implements Comparable<RationalNumber> {
         return new RationalNumber(resultNumerator, lcd);
     }
 
-    static public RationalNumber sum(RationalNumber... args) {
+    public static RationalNumber sum(RationalNumber... args) {
         return Arrays.stream(args).reduce(RationalNumber.ZERO, RationalNumber::add);
     }
 
-    static public RationalNumber product(RationalNumber... args) {
+    public static RationalNumber product(RationalNumber... args) {
         return Arrays.stream(args).reduce(RationalNumber.ONE, RationalNumber::multiply);
+    }
+
+
+    public static RationalNumber fromDecimalString(String dec) {
+        RationalNumber val;
+        if(dec.contains(".")) {
+            BigInteger denominator = new BigInteger("10").multiply(BigInteger.valueOf(dec.length() - dec.indexOf(".") - 1));
+            val = new RationalNumber(new BigInteger(dec.replace(".", "")), denominator);
+        } else {
+            val = new RationalNumber(dec);
+        }
+
+        return val;
     }
 
     public RationalNumber subtract(RationalNumber n) {
