@@ -16,16 +16,9 @@ public class MatrixParser {
                 String[] ysplits = splits[i].split(",");
 
                 for(int j = 0; j<y; j++){
-                    String valstring = ysplits[j].replaceAll("[^0-9]","");
-                    RationalNumber val;
-                    if(valstring.contains(".")) {
-                        BigInteger denominator = new BigInteger("10").multiply(BigInteger.valueOf(valstring.length() - valstring.indexOf(".") - 1));
-                        val = new RationalNumber(new BigInteger(valstring.replace(".", "")), denominator);
-                    } else {
-                        val = new RationalNumber(valstring);
-                    }
+                    String valstring = ysplits[j].replaceAll("[^0-9.]","");
 
-                    ex[i][j] = val;
+                    ex[i][j] = RationalNumber.fromDecimalString(valstring);
                 }
             }
 
