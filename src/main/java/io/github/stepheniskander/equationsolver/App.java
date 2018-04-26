@@ -108,7 +108,7 @@ public class App extends Application {
                         inOutList.add("Derivative of " + expression + " at " + point + ":\n      " + answer);
                     } else {
                         Expression ex = parser.parse(s);
-                        result = ex.evaluateRpn();
+                        result = ex.evaluateRpn().doubleValue();
                         inField.setText(String.valueOf(result));
                         inField.end();
                         inOutList.add(s + ":"); //All inputs and outputs will be added to the list in the order they were entered and shown to the user in the output field
@@ -191,7 +191,7 @@ public class App extends Application {
                         inOutList.add("Derivative of " + expression + " at " + point + ":\n      " + answer);
                     }else {
                         Expression ex = parser.parse(s);
-                        result = ex.evaluateRpn();
+                        result = ex.evaluateRpn().doubleValue();
                         inField.setText(String.valueOf(result));
                         inField.end();
                         inOutList.add(s + ":"); //All inputs and outputs will be added to the list in the order they were entered and shown to the user in the output field

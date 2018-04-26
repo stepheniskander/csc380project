@@ -10,7 +10,7 @@ public class ExpressionTest extends TestCase {
         ExpressionParser parser = new ExpressionParser();
         Expression ex = parser.parse("(2+3)^5/16-(9*1.5)");
 
-        double result = ex.evaluateRpn();
+        double result = ex.evaluateRpn().doubleValue();
 
         assertEquals(result, 181.8125, EPSILON);
     }
@@ -18,7 +18,7 @@ public class ExpressionTest extends TestCase {
         ExpressionParser parse = new ExpressionParser();
         Expression neg = parse.parse("2*-1");
 
-        double result = neg.evaluateRpn();
+        double result = neg.evaluateRpn().doubleValue();
         assertEquals(result,  -2.0);
     }
 

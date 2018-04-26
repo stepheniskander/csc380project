@@ -24,7 +24,7 @@ public class Calculus {
         c = c.replaceAll("\\(\\*","(");
         ExpressionParser exp = new ExpressionParser();
         Expression ex =exp.parse(c);
-        x = ex.evaluateRpn();
+        x = ex.evaluateRpn().doubleValue(); //FIX THIS
         return x;
     }
 
@@ -47,7 +47,7 @@ public class Calculus {
         mapped = mapped.replaceAll("[xX]", "*" + point);
         ExpressionParser exp = new ExpressionParser();
         Expression derived = exp.parse(mapped);
-        return derived.evaluateRpn();
+        return derived.evaluateRpn().doubleValue();
     }
 
 }

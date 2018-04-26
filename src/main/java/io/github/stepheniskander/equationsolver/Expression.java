@@ -26,31 +26,31 @@ public class Expression {
         sb.deleteCharAt(sb.length() - 1);
         return sb.toString();
     }
-    public double evaluateRpn(){
+    public BigDecimal evaluateRpn(){
         ArrayDeque<String> resultStack = new ArrayDeque<>();
         for(String s : rpnStack){
             if(!ExpressionParser.isNumeric(s)){
-                double op_1 =Double.parseDouble(resultStack.pop());
-                double op_2 =Double.parseDouble(resultStack.pop());
-                String res = Double.toString(evaluateExpression(op_1,op_2,s));
+                BigDecimal op_2 = new BigDecimal(resultStack.pop());
+                BigDecimal op_1 = new BigDecimal(resultStack.pop());
+                String res = evaluateExpression(op_1,op_2,s).toString();
                 resultStack.push(res);
 
             }else {
                 resultStack.push(s);
             }
         }
-        return Double.parseDouble(resultStack.pop());
+        return new BigDecimal(resultStack.pop());
 
 
     }
-    private double evaluateExpression(double op_1, double op_2, String operand){ //Evaluates basic arithmetic
+    private BigDecimal evaluateExpression(BigDecimal op_1, BigDecimal op_2, String operand){ //Evaluates basic arithmetic
         switch (operand){
-            case "+": return op_2 + op_1;
-            case "-": return op_2 - op_1;
-            case "^": return Math.pow(op_2,op_1);
-            case "*": return op_2 * op_1;
-            case "/": return op_2 / op_1; //I'm not sure why these are reversed, I must have done something wrong in the evaluation
-            default: return 0;
+            case "+": return op_1.add(op_2);
+            case "-": return op_1.subtract(op_2);
+            case "^": return BigDecimal.valueOf(Math.pow(op_1.doubleValue(), op_2.doubleValue()));
+            case "*": return op_1.multiply(op_2);
+            case "/": return op_1.divide(op_2, MathContext.DECIMAL64); //I'm not sure why these are reversed, I must have done something wrong in the evaluation
+            default: return BigDecimal.ZERO;
         }
     }
 
