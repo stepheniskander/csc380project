@@ -24,11 +24,11 @@ import javafx.scene.control.TextArea;
  * @author Nick
  */
 public class App extends Application {
-    ArrayList<String> inOutList;
-    TextField inField;
-    TextArea outField;
-    ExpressionParser parser;
-    HashMap<String,Matrix> matrixMap;
+    private ArrayList<String> inOutList;
+    private TextField inField;
+    private TextArea outField;
+    private ExpressionParser parser;
+    private HashMap<String,Matrix> matrixMap;
 
     private void handleInput() {
         outField.clear();
