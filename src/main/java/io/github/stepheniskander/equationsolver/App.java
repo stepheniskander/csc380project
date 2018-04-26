@@ -126,12 +126,7 @@ public class App extends Application {
 
         parser = new ExpressionParser();
         matrixMap = new HashMap<>();
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                handleInput();
-            }
-        });
+        btn.setOnAction(event -> handleInput());
 
         inField.setOnKeyPressed((KeyEvent ke) -> {
             if (ke.getCode() == KeyCode.ENTER) {
