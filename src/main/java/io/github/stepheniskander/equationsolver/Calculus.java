@@ -21,7 +21,7 @@ public class Calculus {
         b = b.replaceAll("[xX]", "*" + end);
         b = "(" + b +")";
         String c = b + "-" + a;
-        c.replaceAll(".*\\(*","");
+        c = c.replaceAll("\\(\\*","(");
         ExpressionParser exp = new ExpressionParser();
         Expression ex =exp.parse(c);
         x = ex.evaluateRpn();
