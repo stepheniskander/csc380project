@@ -24,6 +24,13 @@ public class RationalNumberTest {
     }
 
     @Test
+    public void testFromDecimalString() {
+        RationalNumber val = RationalNumber.fromDecimalString("4.2");
+        RationalNumber expected = new RationalNumber("42", "10");
+        assertEquals(expected, val);
+    }
+
+    @Test
     public void testAdd() {
         RationalNumber a = new RationalNumber("1", "2");
         RationalNumber b = new RationalNumber("1", "4");
