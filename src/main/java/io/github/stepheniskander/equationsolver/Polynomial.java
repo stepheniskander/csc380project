@@ -107,9 +107,7 @@ public class Polynomial {
                         result.append("^").append(powers[i]);
                     }
 
-                    if (coefficients[i + 1].compareTo(RationalNumber.ZERO) > 0) {
-                        result.append("+");
-                    }
+                    result.append("+");
                 }
             }
         }

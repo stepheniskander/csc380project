@@ -2,7 +2,7 @@ package io.github.stepheniskander.equationsolver;
 
 import java.util.ArrayDeque;
 import java.util.StringTokenizer;
-
+import java.util.regex.*;
 public class ExpressionParser {
 
     public Expression parse(String ex){
@@ -10,8 +10,13 @@ public class ExpressionParser {
             if (ex.startsWith("-")) { //This handles when the string starts with a negative number
                 ex = ex.replaceFirst("-([0-9]+\\.?[0-9]*)", "(0-$1)");
             }
-            String negString = ex.replaceAll("([*+/\\-^\\(])+\\-(.*).*", "$1(0-$2)");
-            StringTokenizer tokenizer = new StringTokenizer(negString, "+-*/^()", true);
+            //ReplaceAll doesn't work correctly, so I do it an arbitrary amount of times
+            for (int i = 0; i<16;i++) {
+                ex = ex.replaceAll("([*+/\\-^])\\-(.*)", "$1(0-$2)");
+                ex = ex.replaceAll("\\(\\-(.*)", "(0-$1");
+            }
+            System.out.println(ex);
+            StringTokenizer tokenizer = new StringTokenizer(ex, "+-*/^()", true);
             ArrayDeque<String> outputQueue = new ArrayDeque<>();
             ArrayDeque<String> operatorStack = new ArrayDeque<>();
             String token;
