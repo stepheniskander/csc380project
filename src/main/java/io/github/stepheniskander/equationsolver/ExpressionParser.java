@@ -15,7 +15,6 @@ public class ExpressionParser {
                 ex = ex.replaceAll("([*+/\\-^])\\-(.*)", "$1(0-$2)");
                 ex = ex.replaceAll("\\(\\-(.*)", "(0-$1");
             }
-            System.out.println(ex);
             StringTokenizer tokenizer = new StringTokenizer(ex, "+-*/^()", true);
             ArrayDeque<String> outputQueue = new ArrayDeque<>();
             ArrayDeque<String> operatorStack = new ArrayDeque<>();
