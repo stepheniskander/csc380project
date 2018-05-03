@@ -80,8 +80,8 @@ public class App extends Application {
                     result = ex.evaluateRpn();
                     inField.setText(String.valueOf(result));
                     inField.end();
-                    inOutList.add(s + ":"); //All inputs and outputs will be added to the list in the order they were entered and shown to the user in the output field
-                    inOutList.add("             " + String.valueOf(result));
+                    inOutList.add(s); //All inputs and outputs will be added to the list in the order they were entered and shown to the user in the output field
+                    inOutList.add("=        " + result.toString());
                 }
             } else {
                 inField.setText("");
