@@ -4,6 +4,27 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.regex.*;
 public class Calculus {
+    public static String integrateFromString(String input) {
+        Pattern integratePattern = Pattern.compile("int\\((.+), *(.+), *(.+) *\\)");
+        Matcher integrateMatcher = integratePattern.matcher(input);
+        integrateMatcher.matches();
+        String expression = integrateMatcher.group(1);
+        int start = Integer.parseInt(integrateMatcher.group(2));
+        int end = Integer.parseInt(integrateMatcher.group(3));
+
+        return integrate(expression, start, end).toString();
+    }
+
+    public static String deriveFromString(String input) {
+        Pattern derivePattern = Pattern.compile("der\\((.+), *(.+) *\\)");
+        Matcher deriveMatcher = derivePattern.matcher(input);
+        deriveMatcher.matches();
+        String expression = deriveMatcher.group(1);
+        int point = Integer.parseInt(deriveMatcher.group(2));
+
+        return Calculus.derive(expression, point).toString();
+    }
+
     public static BigDecimal integrate(String input, int start, int end){
         Polynomial expression = new Polynomial(input);
         RationalNumber[] coefficients = expression.getCoefficients();

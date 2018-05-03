@@ -75,27 +75,6 @@ public class App extends Application {
                             inField.end();
                         }
                     }
-                } else if (argus[0].startsWith("integrate")) {
-                    Pattern integratePattern = Pattern.compile("integrate\\((.+), *(.+), *(.+) *\\)");
-                    Matcher integrateMatcher = integratePattern.matcher(s);
-                    integrateMatcher.matches();
-                    String expression = integrateMatcher.group(1);
-                    int start = Integer.parseInt(integrateMatcher.group(2));
-                    int end = Integer.parseInt(integrateMatcher.group(3));
-                    BigDecimal answer = Calculus.integrate(expression, start, end);
-                    inField.setText("");
-                    inField.end();
-                    inOutList.add("Integral of " + expression + " from " + start + " to " + end + ":\n      " + answer);
-                } else if (argus[0].startsWith("derive")) {
-                    Pattern derivePattern = Pattern.compile("derive\\((.+), *(.+) *\\)");
-                    Matcher deriveMatcher = derivePattern.matcher(s);
-                    deriveMatcher.matches();
-                    String expression = deriveMatcher.group(1);
-                    int point = Integer.parseInt(deriveMatcher.group(2));
-                    BigDecimal answer = Calculus.derive(expression, point);
-                    inField.setText("");
-                    inField.end();
-                    inOutList.add("Derivative of " + expression + " at " + point + ":\n      " + answer);
                 } else {
                     Expression ex = Parser.parseExpression(s);
                     result = ex.evaluateRpn();

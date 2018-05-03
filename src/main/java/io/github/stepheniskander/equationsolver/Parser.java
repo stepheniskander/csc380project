@@ -39,6 +39,37 @@ public class Parser {
                 ex = ex.replaceAll("([*+/\\-^])\\-(.*)", "$1(0-$2)");
                 ex = ex.replaceAll("\\(\\-(.*)", "(0-$1");
             }
+
+            while(ex.contains("int(")) {
+                int start = ex.indexOf("int(");
+                int end = start + "int(".length();
+                int lParenCount = 1;
+                int rParenCount = 0;
+                for(; end < ex.length() && lParenCount != rParenCount; end++) {
+                    if(ex.charAt(end) == '(')
+                        lParenCount++;
+                    else if(ex.charAt(end) == ')')
+                        rParenCount++;
+                }
+                String intExpr = ex.substring(start, end);
+                ex = ex.substring(0, start) + Calculus.integrateFromString(intExpr) + ex.substring(end);
+            }
+
+            while(ex.contains("der(")) {
+                int start = ex.indexOf("der(");
+                int end = start + "der(".length();
+                int lParenCount = 1;
+                int rParenCount = 0;
+                for(; end < ex.length() && lParenCount != rParenCount; end++) {
+                    if(ex.charAt(end) == '(')
+                        lParenCount++;
+                    else if(ex.charAt(end) == ')')
+                        rParenCount++;
+                }
+                String derExpr = ex.substring(start, end);
+                ex = ex.substring(0, start) + Calculus.deriveFromString(derExpr) + ex.substring(end);
+            }
+
             StringTokenizer tokenizer = new StringTokenizer(ex, "+-*/^()", true);
             ArrayDeque<String> outputQueue = new ArrayDeque<>();
             ArrayDeque<String> operatorStack = new ArrayDeque<>();
