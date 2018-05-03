@@ -20,7 +20,7 @@ public class Parser {
             for(int j = 0; j<y; j++){
                 String valstring = ysplits[j].replaceAll("[^0-9.]","");
 
-                ex[i][j] = RationalNumber.fromDecimalString(valstring);
+                ex[i][j] = RationalNumber.fromDecimalString(Parser.parseExpression(valstring).evaluateRpn().toPlainString());
             }
         }
 

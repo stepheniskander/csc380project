@@ -18,6 +18,7 @@ import java.math.BigDecimal;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Matcher;
@@ -38,53 +39,38 @@ public class App extends Application {
     private void handleInput() {
         try {
             outField.clear();
-            String s = inField.getText();
+            String s = inField.getText().trim();
+            inOutList.add(s);
             String[] argus = s.split(" ");
             BigDecimal result;
-            if (s.trim().length() != 0) {
-                if (argus[0].equalsIgnoreCase("matrix")) {
-                    if (argus[1].charAt(0) == '[') { //Checks to see if you just input a matrix without a variable
-                        String inputString = s.substring(7, s.length()).trim();
-                        Matrix inputMatrix = Parser.parseMatrix(inputString);                                       //I made a HashMap that stores matrices based on their Variable Name
-                        inField.setText("");                                                                         //Matrices can be stored as an Upper case letter
-                        inField.end();                                                                               //One assigns matrices with "matrix X = [[]]"
-                        inOutList.add("-------------\n" + inputMatrix.toString() + "\n-------------\n");            //Then you can recall that matrix from the hashmap by
-                    } else if (argus[1].matches("[A-Z]")) {                                                       //typing "matrix X"
-                        if (argus.length > 2) { //if there are more than two arguments, then it will either be assigning or doing matrix multiplication
-                            if (argus[2].equals("=")) {
-                                String inputString = s.substring(10, s.length()).trim(); //The number 10 comes from the fact that assignment is always in the form:
-                                Matrix inputMatrix = Parser.parseMatrix(inputString);   //matrix x = .... the 10th position in that string is right after the equals
-                                matrixMap.put(argus[1], inputMatrix);
-                                inField.setText("");
-                                inField.end();
-                                inOutList.add("Matrix " + argus[1] + ":\n" + "-------------\n" + inputMatrix.toString() + "\n-------------\n");
-                            } else if (argus[2].equalsIgnoreCase("times")) {
-                                try {
-                                    Matrix a = matrixMap.get(argus[1]);
-                                    Matrix b = matrixMap.get(argus[3]);
-                                    Matrix c = Matrix.matrixMultiply(a, b);
-                                    inField.setText("");
-                                    inField.end();
-                                    inOutList.add("-------------\n" + c.toString() + "\n-------------\n");
-                                } catch (Exception e) {
-                                    inField.setText("Error loading matrices");
-                                }
-                            }
-
-                        } else { //If there are 2 arguments, then it will be just recalling the matrix from the hash map
-                            Matrix curr = matrixMap.get(argus[1]);
-                            inOutList.add("Matrix: " + argus[1] + ":\n" + "-------------\n" + curr.toString() + "\n-------------\n");
-                            inField.setText("");
-                            inField.end();
-                        }
+            if (s.length() != 0) {
+                if(s.matches("^[A-Z]$")) {
+                    Matrix m = matrixMap.get(s);
+                    if(m != null) {
+                        inOutList.add("=        " + m.toString());
+                        inField.setText(m.toString());
+                    } else {
+                        inOutList.add("         " + "matrix " + s + " is undefined");
+                        inField.setText("");
                     }
+                }
+                else if(s.matches("^store\\(.+$")) {
+                    Matcher storeMatcher = Pattern.compile("store\\((.+),(.+)\\)").matcher(s);
+                    storeMatcher.matches();
+                    String name = storeMatcher.group(1).trim();
+                    Matrix m = Parser.parseMatrix(storeMatcher.group(2).trim());
+                    matrixMap.put(name, m);
+                    inField.setText("");
                 } else {
-                    Expression ex = Parser.parseExpression(s);
-                    result = ex.evaluateRpn();
-                    inField.setText(String.valueOf(result));
-                    inField.end();
-                    inOutList.add(s); //All inputs and outputs will be added to the list in the order they were entered and shown to the user in the output field
-                    inOutList.add("=        " + result.toString());
+                    try {
+                        Expression ex = Parser.parseExpression(s);
+                        result = ex.evaluateRpn();
+                        inField.setText(String.valueOf(result));
+                        //All inputs and outputs will be added to the list in the order they were entered and shown to the user in the output field
+                        inOutList.add("=        " + result.toString());
+                    } catch (NoSuchElementException e) {
+                        inOutList.add("         " + "ERROR");
+                    }
                 }
             } else {
                 inField.setText("");
@@ -94,6 +80,7 @@ public class App extends Application {
             inField.setText("Arithmetic exception: i.e. divide by 0");
         }
         finally {
+            inField.end();
             inOutListIndex.set(inOutList.size());
             for (String item : inOutList) {
                 outField.appendText(item + "\n");

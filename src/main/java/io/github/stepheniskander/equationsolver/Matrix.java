@@ -17,15 +17,17 @@ public class Matrix {
     }
     @Override
     public String toString() {
-        String s = "";
-        for(int i = 0; i < numMatrix.length; i++){
-            for (int j = 0; j < numMatrix[0].length; j++){
-                s = s + numMatrix[i][j] + " ";
-
-            }
-            s = s + "\n";
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for(RationalNumber[] row : numMatrix) {
+            sb.append("[");
+            for(RationalNumber n : row)
+                sb.append(n.toString() + ",");
+            sb.replace(sb.length() - 1, sb.length(), "] ");
         }
-        return s.trim();
+        sb.replace(sb.length() - 1, sb.length(), "]");
+
+        return sb.toString();
     }
     public static Matrix matrixMultiply(Matrix m1, Matrix m2){
         RationalNumber [][] result = new RationalNumber[m1.getColumns()][m2.getRows()];
