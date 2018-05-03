@@ -18,6 +18,8 @@ import java.math.BigDecimal;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,6 +33,7 @@ public class App extends Application {
     private TextArea outField;
     private HashMap<String,Matrix> matrixMap;
     private GridPane buttonPane;
+    static AtomicInteger inOutListIndex;
 
     private void handleInput() {
         try {
@@ -91,6 +94,7 @@ public class App extends Application {
             inField.setText("Arithmetic exception: i.e. divide by 0");
         }
         finally {
+            inOutListIndex.set(inOutList.size());
             for (String item : inOutList) {
                 outField.appendText(item + "\n");
             }
@@ -114,12 +118,6 @@ public class App extends Application {
 
         matrixMap = new HashMap<>();
         btn.setOnAction(event -> handleInput());
-
-        inField.setOnKeyPressed((KeyEvent ke) -> {
-            if (ke.getCode() == KeyCode.ENTER) {
-                handleInput();
-            }
-        });
 
         //These are the alignments to this pane that I have been experimenting with
 
@@ -145,6 +143,39 @@ public class App extends Application {
         scene.getStylesheets().add(this.getClass().getClassLoader().getResource("font.css").toExternalForm());
 
         inField.requestFocus();
+
+        inOutListIndex = new AtomicInteger(inOutList.size() - 1);
+        AtomicReference<String> partialInput = new AtomicReference<>("");
+
+        inField.setOnKeyPressed(ke -> {
+            switch (ke.getCode()) {
+                case ENTER:
+                    handleInput();
+                    break;
+                case UP:
+                    if (inOutListIndex.get() == inOutList.size())
+                        partialInput.set(inField.getText());
+                    if (inOutListIndex.get() >= 2) {
+                        inField.setText(inOutList.get(inOutListIndex.addAndGet(-2)));
+                    }
+                    inField.end();
+                    ke.consume();
+                    break;
+                case DOWN:
+                    if (inOutListIndex.get() == inOutList.size() || inOutListIndex.get() == inOutList.size() - 2) {
+                        inField.setText(partialInput.get());
+                        inOutListIndex.set(inOutList.size());
+                    } else if (inOutListIndex.get() < inOutList.size() - 2) {
+                        inField.setText(inOutList.get(inOutListIndex.addAndGet(2)));
+                    }
+                    inField.end();
+                    break;
+                default:
+                    inOutListIndex.set(inOutList.size());
+                    break;
+            }
+        });
+
         primaryStage.setTitle("MathBoy3000");
         primaryStage.setScene(scene);
         primaryStage.show();
