@@ -107,12 +107,14 @@ public class App extends Application {
             } else {
                 inField.setText("");
             }
-            for (String item : inOutList) {
-                outField.appendText(item + "\n");
-            }
         }
         catch(ArithmeticException ae){
             inField.setText("Arithmetic exception: i.e. divide by 0");
+        }
+        finally {
+            for (String item : inOutList) {
+                outField.appendText(item + "\n");
+            }
         }
 
     }
