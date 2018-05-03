@@ -8,10 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.math.BigDecimal;
@@ -122,7 +119,7 @@ public class App extends Application {
         inField = new TextField();
         outField = new TextArea();
         outField.setEditable(false);
-        inField.setPromptText("Please enter your expression");
+        // inField.setPromptText("Please enter your expression");
         Button btn = new Button();
         btn.setText("Enter");
 
@@ -146,15 +143,50 @@ public class App extends Application {
         HBox inputBox = new HBox();
         inputBox.setSpacing(5);
         HBox.setHgrow(inField, Priority.ALWAYS);
-        inputBox.getChildren().addAll(inField, btn);
+        inputBox.getChildren().addAll(inField /*, btn*/);
         uiBox.getChildren().addAll(outField, inputBox);
+
         MenuBar menuBar = new MenuBar();
         Menu file = new Menu("File");
         Menu view = new Menu("View");
+        view.getItems().add(new CheckMenuItem("Toggle Calculator Buttons"));
         Menu help = new Menu("Help");
         menuBar.getMenus().addAll(file, view, help);
         root.getChildren().addAll(menuBar, uiBox);
-        Scene scene = new Scene(root, 800, 500);
+
+        GridPane buttonPane = new GridPane();
+        buttonPane.add(new CalculatorButton("7"), 0, 0);
+        buttonPane.add(new CalculatorButton("8"), 1, 0);
+        buttonPane.add(new CalculatorButton("9"), 2, 0);
+        buttonPane.add(new CalculatorButton("/"), 3, 0);
+        buttonPane.add(new CalculatorButton("↵"), 4, 0);
+        buttonPane.add(new CalculatorButton("⌫"), 5, 0);
+
+        buttonPane.add(new CalculatorButton("4"), 0, 1);
+        buttonPane.add(new CalculatorButton("5"), 1, 1);
+        buttonPane.add(new CalculatorButton("6"), 2, 1);
+        buttonPane.add(new CalculatorButton("×"), 3, 1);
+        buttonPane.add(new CalculatorButton("("), 4, 1);
+        buttonPane.add(new CalculatorButton(")"), 5, 1);
+
+        buttonPane.add(new CalculatorButton("1"), 0, 2);
+        buttonPane.add(new CalculatorButton("2"), 1, 2);
+        buttonPane.add(new CalculatorButton("3"), 2, 2);
+        buttonPane.add(new CalculatorButton("-"), 3, 2);
+        buttonPane.add(new CalculatorButton("xⁿ"), 4, 2);
+
+        buttonPane.add(new CalculatorButton("0"), 0, 3);
+        buttonPane.add(new CalculatorButton("."), 1, 3);
+        buttonPane.add(new CalculatorButton("+"), 3, 3);
+        CalculatorButton btnEq = new CalculatorButton("=");
+        btnEq.setStyle(btnEq.getStyle() + "-fx-background-color: #2196F3;");
+        buttonPane.add(btnEq, 4, 3, 2, 1);
+        buttonPane.setHgap(5);
+        buttonPane.setVgap(5);
+        buttonPane.setMaxWidth(Double.POSITIVE_INFINITY);
+
+        uiBox.getChildren().add(buttonPane);
+        Scene scene = new Scene(root, 400, 600);
 
         inField.requestFocus();
         primaryStage.setTitle("MathBoy3000");
