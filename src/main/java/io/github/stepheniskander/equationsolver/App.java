@@ -7,18 +7,19 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.math.BigDecimal;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import javafx.geometry.Pos;
 
 /**
  * @author Nick
@@ -232,7 +233,16 @@ public class App extends Application {
         about.setOnAction(e -> {
             Alert aboutDialog = new Alert(Alert.AlertType.INFORMATION);
             aboutDialog.setTitle("About");
-            aboutDialog.setHeaderText("MathBoy 3000 1.0");
+            aboutDialog.setHeaderText(" ");
+            try {
+                ImageView logoView = new ImageView(new Image(this.getClass().getClassLoader().getResource("mathboylogo.png").toURI().toString()));
+                logoView.setPreserveRatio(true);
+                logoView.setSmooth(true);
+                logoView.setFitHeight(100);
+                aboutDialog.setGraphic(logoView);
+            } catch (URISyntaxException e1) {
+                e1.printStackTrace();
+            }
             aboutDialog.setContentText("Literally the best calculator you've ever seen.");
             aboutDialog.showAndWait();
         });
@@ -283,7 +293,12 @@ public class App extends Application {
         CalculatorButton btnEq = new CalculatorButton("=");
         btnEq.setStyle(btnEq.getStyle() + "-fx-background-color: #2196F3;");
 
-        EventHandler<ActionEvent> addLabelToInput = e -> inField.appendText(((Button) e.getSource()).getText());
+        EventHandler<ActionEvent> addLabelToInput = e -> {
+            inField.appendText(((Button) e.getSource()).getText());
+            inField.requestFocus();
+            inField.deselect();
+            inField.positionCaret(inField.getLength());
+        };
 
         btn7.setOnAction(addLabelToInput);
         btn8.setOnAction(addLabelToInput);
@@ -301,13 +316,34 @@ public class App extends Application {
         btnDot.setOnAction(addLabelToInput);
         btnPlus.setOnAction(addLabelToInput);
 
-        btnDiv.setOnAction(e -> inField.appendText("/"));
-        btnMul.setOnAction(e -> inField.appendText("*"));
-        btnExp.setOnAction(e -> inField.appendText("^"));
+        btnDiv.setOnAction(e -> {
+            inField.appendText("/");
+            inField.requestFocus();
+            inField.deselect();
+            inField.positionCaret(inField.getLength());
+
+        });
+        btnMul.setOnAction(e -> {
+            inField.appendText("*");
+            inField.requestFocus();
+            inField.deselect();
+            inField.positionCaret(inField.getLength());
+
+        });
+        btnExp.setOnAction(e -> {
+            inField.appendText("^");
+            inField.requestFocus();
+            inField.deselect();
+            inField.positionCaret(inField.getLength());
+
+        });
 
         btnDel.setOnAction(e -> {
             inField.positionCaret(inField.getLength());
             inField.deletePreviousChar();
+            inField.requestFocus();
+            inField.deselect();
+            inField.positionCaret(inField.getLength());
         });
 
         btnClr.setOnAction(e -> {
@@ -316,6 +352,9 @@ public class App extends Application {
             } else {
                 inField.clear();
             }
+            inField.requestFocus();
+            inField.deselect();
+            inField.positionCaret(inField.getLength());
         });
 
         btnEq.setOnAction(e -> handleInput());
