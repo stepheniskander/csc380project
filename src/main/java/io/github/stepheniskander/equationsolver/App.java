@@ -102,9 +102,9 @@ public class App extends Application {
     public void start(Stage primaryStage) {
         inOutList = new ArrayList<>(); //Contains inputs and outputs as strings to be shown to the user
         inField = new TextField();
-        inField.setStyle("-fx-font-family: \"Hack\";");
+        inField.setStyle("-fx-font-family: \"Hack\"; -fx-font-size: 16;");
         outField = new TextArea();
-        outField.setStyle("-fx-font-family: \"Hack\";");
+        outField.setStyle("-fx-font-family: \"Hack\"; -fx-font-size: 16;");
         outField.setEditable(false);
         // inField.setPromptText("Please enter your expression");
         btn = new Button();
@@ -170,7 +170,7 @@ public class App extends Application {
 
             private FunctionMenuItem(String title) {
                 super(title);
-                this.setStyle("-fx-font-family: \"Hack\"");
+                this.setStyle("-fx-font-family: \"Hack\";");
             }
         }
 
