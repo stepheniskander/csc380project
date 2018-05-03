@@ -31,15 +31,6 @@ public class Parser {
 
     public static Expression parseExpression(String ex){
         if(ex.length()!=0) {
-            if (ex.startsWith("-")) { //This handles when the string starts with a negative number
-                ex = ex.replaceFirst("-([0-9]+\\.?[0-9]*)", "(0-$1)");
-            }
-            //ReplaceAll doesn't work correctly, so I do it an arbitrary amount of times
-            for (int i = 0; i<16;i++) {
-                ex = ex.replaceAll("([*+/\\-^])\\-(.*)", "$1(0-$2)");
-                ex = ex.replaceAll("\\(\\-(.*)", "(0-$1");
-            }
-
             while(ex.contains("int(")) {
                 int start = ex.indexOf("int(");
                 int end = start + "int(".length();
@@ -68,6 +59,15 @@ public class Parser {
                 }
                 String derExpr = ex.substring(start, end);
                 ex = ex.substring(0, start) + Calculus.deriveFromString(derExpr) + ex.substring(end);
+            }
+
+            if (ex.startsWith("-")) { //This handles when the string starts with a negative number
+                ex = ex.replaceFirst("-([0-9]+\\.?[0-9]*)", "(0-$1)");
+            }
+            //ReplaceAll doesn't work correctly, so I do it an arbitrary amount of times
+            for (int i = 0; i<16;i++) {
+                ex = ex.replaceAll("([*+/\\-^])\\-(.*)", "$1(0-$2)");
+                ex = ex.replaceAll("\\(\\-(.*)", "(0-$1");
             }
 
             StringTokenizer tokenizer = new StringTokenizer(ex, "+-*/^()", true);
