@@ -3,11 +3,15 @@ package io.github.stepheniskander.equationsolver;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.math.BigDecimal;
@@ -117,15 +121,11 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) {
         inOutList = new ArrayList<>(); //Contains inputs and outputs as strings to be shown to the user
-        inField = new TextField(); //The
+        inField = new TextField();
         outField = new TextArea();
         outField.setEditable(false);
-        outField.setMaxSize(300, 400); //This dissallows the user to input text in the output box
-        inField.setMaxWidth(250);
         inField.setPromptText("Please enter your expression");
         Button btn = new Button();
-        btn.setTranslateX(151);
-
         btn.setText("Enter");
 
         matrixMap = new HashMap<>();
@@ -138,15 +138,19 @@ public class App extends Application {
         });
 
         //These are the alignments to this pane that I have been experimenting with
-        StackPane root = new StackPane();
-        root.getChildren().addAll(btn, inField, outField);
-        root.setAlignment(btn, Pos.BOTTOM_CENTER);
-        root.setAlignment(inField, Pos.BOTTOM_CENTER);
 
-        root.setAlignment(outField, Pos.TOP_CENTER);
-        btn.toFront();
+        VBox root = new VBox();
+        root.setSpacing(10);
+        root.setPadding(new Insets(10, 10, 10, 10));
+        VBox.setVgrow(outField, Priority.ALWAYS);
+        HBox inputBox = new HBox();
+        inputBox.setSpacing(5);
+        HBox.setHgrow(inField, Priority.ALWAYS);
+        inputBox.getChildren().addAll(inField, btn);
+        root.getChildren().addAll(outField, inputBox);
         Scene scene = new Scene(root, 800, 500);
 
+        inField.requestFocus();
         primaryStage.setTitle("MathBoy3000");
         primaryStage.setScene(scene);
         primaryStage.show();
