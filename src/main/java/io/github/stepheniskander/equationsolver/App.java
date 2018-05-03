@@ -245,6 +245,21 @@ public class App extends Application {
     private GridPane generateButtonPane() {
         GridPane buttonPane = new GridPane();
 
+        class CalculatorButton extends Button {
+            private CalculatorButton() {
+                this("");
+            }
+
+            private CalculatorButton(String text) {
+                super(text);
+                this.setMaxWidth(Double.POSITIVE_INFINITY);
+                this.setMaxHeight(Double.POSITIVE_INFINITY);
+                GridPane.setHgrow(this, Priority.ALWAYS);
+                GridPane.setVgrow(this, Priority.ALWAYS);
+                this.setStyle("-fx-font-size: 16; -fx-font-weight: bold;");
+            }
+        }
+
         CalculatorButton btn7 = new CalculatorButton("7");
         CalculatorButton btn8 = new CalculatorButton("8");
         CalculatorButton btn9 = new CalculatorButton("9");
