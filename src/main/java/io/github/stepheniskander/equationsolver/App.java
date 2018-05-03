@@ -1,6 +1,7 @@
 package io.github.stepheniskander.equationsolver;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -25,8 +26,10 @@ import javafx.geometry.Pos;
 public class App extends Application {
     private ArrayList<String> inOutList;
     private TextField inField;
+    private Button btn;
     private TextArea outField;
     private HashMap<String,Matrix> matrixMap;
+    private GridPane buttonPane;
 
     private void handleInput() {
         try {
@@ -120,8 +123,10 @@ public class App extends Application {
         outField = new TextArea();
         outField.setEditable(false);
         // inField.setPromptText("Please enter your expression");
-        Button btn = new Button();
+        btn = new Button();
         btn.setText("Enter");
+        btn.managedProperty().bind(btn.visibleProperty());
+        btn.setVisible(false);
 
         matrixMap = new HashMap<>();
         btn.setOnAction(event -> handleInput());
@@ -143,18 +148,14 @@ public class App extends Application {
         HBox inputBox = new HBox();
         inputBox.setSpacing(5);
         HBox.setHgrow(inField, Priority.ALWAYS);
-        inputBox.getChildren().addAll(inField /*, btn*/);
+        inputBox.getChildren().addAll(inField, btn);
         uiBox.getChildren().addAll(outField, inputBox);
 
-        MenuBar menuBar = new MenuBar();
-        Menu file = new Menu("File");
-        Menu view = new Menu("View");
-        view.getItems().add(new CheckMenuItem("Toggle Calculator Buttons"));
-        Menu help = new Menu("Help");
-        menuBar.getMenus().addAll(file, view, help);
+        MenuBar menuBar = generateMenuBar();
         root.getChildren().addAll(menuBar, uiBox);
 
-        GridPane buttonPane = generateButtonPane();
+        buttonPane = generateButtonPane();
+        buttonPane.managedProperty().bind(buttonPane.visibleProperty());
         uiBox.getChildren().add(buttonPane);
         Scene scene = new Scene(root, 400, 600);
 
@@ -162,6 +163,83 @@ public class App extends Application {
         primaryStage.setTitle("MathBoy3000");
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    private MenuBar generateMenuBar() {
+        MenuBar menuBar = new MenuBar();
+
+        Menu file = new Menu("File");
+        MenuItem exit = new MenuItem("Exit");
+        exit.setOnAction(e -> {
+            Platform.exit();
+            System.exit(0);
+        });
+        file.getItems().add(exit);
+
+        Menu functions = new Menu("Functions");
+
+        class FunctionMenuItem extends MenuItem {
+            private FunctionMenuItem() {
+                this("");
+            }
+
+            private FunctionMenuItem(String title) {
+                super(title);
+                this.setStyle("-fx-font-family: monospace");
+            }
+        }
+
+        MenuItem integral = new FunctionMenuItem(String.format("%-20s\t%s", "Integral", "int()"));
+        integral.setOnAction(e -> {
+            inField.insertText(inField.getCaretPosition(), "int()");
+            inField.backward();
+        });
+        MenuItem derivative = new FunctionMenuItem(String.format("%-20s\t%s", "Derivative", "der()"));
+        derivative.setOnAction(e -> {
+            inField.insertText(inField.getCaretPosition(), "der()");
+            inField.backward();
+        });
+        MenuItem mmul = new FunctionMenuItem(String.format("%-20s\t%s", "Matrix Multiply", "mmul()"));
+        mmul.setOnAction(e -> {
+            inField.insertText(inField.getCaretPosition(), "mmul()");
+            inField.backward();
+        });
+        MenuItem store = new FunctionMenuItem(String.format("%-20s\t%s", "Store Matrix", "store()"));
+        store.setOnAction(e -> {
+            inField.insertText(inField.getCaretPosition(), "store()");
+            inField.backward();
+        });
+        functions.getItems().addAll(integral, derivative, mmul, store);
+
+        Menu view = new Menu("View");
+        CheckMenuItem buttonToggle = new CheckMenuItem("Toggle Calculator Buttons");
+        buttonToggle.setSelected(true);
+        buttonToggle.setOnAction(e -> {
+            CheckMenuItem m = (CheckMenuItem) e.getSource();
+
+            if(m.isSelected()) {
+                btn.setVisible(false);
+                buttonPane.setVisible(true);
+            } else {
+                btn.setVisible(true);
+                buttonPane.setVisible(false);
+            }
+        });
+        view.getItems().add(buttonToggle);
+
+        Menu help = new Menu("Help");
+        MenuItem about = new MenuItem("About");
+        about.setOnAction(e -> {
+            Alert aboutDialog = new Alert(Alert.AlertType.INFORMATION);
+            aboutDialog.setTitle("About");
+            aboutDialog.setHeaderText("MathBoy 3000 1.0");
+            aboutDialog.setContentText("Literally the best calculator you've ever seen.");
+            aboutDialog.showAndWait();
+        });
+        help.getItems().add(about);
+
+        menuBar.getMenus().addAll(file, functions, view, help);
+        return menuBar;
     }
 
     private GridPane generateButtonPane() {
@@ -190,13 +268,7 @@ public class App extends Application {
         CalculatorButton btnEq = new CalculatorButton("=");
         btnEq.setStyle(btnEq.getStyle() + "-fx-background-color: #2196F3;");
 
-        EventHandler<ActionEvent> addLabelToInput = new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent event) {
-                inField.appendText(((Button) event.getSource()).getText());
-            }
-        };
+        EventHandler<ActionEvent> addLabelToInput = e -> inField.appendText(((Button) e.getSource()).getText());
 
         btn7.setOnAction(addLabelToInput);
         btn8.setOnAction(addLabelToInput);
