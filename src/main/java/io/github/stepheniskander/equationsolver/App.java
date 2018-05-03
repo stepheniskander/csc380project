@@ -154,37 +154,7 @@ public class App extends Application {
         menuBar.getMenus().addAll(file, view, help);
         root.getChildren().addAll(menuBar, uiBox);
 
-        GridPane buttonPane = new GridPane();
-        buttonPane.add(new CalculatorButton("7"), 0, 0);
-        buttonPane.add(new CalculatorButton("8"), 1, 0);
-        buttonPane.add(new CalculatorButton("9"), 2, 0);
-        buttonPane.add(new CalculatorButton("/"), 3, 0);
-        buttonPane.add(new CalculatorButton("↵"), 4, 0);
-        buttonPane.add(new CalculatorButton("⌫"), 5, 0);
-
-        buttonPane.add(new CalculatorButton("4"), 0, 1);
-        buttonPane.add(new CalculatorButton("5"), 1, 1);
-        buttonPane.add(new CalculatorButton("6"), 2, 1);
-        buttonPane.add(new CalculatorButton("×"), 3, 1);
-        buttonPane.add(new CalculatorButton("("), 4, 1);
-        buttonPane.add(new CalculatorButton(")"), 5, 1);
-
-        buttonPane.add(new CalculatorButton("1"), 0, 2);
-        buttonPane.add(new CalculatorButton("2"), 1, 2);
-        buttonPane.add(new CalculatorButton("3"), 2, 2);
-        buttonPane.add(new CalculatorButton("-"), 3, 2);
-        buttonPane.add(new CalculatorButton("xⁿ"), 4, 2);
-
-        buttonPane.add(new CalculatorButton("0"), 0, 3);
-        buttonPane.add(new CalculatorButton("."), 1, 3);
-        buttonPane.add(new CalculatorButton("+"), 3, 3);
-        CalculatorButton btnEq = new CalculatorButton("=");
-        btnEq.setStyle(btnEq.getStyle() + "-fx-background-color: #2196F3;");
-        buttonPane.add(btnEq, 4, 3, 2, 1);
-        buttonPane.setHgap(5);
-        buttonPane.setVgap(5);
-        buttonPane.setMaxWidth(Double.POSITIVE_INFINITY);
-
+        GridPane buttonPane = generateButtonPane();
         uiBox.getChildren().add(buttonPane);
         Scene scene = new Scene(root, 400, 600);
 
@@ -192,6 +162,106 @@ public class App extends Application {
         primaryStage.setTitle("MathBoy3000");
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    private GridPane generateButtonPane() {
+        GridPane buttonPane = new GridPane();
+
+        CalculatorButton btn7 = new CalculatorButton("7");
+        CalculatorButton btn8 = new CalculatorButton("8");
+        CalculatorButton btn9 = new CalculatorButton("9");
+        CalculatorButton btnDiv = new CalculatorButton("÷");
+        CalculatorButton btnDel = new CalculatorButton("↵");
+        CalculatorButton btnClr = new CalculatorButton("⌫");
+        CalculatorButton btn4 = new CalculatorButton("4");
+        CalculatorButton btn5 = new CalculatorButton("5");
+        CalculatorButton btn6 = new CalculatorButton("6");
+        CalculatorButton btnMul = new CalculatorButton("×");
+        CalculatorButton btnLPar = new CalculatorButton("(");
+        CalculatorButton btnRPar = new CalculatorButton(")");
+        CalculatorButton btn1 = new CalculatorButton("1");
+        CalculatorButton btn2 = new CalculatorButton("2");
+        CalculatorButton btn3 = new CalculatorButton("3");
+        CalculatorButton btnMin = new CalculatorButton("-");
+        CalculatorButton btnExp = new CalculatorButton("xⁿ");
+        CalculatorButton btn0 = new CalculatorButton("0");
+        CalculatorButton btnDot = new CalculatorButton(".");
+        CalculatorButton btnPlus = new CalculatorButton("+");
+        CalculatorButton btnEq = new CalculatorButton("=");
+        btnEq.setStyle(btnEq.getStyle() + "-fx-background-color: #2196F3;");
+
+        EventHandler<ActionEvent> addLabelToInput = new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                inField.appendText(((Button) event.getSource()).getText());
+            }
+        };
+
+        btn7.setOnAction(addLabelToInput);
+        btn8.setOnAction(addLabelToInput);
+        btn9.setOnAction(addLabelToInput);
+        btn4.setOnAction(addLabelToInput);
+        btn5.setOnAction(addLabelToInput);
+        btn6.setOnAction(addLabelToInput);
+        btnLPar.setOnAction(addLabelToInput);
+        btnRPar.setOnAction(addLabelToInput);
+        btn1.setOnAction(addLabelToInput);
+        btn2.setOnAction(addLabelToInput);
+        btn3.setOnAction(addLabelToInput);
+        btnMin.setOnAction(addLabelToInput);
+        btn0.setOnAction(addLabelToInput);
+        btnDot.setOnAction(addLabelToInput);
+        btnPlus.setOnAction(addLabelToInput);
+
+        btnDiv.setOnAction(e -> inField.appendText("/"));
+        btnMul.setOnAction(e -> inField.appendText("*"));
+        btnExp.setOnAction(e -> inField.appendText("^"));
+
+        btnDel.setOnAction(e -> {
+            inField.positionCaret(inField.getLength());
+            inField.deletePreviousChar();
+        });
+
+        btnClr.setOnAction(e -> {
+            if(inField.getText().isEmpty()) {
+                outField.clear();
+            } else {
+                inField.clear();
+            }
+        });
+
+        btnEq.setOnAction(e -> handleInput());
+
+        buttonPane.add(btn7, 0, 0);
+        buttonPane.add(btn8, 1, 0);
+        buttonPane.add(btn9, 2, 0);
+        buttonPane.add(btnDiv, 3, 0);
+        buttonPane.add(btnDel, 4, 0);
+        buttonPane.add(btnClr, 5, 0);
+
+        buttonPane.add(btn4, 0, 1);
+        buttonPane.add(btn5, 1, 1);
+        buttonPane.add(btn6, 2, 1);
+        buttonPane.add(btnMul, 3, 1);
+        buttonPane.add(btnLPar, 4, 1);
+        buttonPane.add(btnRPar, 5, 1);
+
+        buttonPane.add(btn1, 0, 2);
+        buttonPane.add(btn2, 1, 2);
+        buttonPane.add(btn3, 2, 2);
+        buttonPane.add(btnMin, 3, 2);
+        buttonPane.add(btnExp, 4, 2);
+
+        buttonPane.add(btn0, 0, 3);
+        buttonPane.add(btnDot, 1, 3);
+        buttonPane.add(btnPlus, 3, 3);
+        buttonPane.add(btnEq, 4, 3, 2, 1);
+        buttonPane.setHgap(5);
+        buttonPane.setVgap(5);
+        buttonPane.setMaxWidth(Double.POSITIVE_INFINITY);
+
+        return buttonPane;
     }
 
     /**
