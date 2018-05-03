@@ -29,7 +29,7 @@ public class Expression {
     public BigDecimal evaluateRpn(){
         ArrayDeque<String> resultStack = new ArrayDeque<>();
         for(String s : rpnStack){
-            if(!ExpressionParser.isNumeric(s)){
+            if(!Parser.isNumeric(s)){
                 BigDecimal op_2 = new BigDecimal(resultStack.pop());
                 BigDecimal op_1 = new BigDecimal(resultStack.pop());
                 String res = evaluateExpression(op_1,op_2,s).toString();

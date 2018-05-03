@@ -23,8 +23,7 @@ public class Calculus {
         b = "(" + b +")";
         String c = b + "-" + a;
         c = c.replaceAll("\\(\\*","(");
-        ExpressionParser exp = new ExpressionParser();
-        Expression ex =exp.parse(c);
+        Expression ex =Parser.parseExpression(c);
         x = ex.evaluateRpn(); //FIX THIS
         return x;
     }
@@ -45,8 +44,7 @@ public class Calculus {
         String unMapped = poly.toString();
         String mapped = unMapped.replaceAll("[xX]\\^([0-9]+)","*("+ point + "^$1)" );
         mapped = mapped.replaceAll("[xX]", "*" + point);
-        ExpressionParser exp = new ExpressionParser();
-        Expression derived = exp.parse(mapped);
+        Expression derived = Parser.parseExpression(mapped);
         return derived.evaluateRpn();
     }
 

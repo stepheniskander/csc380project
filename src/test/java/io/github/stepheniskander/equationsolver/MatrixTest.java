@@ -4,19 +4,17 @@ import junit.framework.TestCase;
 
 public class MatrixTest extends TestCase {
     public void testSquare(){
-        MatrixParser X = new MatrixParser();
-        Matrix A = X.parse("[[1,2] [3,4]]");
-        Matrix B = X.parse("[[2,3] [4,5]]");
+        Matrix A = Parser.parseMatrix("[[1,2] [3,4]]");
+        Matrix B = Parser.parseMatrix("[[2,3] [4,5]]");
         Matrix C = Matrix.matrixMultiply(A, B);
 
-        assertEquals(C, X.parse("[[10,13] [22,29]]"));
+        assertEquals(C, Parser.parseMatrix("[[10,13] [22,29]]"));
     }
     public void testNonSquare() {
-        MatrixParser x = new MatrixParser();
-        Matrix A = x.parse("[[1,2,3]]");
-        Matrix B = x.parse("[[3] [4] [5]]");
+        Matrix A = Parser.parseMatrix("[[1,2,3]]");
+        Matrix B = Parser.parseMatrix("[[3] [4] [5]]");
         Matrix C = Matrix.matrixMultiply(A, B);
-        assertEquals(C, x.parse("[[26]]"));
+        assertEquals(C, Parser.parseMatrix("[[26]]"));
     }
 
 

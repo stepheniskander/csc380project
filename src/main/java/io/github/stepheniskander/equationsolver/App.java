@@ -27,7 +27,6 @@ public class App extends Application {
     private ArrayList<String> inOutList;
     private TextField inField;
     private TextArea outField;
-    private ExpressionParser parser;
     private HashMap<String,Matrix> matrixMap;
 
     private void handleInput() {
@@ -38,10 +37,9 @@ public class App extends Application {
             BigDecimal result;
             if (s.trim().length() != 0) {
                 if (argus[0].equalsIgnoreCase("matrix")) {
-                    MatrixParser matrixParser = new MatrixParser();
                     if (argus[1].charAt(0) == '[') { //Checks to see if you just input a matrix without a variable
                         String inputString = s.substring(7, s.length()).trim();
-                        Matrix inputMatrix = matrixParser.parse(inputString);                                       //I made a HashMap that stores matrices based on their Variable Name
+                        Matrix inputMatrix = Parser.parseMatrix(inputString);                                       //I made a HashMap that stores matrices based on their Variable Name
                         inField.setText("");                                                                         //Matrices can be stored as an Upper case letter
                         inField.end();                                                                               //One assigns matrices with "matrix X = [[]]"
                         inOutList.add("-------------\n" + inputMatrix.toString() + "\n-------------\n");            //Then you can recall that matrix from the hashmap by
@@ -49,7 +47,7 @@ public class App extends Application {
                         if (argus.length > 2) { //if there are more than two arguments, then it will either be assigning or doing matrix multiplication
                             if (argus[2].equals("=")) {
                                 String inputString = s.substring(10, s.length()).trim(); //The number 10 comes from the fact that assignment is always in the form:
-                                Matrix inputMatrix = matrixParser.parse(inputString);   //matrix x = .... the 10th position in that string is right after the equals
+                                Matrix inputMatrix = Parser.parseMatrix(inputString);   //matrix x = .... the 10th position in that string is right after the equals
                                 matrixMap.put(argus[1], inputMatrix);
                                 inField.setText("");
                                 inField.end();
@@ -96,7 +94,7 @@ public class App extends Application {
                     inField.end();
                     inOutList.add("Derivative of " + expression + " at " + point + ":\n      " + answer);
                 } else {
-                    Expression ex = parser.parse(s);
+                    Expression ex = Parser.parseExpression(s);
                     result = ex.evaluateRpn();
                     inField.setText(String.valueOf(result));
                     inField.end();
@@ -130,7 +128,6 @@ public class App extends Application {
 
         btn.setText("Enter");
 
-        parser = new ExpressionParser();
         matrixMap = new HashMap<>();
         btn.setOnAction(event -> handleInput());
 
