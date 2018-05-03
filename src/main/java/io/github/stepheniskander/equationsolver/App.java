@@ -5,7 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
@@ -21,8 +21,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javafx.geometry.Pos;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TextArea;
 
 /**
  * @author Nick
@@ -140,14 +138,22 @@ public class App extends Application {
         //These are the alignments to this pane that I have been experimenting with
 
         VBox root = new VBox();
-        root.setSpacing(10);
-        root.setPadding(new Insets(10, 10, 10, 10));
+        VBox uiBox = new VBox();
+        uiBox.setSpacing(10);
+        uiBox.setPadding(new Insets(10, 10, 10, 10));
+        VBox.setVgrow(uiBox, Priority.ALWAYS);
         VBox.setVgrow(outField, Priority.ALWAYS);
         HBox inputBox = new HBox();
         inputBox.setSpacing(5);
         HBox.setHgrow(inField, Priority.ALWAYS);
         inputBox.getChildren().addAll(inField, btn);
-        root.getChildren().addAll(outField, inputBox);
+        uiBox.getChildren().addAll(outField, inputBox);
+        MenuBar menuBar = new MenuBar();
+        Menu file = new Menu("File");
+        Menu view = new Menu("View");
+        Menu help = new Menu("Help");
+        menuBar.getMenus().addAll(file, view, help);
+        root.getChildren().addAll(menuBar, uiBox);
         Scene scene = new Scene(root, 800, 500);
 
         inField.requestFocus();
