@@ -1,10 +1,11 @@
 package io.github.stepheniskander.equationsolver;
 
+import java.text.ParseException;
 import java.util.ArrayDeque;
 import java.util.StringTokenizer;
 
 public class Parser {
-    public static  Matrix parseMatrix(String input){
+    public static  Matrix parseMatrix(String input) {
         int x;
         int y;
         String[] splits = input.split(" ");
