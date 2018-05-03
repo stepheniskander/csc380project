@@ -171,22 +171,22 @@ public class App extends Application {
             }
         }
 
-        MenuItem integral = new FunctionMenuItem(String.format("%-20s\t%s", "Integral", "int()"));
+        MenuItem integral = new FunctionMenuItem(String.format("%-20s\t%s", "Integral", "int(function, start, end)"));
         integral.setOnAction(e -> {
             inField.insertText(inField.getCaretPosition(), "int()");
             inField.backward();
         });
-        MenuItem derivative = new FunctionMenuItem(String.format("%-20s\t%s", "Derivative", "der()"));
+        MenuItem derivative = new FunctionMenuItem(String.format("%-20s\t%s", "Derivative", "der(function, point)"));
         derivative.setOnAction(e -> {
             inField.insertText(inField.getCaretPosition(), "der()");
             inField.backward();
         });
-        MenuItem mmul = new FunctionMenuItem(String.format("%-20s\t%s", "Matrix Multiply", "mmul()"));
+        MenuItem mmul = new FunctionMenuItem(String.format("%-20s\t%s", "Matrix Multiply", "mmul(m1, m2)"));
         mmul.setOnAction(e -> {
             inField.insertText(inField.getCaretPosition(), "mmul()");
             inField.backward();
         });
-        MenuItem store = new FunctionMenuItem(String.format("%-20s\t%s", "Store Matrix", "store()"));
+        MenuItem store = new FunctionMenuItem(String.format("%-20s\t%s", "Store Matrix", "store(dest, matrix)"));
         store.setOnAction(e -> {
             inField.insertText(inField.getCaretPosition(), "store()");
             inField.backward();
