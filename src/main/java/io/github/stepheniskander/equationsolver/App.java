@@ -106,9 +106,9 @@ public class App extends Application {
                         Expression ex = Parser.parseExpression(s);
                         result = ex.evaluateRpn();
                         result = result.stripTrailingZeros();
-                        inField.setText(String.valueOf(result));
+                        inField.setText(result.toPlainString());
                         //All inputs and outputs will be added to the list in the order they were entered and shown to the user in the output field
-                        inOutList.add("=        " + result.toString());
+                        inOutList.add("=        " + result.toPlainString());
                     } catch (NoSuchElementException|IllegalStateException e) {
                         inOutList.add("         " + "ERROR");
                     }
