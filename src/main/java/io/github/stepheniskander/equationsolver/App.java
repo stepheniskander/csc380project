@@ -38,7 +38,6 @@ public class App extends Application {
 
     private void handleInput() {
         try {
-            outField.clear();
             String s = inField.getText().trim();
             inOutList.add(s);
             String[] argus = s.split(" ");
@@ -95,7 +94,9 @@ public class App extends Application {
                 } else if(s.equals("quickmafs()")) {
                     inOutList.remove(inOutList.size() - 1);
                     inOutList.add("2+2");
+                    outField.appendText("2+2\n");
                     inOutList.add("=        4");
+                    outField.appendText("=        4\n");
                     inOutList.add("4-1");
                     inOutList.add("=        3");
                     inField.setText("3");
@@ -122,9 +123,8 @@ public class App extends Application {
         finally {
             inField.end();
             inOutListIndex.set(inOutList.size());
-            for (String item : inOutList) {
-                outField.appendText(item + "\n");
-            }
+            for(int i = inOutList.size() - 2; i < inOutList.size(); i++)
+                outField.appendText(inOutList.get(i) + "\n");
         }
 
     }
