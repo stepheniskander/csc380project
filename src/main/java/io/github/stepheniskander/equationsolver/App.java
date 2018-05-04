@@ -97,6 +97,7 @@ public class App extends Application {
                         BigDecimal result;
                         Expression ex = Parser.parseExpression(s);
                         result = ex.evaluateRpn();
+                        result = result.stripTrailingZeros();
                         inField.setText(String.valueOf(result));
                         //All inputs and outputs will be added to the list in the order they were entered and shown to the user in the output field
                         inOutList.add("=        " + result.toString());
