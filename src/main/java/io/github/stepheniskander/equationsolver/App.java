@@ -55,12 +55,16 @@ public class App extends Application {
                     }
                 }
                 else if(s.matches("^store\\(.+$")) {
-                    Matcher storeMatcher = Pattern.compile("store\\((.+),(.+)\\)").matcher(s);
-                    storeMatcher.matches();
-                    String name = storeMatcher.group(1).trim();
-                    Matrix m = Parser.parseMatrix(storeMatcher.group(2).trim());
-                    matrixMap.put(name, m);
-                    inField.setText("");
+                    try {
+                        Matcher storeMatcher = Pattern.compile("store\\((.+),(.+)\\)").matcher(s);
+                        storeMatcher.matches();
+                        String name = storeMatcher.group(1).trim();
+                        Matrix m = Parser.parseMatrix(storeMatcher.group(2).trim());
+                        matrixMap.put(name, m);
+                        inField.setText("");
+                    } catch(IllegalStateException e) {
+                        inOutList.add("         " + "ERROR");
+                    }
                 } else {
                     try {
                         Expression ex = Parser.parseExpression(s);
@@ -68,7 +72,7 @@ public class App extends Application {
                         inField.setText(String.valueOf(result));
                         //All inputs and outputs will be added to the list in the order they were entered and shown to the user in the output field
                         inOutList.add("=        " + result.toString());
-                    } catch (NoSuchElementException e) {
+                    } catch (NoSuchElementException|IllegalStateException e) {
                         inOutList.add("         " + "ERROR");
                     }
                 }
