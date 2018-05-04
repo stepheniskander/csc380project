@@ -56,12 +56,13 @@ public class App extends Application {
                 }
                 else if(s.matches("^store\\(.+$")) {
                     try {
-                        Matcher storeMatcher = Pattern.compile("store\\((.+),(.+)\\)").matcher(s);
+                        Matcher storeMatcher = Pattern.compile("store\\(([A-Z]+),(.+)\\)").matcher(s);
                         storeMatcher.matches();
                         String name = storeMatcher.group(1).trim();
                         Matrix m = Parser.parseMatrix(storeMatcher.group(2).trim());
                         matrixMap.put(name, m);
                         inField.setText("");
+                        inOutList.add("         " + name + "←" + m.toString());
                     } catch(IllegalStateException e) {
                         inOutList.add("         " + "ERROR");
                     }

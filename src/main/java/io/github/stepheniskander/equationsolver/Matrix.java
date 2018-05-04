@@ -19,10 +19,10 @@ public class Matrix {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("[");
-        for(RationalNumber[] row : numMatrix) {
+        for(int i = 0; i < getColumns(); i++) {
             sb.append("[");
-            for(RationalNumber n : row)
-                sb.append(n.toString() + ",");
+            for(int j = 0; j < getRows(); j++)
+                sb.append(numMatrix[i][j].toString() + ",");
             sb.replace(sb.length() - 1, sb.length(), "] ");
         }
         sb.replace(sb.length() - 1, sb.length(), "]");
