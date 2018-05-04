@@ -92,6 +92,13 @@ public class App extends Application {
                     }
                     inOutList.add("=        " + result);
                     inField.setText(result.toString());
+                } else if(s.equals("quickmafs()")) {
+                    inOutList.remove(inOutList.size() - 1);
+                    inOutList.add("2+2");
+                    inOutList.add("=        4");
+                    inOutList.add("4-1");
+                    inOutList.add("=        3");
+                    inField.setText("3");
                 } else {
                     try {
                         BigDecimal result;
