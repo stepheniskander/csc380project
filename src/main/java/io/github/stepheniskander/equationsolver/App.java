@@ -42,7 +42,6 @@ public class App extends Application {
             String s = inField.getText().trim();
             inOutList.add(s);
             String[] argus = s.split(" ");
-            BigDecimal result;
             if (s.length() != 0) {
                 if(s.matches("^[A-Z]$")) {
                     Matrix m = matrixMap.get(s);
@@ -53,8 +52,7 @@ public class App extends Application {
                         inOutList.add("         " + "matrix " + s + " is undefined");
                         inField.setText("");
                     }
-                }
-                else if(s.matches("^store\\(.+$")) {
+                } else if(s.matches("^store\\(.+$")) {
                     try {
                         Matcher storeMatcher = Pattern.compile("store\\(([A-Z]+),(.+)\\)").matcher(s);
                         storeMatcher.matches();
@@ -66,8 +64,37 @@ public class App extends Application {
                     } catch(IllegalStateException e) {
                         inOutList.add("         " + "ERROR");
                     }
+                } else if(s.matches("^mmul\\(.+$")) {
+                    Matrix result;
+                    if(!s.contains("[")) {
+                        Matcher mmulMatcher = Pattern.compile("mmul\\(\\s*([A-Z])\\s*,\\s*([A-Z])\\s*\\)").matcher(s);
+                        mmulMatcher.matches();
+                        Matrix m1 = matrixMap.get(mmulMatcher.group(1));
+                        Matrix m2 = matrixMap.get(mmulMatcher.group(2));
+                        result = Matrix.matrixMultiply(m1, m2);
+                    } else {
+                        Matrix[] ms = new Matrix[2];
+                        for(int i = 0; i < ms.length; i++) {
+                            int start = s.indexOf("[");
+                            int end = start + 1;
+                            int lBracketCount = 1;
+                            int rBracketCount = 0;
+                            for (; end < s.length() && lBracketCount != rBracketCount; end++) {
+                                if (s.charAt(end) == '[')
+                                    lBracketCount++;
+                                else if (s.charAt(end) == ']')
+                                    rBracketCount++;
+                            }
+                            ms[i] = Parser.parseMatrix(s.substring(start, end));
+                            s = s.substring(end);
+                        }
+                        result = Matrix.matrixMultiply(ms[0], ms[1]);
+                    }
+                    inOutList.add("=        " + result);
+                    inField.setText(result.toString());
                 } else {
                     try {
+                        BigDecimal result;
                         Expression ex = Parser.parseExpression(s);
                         result = ex.evaluateRpn();
                         inField.setText(String.valueOf(result));
