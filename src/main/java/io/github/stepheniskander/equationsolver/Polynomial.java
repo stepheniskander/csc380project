@@ -32,9 +32,11 @@ public class Polynomial {
             String s = split.get(i);
             Matcher negMatch = negCheck.matcher(s);
             if(negMatch.matches()){
-                split.set(split.indexOf(s),negMatch.group(1));
-                String temp = "-" + negMatch.group(2);
-                split.add(temp);
+                if(!s.matches("^\\-?([0-9/])*[xX]\\^\\-([0-9/])+$")) {
+                    split.set(split.indexOf(s), s.split("-",2)[0]);
+                    String temp = "-" + s.split("-",2)[1];
+                    split.add(temp);
+                }
             }
         }
         RationalNumber[] coefficients = new RationalNumber[split.size()];
@@ -120,6 +122,9 @@ public class Polynomial {
                     result.append("^").append(powers[coefficients.length - 1]);
                 }
             }
+        }
+        if(result.charAt(result.length()-1) == '+'){
+            return result.substring(0, result.length()-2);
         }
 
         return result.toString();

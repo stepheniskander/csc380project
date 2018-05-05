@@ -30,9 +30,22 @@ public class Calculus {
         RationalNumber[] coefficients = expression.getCoefficients();
         RationalNumber[] powers = expression.getPowers();
         BigDecimal x;
+        BigDecimal ln = new BigDecimal(0);
         for(int i = 0; i < coefficients.length;i++){
-            powers[i] = powers[i].add(RationalNumber.ONE);
-            coefficients[i] = coefficients[i].multiply(new RationalNumber(powers[i].getDenominator(),powers[i].getNumerator()));
+            if(!powers[i].equals(new RationalNumber("-1"))) {
+                powers[i] = powers[i].add(RationalNumber.ONE);
+                coefficients[i] = coefficients[i].multiply(new RationalNumber(powers[i].getDenominator(), powers[i].getNumerator()));
+            }else{
+                double dubStart = (double) start;
+                double dubEnd = (double) end;
+                double tempA = Math.log(dubStart);
+                double tempB = Math.log(dubEnd);
+                double tempDiff = tempB - tempA;
+                BigDecimal tempC = new BigDecimal(tempDiff);
+                BigDecimal coef = coefficients[i].asBigDecimal();
+                coefficients[i] = RationalNumber.ZERO;
+                ln = ln.add(tempC.multiply(coef));
+            }
         }
         Polynomial poly = new Polynomial(coefficients,powers);
         String unMapped = poly.toString();
@@ -46,6 +59,7 @@ public class Calculus {
         c = c.replaceAll("\\(\\*","(");
         Expression ex =Parser.parseExpression(c);
         x = ex.evaluateRpn(); //FIX THIS
+        x = x.add(ln);
         return x;
     }
 
