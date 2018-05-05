@@ -109,16 +109,22 @@ public class App extends Application {
                         inField.setText(result.toPlainString());
                         //All inputs and outputs will be added to the list in the order they were entered and shown to the user in the output field
                         inOutList.add("=        " + result.toPlainString());
-                    } catch (NoSuchElementException|IllegalStateException e) {
-                        inOutList.add("         " + "ERROR");
+                    }catch(ArithmeticException ae){
+                        inOutList.add("         " + "ARITHMETIC ERROR");
+                    }
+                    catch (NoSuchElementException e) {
+                        inOutList.add("         " + "COMMAND NOT FOUND");
                     }
                 }
             } else {
                 inField.setText("");
             }
         }
-        catch(ArithmeticException ae){
-            inField.setText("Arithmetic exception: i.e. divide by 0");
+        catch(IllegalStateException e){
+            inOutList.add("         SYNTAX ERROR");
+        }
+        catch (Exception e){
+            inOutList.add("         ERROR");
         }
         finally {
             inField.end();
