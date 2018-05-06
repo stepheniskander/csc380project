@@ -152,6 +152,7 @@ public class App extends Application {
         btn = new Button();
         btn.setText("Enter");
         btn.managedProperty().bind(btn.visibleProperty());
+        btn.prefHeightProperty().bind(inField.heightProperty());
         btn.setVisible(false);
 
         matrixMap = new HashMap<>();
