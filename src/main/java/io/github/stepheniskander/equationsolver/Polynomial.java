@@ -19,8 +19,7 @@ public class Polynomial {
     }
 
     public Polynomial(String input) {
-        List<String> fixedSplit = Arrays.asList(input.split("\\+"));
-        ArrayList<String> split = new ArrayList<>(fixedSplit);
+        List<String> split = Arrays.asList(input.split("\\+"));
         Pattern negCheck = Pattern.compile("(.+) ?- ?(.+)");
         Pattern termSplitter = Pattern.compile(" *([\\-0-9\\/]*)\\*?([xX]\\^(.+)|[xX]|) *");
         for (int i = 0; i < split.size(); i++) {
