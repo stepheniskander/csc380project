@@ -81,10 +81,10 @@ public class RationalNumber implements Comparable<RationalNumber> {
     }
 
     public Optional<RationalNumber> divide(RationalNumber n) {
-        return n.inverse().map(this::multiply); // we functional now bois
+        return n.reciprocal().map(this::multiply); // we functional now bois
     }
 
-    public Optional<RationalNumber> inverse() {
+    public Optional<RationalNumber> reciprocal() {
         if (numerator.equals(BigInteger.ZERO))
             return Optional.empty();
 

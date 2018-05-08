@@ -61,8 +61,8 @@ public class RationalNumberTest {
 
     @Test
     public void testInverse() {
-        assertEquals(new RationalNumber("4", "3"), new RationalNumber("3", "4").inverse().get());
-        assertEquals(Optional.empty(), new RationalNumber("0").inverse());
+        assertEquals(new RationalNumber("4", "3"), new RationalNumber("3", "4").reciprocal().get());
+        assertEquals(Optional.empty(), new RationalNumber("0").reciprocal());
     }
 
     @Test

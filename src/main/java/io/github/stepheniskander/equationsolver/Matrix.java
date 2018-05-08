@@ -40,7 +40,7 @@ public class Matrix {
         for (int i = 0; i < getColumns(); i++) {
             sb.append("[");
             for (int j = 0; j < getRows(); j++)
-                sb.append(numMatrix[i][j].toString() + ",");
+                sb.append(numMatrix[i][j].toString()).append(",");
             sb.replace(sb.length() - 1, sb.length(), "] ");
         }
         sb.replace(sb.length() - 1, sb.length(), "]");

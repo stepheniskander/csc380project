@@ -29,7 +29,7 @@ import java.util.regex.Pattern;
  * @author Nick
  */
 public class App extends Application {
-    static AtomicInteger inOutListIndex;
+    private static AtomicInteger inOutListIndex;
     private ArrayList<String> inOutList;
     private TextField inField;
     private Button btn;
@@ -49,7 +49,6 @@ public class App extends Application {
         try {
             String s = inField.getText().trim();
             inOutList.add(s);
-            String[] argus = s.split(" ");
             if (s.length() != 0) {
                 if (s.matches("^[A-Z]$")) {
                     Matrix m = matrixMap.get(s);
