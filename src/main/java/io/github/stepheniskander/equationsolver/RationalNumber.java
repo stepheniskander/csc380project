@@ -35,16 +35,6 @@ public class RationalNumber implements Comparable<RationalNumber> {
         this.denominator = BigInteger.ONE;
     }
 
-    public RationalNumber add(RationalNumber n) {
-        BigInteger gcd = this.denominator.gcd(n.denominator);
-        BigInteger lcd = this.denominator.divide(gcd).multiply(n.denominator);
-
-        BigInteger resultNumerator = this.numerator.multiply(lcd.divide(this.denominator))
-                .add(n.numerator.multiply(lcd.divide(n.denominator)));
-
-        return new RationalNumber(resultNumerator, lcd);
-    }
-
     public static RationalNumber sum(RationalNumber... args) {
         return Arrays.stream(args).reduce(RationalNumber.ZERO, RationalNumber::add);
     }
@@ -53,10 +43,9 @@ public class RationalNumber implements Comparable<RationalNumber> {
         return Arrays.stream(args).reduce(RationalNumber.ONE, RationalNumber::multiply);
     }
 
-
     public static RationalNumber fromDecimalString(String dec) {
         RationalNumber val;
-        if(dec.contains(".")) {
+        if (dec.contains(".")) {
             BigInteger denominator = new BigInteger("10").multiply(BigInteger.valueOf(dec.length() - dec.indexOf(".") - 1));
             val = new RationalNumber(new BigInteger(dec.replace(".", "")), denominator);
         } else {
@@ -64,6 +53,16 @@ public class RationalNumber implements Comparable<RationalNumber> {
         }
 
         return val;
+    }
+
+    public RationalNumber add(RationalNumber n) {
+        BigInteger gcd = this.denominator.gcd(n.denominator);
+        BigInteger lcd = this.denominator.divide(gcd).multiply(n.denominator);
+
+        BigInteger resultNumerator = this.numerator.multiply(lcd.divide(this.denominator))
+                .add(n.numerator.multiply(lcd.divide(n.denominator)));
+
+        return new RationalNumber(resultNumerator, lcd);
     }
 
     public RationalNumber subtract(RationalNumber n) {
@@ -112,7 +111,7 @@ public class RationalNumber implements Comparable<RationalNumber> {
 
     @Override
     public String toString() {
-        if(!denominator.equals(BigInteger.ONE)) {
+        if (!denominator.equals(BigInteger.ONE)) {
             return String.format("(%s/%s)", numerator, denominator);
         } else
             return numerator.toString();
@@ -147,7 +146,8 @@ public class RationalNumber implements Comparable<RationalNumber> {
 
         return thisNumerator.compareTo(oNumerator);
     }
-    public BigInteger getNumerator(){
+
+    public BigInteger getNumerator() {
         return this.numerator;
     }
 

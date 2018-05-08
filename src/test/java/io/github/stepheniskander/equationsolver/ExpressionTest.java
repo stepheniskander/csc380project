@@ -17,11 +17,11 @@ public class ExpressionTest {
     }
 
     @Test
-    public void testNegative(){
+    public void testNegative() {
         Expression neg = Parser.parseExpression("2*-1");
 
         double result = neg.evaluateRpn().doubleValue();
-        assertEquals(result,  -2.0, EPSILON);
+        assertEquals(result, -2.0, EPSILON);
     }
 
     @Test

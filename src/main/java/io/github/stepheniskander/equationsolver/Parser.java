@@ -1,11 +1,10 @@
 package io.github.stepheniskander.equationsolver;
 
-import java.text.ParseException;
 import java.util.ArrayDeque;
 import java.util.StringTokenizer;
 
 public class Parser {
-    public static  Matrix parseMatrix(String input) {
+    public static Matrix parseMatrix(String input) {
         int x;
         int y;
         String[] splits = input.split(" ");
@@ -14,11 +13,11 @@ public class Parser {
         y = ylength.length;
         RationalNumber[][] ex = new RationalNumber[x][y];
 
-        for(int i = 0; i<x; i++ ){
+        for (int i = 0; i < x; i++) {
             String[] ysplits = splits[i].split(",");
 
-            for(int j = 0; j<y; j++){
-                String valstring = ysplits[j].replaceAll("[^0-9.]","");
+            for (int j = 0; j < y; j++) {
+                String valstring = ysplits[j].replaceAll("[^0-9.]", "");
 
                 ex[i][j] = RationalNumber.fromDecimalString(Parser.parseExpression(valstring).evaluateRpn().toPlainString());
             }
@@ -29,32 +28,32 @@ public class Parser {
         return t;
     }
 
-    public static Expression parseExpression(String ex){
-        if(ex.length()!=0) {
-            while(ex.contains("int(")) {
+    public static Expression parseExpression(String ex) {
+        if (ex.length() != 0) {
+            while (ex.contains("int(")) {
                 int start = ex.indexOf("int(");
                 int end = start + "int(".length();
                 int lParenCount = 1;
                 int rParenCount = 0;
-                for(; end < ex.length() && lParenCount != rParenCount; end++) {
-                    if(ex.charAt(end) == '(')
+                for (; end < ex.length() && lParenCount != rParenCount; end++) {
+                    if (ex.charAt(end) == '(')
                         lParenCount++;
-                    else if(ex.charAt(end) == ')')
+                    else if (ex.charAt(end) == ')')
                         rParenCount++;
                 }
                 String intExpr = ex.substring(start, end);
                 ex = ex.substring(0, start) + Calculus.integrateFromString(intExpr) + ex.substring(end);
             }
 
-            while(ex.contains("der(")) {
+            while (ex.contains("der(")) {
                 int start = ex.indexOf("der(");
                 int end = start + "der(".length();
                 int lParenCount = 1;
                 int rParenCount = 0;
-                for(; end < ex.length() && lParenCount != rParenCount; end++) {
-                    if(ex.charAt(end) == '(')
+                for (; end < ex.length() && lParenCount != rParenCount; end++) {
+                    if (ex.charAt(end) == '(')
                         lParenCount++;
-                    else if(ex.charAt(end) == ')')
+                    else if (ex.charAt(end) == ')')
                         rParenCount++;
                 }
                 String derExpr = ex.substring(start, end);
@@ -65,7 +64,7 @@ public class Parser {
                 ex = ex.replaceFirst("-([0-9]+\\.?[0-9]*)", "(0-$1)");
             }
             //ReplaceAll doesn't work correctly, so I do it an arbitrary amount of times
-            for (int i = 0; i<16;i++) {
+            for (int i = 0; i < 16; i++) {
                 ex = ex.replaceAll("([*+/\\-^])\\-(.*)", "$1(0-$2)");
                 ex = ex.replaceAll("\\(\\-(.*)", "(0-$1");
             }
@@ -100,7 +99,7 @@ public class Parser {
             }
 
             return new Expression(outputQueue);
-        }else{
+        } else {
             ArrayDeque<String> zero = new ArrayDeque<>();
             zero.add("0");
             return new Expression(zero);
@@ -118,12 +117,14 @@ public class Parser {
     }
 
     public static boolean greaterPrecedence(char first, char second) {
-        switch(first) {
+        switch (first) {
             case '^':
                 return second != '^' && second != '(' && second != ')';
-            case '*': case '/':
+            case '*':
+            case '/':
                 return second == '+' || second == '-';
-            case '+': case '-':
+            case '+':
+            case '-':
                 return false;
         }
 

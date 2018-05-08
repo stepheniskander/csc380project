@@ -9,9 +9,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.math.BigDecimal;
@@ -28,13 +29,21 @@ import java.util.regex.Pattern;
  * @author Nick
  */
 public class App extends Application {
+    static AtomicInteger inOutListIndex;
     private ArrayList<String> inOutList;
     private TextField inField;
     private Button btn;
     private TextArea outField;
-    private HashMap<String,Matrix> matrixMap;
+    private HashMap<String, Matrix> matrixMap;
     private GridPane buttonPane;
-    static AtomicInteger inOutListIndex;
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        launch(args);
+
+    }
 
     private void handleInput() {
         try {
@@ -42,16 +51,16 @@ public class App extends Application {
             inOutList.add(s);
             String[] argus = s.split(" ");
             if (s.length() != 0) {
-                if(s.matches("^[A-Z]$")) {
+                if (s.matches("^[A-Z]$")) {
                     Matrix m = matrixMap.get(s);
-                    if(m != null) {
+                    if (m != null) {
                         inOutList.add("=        " + m.toString());
                         inField.setText(m.toString());
                     } else {
                         inOutList.add("         " + "matrix " + s + " is undefined");
                         inField.setText("");
                     }
-                } else if(s.matches("^store\\(.+$")) {
+                } else if (s.matches("^store\\(.+$")) {
                     try {
                         Matcher storeMatcher = Pattern.compile("store\\(([A-Z]+),(.+)\\)").matcher(s);
                         storeMatcher.matches();
@@ -60,10 +69,10 @@ public class App extends Application {
                         matrixMap.put(name, m);
                         inField.setText("");
                         inOutList.add("         " + name + "←" + m.toString());
-                    } catch(IllegalStateException e) {
+                    } catch (IllegalStateException e) {
                         inOutList.add("         " + "ERROR");
                     }
-                } else if(s.matches("^mmul\\(.+$")) {
+                } else if (s.matches("^mmul\\(.+$")) {
                     try {
                         Matrix result;
                         if (!s.contains("[")) {
@@ -92,11 +101,10 @@ public class App extends Application {
                         }
                         inOutList.add("=        " + result);
                         inField.setText(result.toString());
-                    }
-                    catch (ArrayIndexOutOfBoundsException e){
+                    } catch (ArrayIndexOutOfBoundsException e) {
                         inOutList.add("         MATRIX SIZE ERROR");
                     }
-                } else if(s.equals("quickmafs()")) {
+                } else if (s.equals("quickmafs()")) {
                     inOutList.remove(inOutList.size() - 1);
                     inOutList.add("2+2");
                     outField.appendText("2+2\n");
@@ -114,32 +122,28 @@ public class App extends Application {
                         inField.setText(result.toPlainString());
                         //All inputs and outputs will be added to the list in the order they were entered and shown to the user in the output field
                         inOutList.add("=        " + result.toPlainString());
-                    }catch(ArithmeticException ae){
+                    } catch (ArithmeticException ae) {
                         inOutList.add("         " + "ARITHMETIC ERROR");
-                    }
-                    catch (NoSuchElementException e) {
+                    } catch (NoSuchElementException e) {
                         inOutList.add("         " + "COMMAND NOT FOUND");
                     }
                 }
             } else {
                 inField.setText("");
             }
-        }
-        catch(IllegalStateException e){
+        } catch (IllegalStateException e) {
             inOutList.add("         SYNTAX ERROR");
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             inOutList.add("         ERROR");
-        }
-        finally {
+        } finally {
             inField.end();
             inOutListIndex.set(inOutList.size());
-            for(int i = inOutList.size() - 2; i < inOutList.size(); i++)
+            for (int i = inOutList.size() - 2; i < inOutList.size(); i++)
                 outField.appendText(inOutList.get(i) + "\n");
         }
 
     }
-    
+
     @Override
     public void start(Stage primaryStage) {
         inOutList = new ArrayList<>(); //Contains inputs and outputs as strings to be shown to the user
@@ -272,7 +276,7 @@ public class App extends Application {
         buttonToggle.setOnAction(e -> {
             CheckMenuItem m = (CheckMenuItem) e.getSource();
 
-            if(m.isSelected()) {
+            if (m.isSelected()) {
                 btn.setVisible(false);
                 buttonPane.setVisible(true);
             } else {
@@ -401,7 +405,7 @@ public class App extends Application {
         });
 
         btnClr.setOnAction(e -> {
-            if(inField.getText().isEmpty()) {
+            if (inField.getText().isEmpty()) {
                 outField.clear();
             } else {
                 inField.clear();
@@ -442,14 +446,6 @@ public class App extends Application {
         buttonPane.setMaxWidth(Double.POSITIVE_INFINITY);
 
         return buttonPane;
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        launch(args);
-
     }
 
 }
