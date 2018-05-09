@@ -19,7 +19,9 @@ public class Polynomial {
     }
 
     public Polynomial(String input) {
-        List<String> split = Arrays.asList(input.split("\\+"));
+        List<String> splitA = Arrays.asList(input.split("\\+"));
+        ArrayList<String> split = new ArrayList<>();
+        split.addAll(splitA);
         Pattern negCheck = Pattern.compile("(.+) ?- ?(.+)");
         Pattern termSplitter = Pattern.compile(" *([\\-0-9\\/]*)\\*?([xX]\\^(.+)|[xX]|) *");
         for (int i = 0; i < split.size(); i++) {
@@ -127,6 +129,9 @@ public class Polynomial {
                     result.append("^").append(powers[coefficients.length - 1]);
                 }
             }
+        }
+        if(result.length()==0){
+            return "0";
         }
         if (result.charAt(result.length() - 1) == '+') {
             return result.substring(0, result.length() - 2);
