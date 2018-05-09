@@ -130,6 +130,9 @@ public class Polynomial {
                 }
             }
         }
+        if(result.length()==0){
+            return "0";
+        }
         if (result.charAt(result.length() - 1) == '+') {
             return result.substring(0, result.length() - 2);
         }

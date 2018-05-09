@@ -133,6 +133,7 @@ public class App extends Application {
         } catch (IllegalStateException e) {
             inOutList.add("         SYNTAX ERROR");
         } catch (Exception e) {
+            e.printStackTrace();
             inOutList.add("         ERROR");
         } finally {
             inField.end();
