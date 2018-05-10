@@ -83,11 +83,10 @@ ST-4 & 5 pts & As a user, I can perform matrix multiplication. \\ \hline
 \textbf{Use Case UC-1}     & \textbf{EvaluateExpression} \\ \hline
 Related Requirements: & REQ1, REQ2, REQ3 \\
 Initiating Actor:     & User \\
-Participating Actors: & GUI, ExpressionParser, Expression \\
+Participating Actors: & GUI, Parser, Expression \\
 Actor's Goal:          & To evaluate a mathematical expression typed into the calculator. \\
 Preconditions:         & \begin{itemize}[nosep]
                          \item GUI is visible
-                         \item ExpressionParser is initialized
                          \end{itemize} \\
 Postconditions:        & \begin{itemize}[nosep]
                          \item Program is ready to evaluate another expression.
@@ -119,11 +118,9 @@ $\leftarrow$  & 1.           & Expression throws ArithmeticException
 \textbf{Use Case UC-2}     & \textbf{ParseExpression} \\ \hline
 Related Requirements: & REQ1 \\
 Initiating Actor:     & GUI \\
-Participating Actors: & ExpressionParser, Expression \\
+Participating Actors: & Parser, Expression \\
 Actor's Goal:          & To parse the incoming string into an evaluable expression. \\
-Preconditions:         & \begin{itemize}[nosep]
-		      \item  ExpressionParser is initialized
-                         \end{itemize} \\
+Preconditions:         & \\
 Postconditions:        & \begin{itemize}[nosep]
                          \item An Expression object is created and ready to be evaluated.
                          \end{itemize} \\ \hline
@@ -223,11 +220,9 @@ $\leftarrow$  & 1.           & Polynomial throws Exception.\\
 \textbf{Use Case UC-5}     & \textbf{ParseMatrix} \\ \hline
 Related Requirements: & REQ6 \\
 Initiating Actor:     & GUI \\
-Participating Actors: &MatrixParser, Matrix \\
+Participating Actors: & Parser, Matrix \\
 Actor's Goal:          & To parse the incoming string into a Matrix. \\
-Preconditions:         & \begin{itemize}[nosep]
-		      \item  MatrixParser is initialized
-                         \end{itemize} \\
+Preconditions:         &  \\
 Postconditions:        & \begin{itemize}[nosep]
                          \item A Matrix object is created.
                          \end{itemize} \\ \hline
@@ -256,11 +251,9 @@ $\leftarrow$  & 1.           & MatrixParser throws Exception\\
 \textbf{Use Case UC-6}     & \textbf{MultiplyMatrix} \\ \hline
 Related Requirements: & REQ7 \\
 Initiating Actor:     & GUI \\
-Participating Actors: &MatrixParser, Matrix \\
+Participating Actors: & Parser, Matrix \\
 Actor's Goal:          & To multiply two matrices. \\
-Preconditions:         & \begin{itemize}[nosep]
-		      \item  MatrixParser is initialized
-                         \end{itemize} \\
+Preconditions:         & \\
 Postconditions:        & \begin{itemize}[nosep]
                          \item A Matrix object is created.
                          \end{itemize} \\ \hline
